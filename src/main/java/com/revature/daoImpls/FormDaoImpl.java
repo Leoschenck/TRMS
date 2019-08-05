@@ -74,6 +74,20 @@ public class FormDaoImpl {
 		}
 		return formList;
 	}
+	public Form getFormBy(int formid) throws SQLException {
+		Connection conn = cf.getConnection();
+		Statement stmt = conn.createStatement();
+		String sql = "SELECT * FROM Form WHERE formid = " + formid;
+		ResultSet rs = stmt.executeQuery(sql);
+		Form f = null;
+		if(rs.next()) {
+			f = new Form(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getDouble(6),
+					rs.getString(7),rs.getString(8), rs.getString(9), rs.getString(10),
+					rs.getInt(11), rs.getString(12), rs.getString(13), rs.getDouble(14), rs.getString(15),
+					rs.getInt(16), rs.getInt(17));
+			}
+		return f;
+	}
 	
 	
 }
