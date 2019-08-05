@@ -9,6 +9,9 @@ public class User {
 	private String lastName;
 	private String phoneNumber;
 	private String email;
+	private int rmnReimbursement;
+	private int reportsTo;
+
 	public String getUserName() {
 		return userName;
 	}
@@ -85,7 +88,5 @@ public class User {
 	public void setReportsTo(int reportsTo) {
 		this.reportsTo = reportsTo;
 	}
-	private int rmnReimbursement;
-	private int reportsTo;
 	
 }
