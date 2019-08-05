@@ -41,6 +41,8 @@ public class UserDaoImpl {
 		}
 		return null;
 	}
+	
+	
 	public User getBenCo() throws SQLException {
 		ArrayList<User> userList = new ArrayList<User>();
 		Connection conn = cf.getConnection();
