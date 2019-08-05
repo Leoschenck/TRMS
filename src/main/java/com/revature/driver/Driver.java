@@ -11,7 +11,8 @@ public class Driver {
 		UserDaoImpl udi = new UserDaoImpl();
 		
 		try {
-			System.out.println(udi.getUsers());
+			//System.out.println(udi.getUserById(3));
+			System.out.println(udi.getBenCo());
 		} catch (SQLException e) {
 
 			e.printStackTrace();
