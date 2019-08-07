@@ -13,7 +13,7 @@
     <description></description>
     <display-name>HomeServlet</display-name>
     <servlet-name>HomeServlet</servlet-name>
-    <servlet-class>com.revature.servlet.HomeServlet</servlet-class>
+    <servlet-class>com.revature.servlets.HomeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
@@ -23,7 +23,7 @@
     <description></description>
     <display-name>LoginServlet</display-name>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.revature.servlet.LoginServlet</servlet-class>
+    <servlet-class>com.revature.servlets.LoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
@@ -33,7 +33,7 @@
     <description></description>
     <display-name>FormServlet</display-name>
     <servlet-name>FormServlet</servlet-name>
-    <servlet-class>com.revature.servlet.FormServlet</servlet-class>
+    <servlet-class>com.revature.servlets.FormServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FormServlet</servlet-name>
@@ -43,7 +43,7 @@
     <description></description>
     <display-name>LogoutServlet</display-name>
     <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>com.revature.servlet.LogoutServlet</servlet-class>
+    <servlet-class>com.revature.servlets.LogoutServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
@@ -53,7 +53,7 @@
     <description></description>
     <display-name>ApproveServlet</display-name>
     <servlet-name>ApproveServlet</servlet-name>
-    <servlet-class>com.revature.servlet.ApproveServlet</servlet-class>
+    <servlet-class>com.revature.servlets.ApproveServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ApproveServlet</servlet-name>
@@ -63,7 +63,7 @@
     <description></description>
     <display-name>DenyServlet</display-name>
     <servlet-name>DenyServlet</servlet-name>
-    <servlet-class>com.revature.servlet.DenyServlet</servlet-class>
+    <servlet-class>com.revature.servlets.DenyServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DenyServlet</servlet-name>

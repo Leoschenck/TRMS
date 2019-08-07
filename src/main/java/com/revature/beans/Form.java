@@ -1,21 +1,23 @@
 package com.revature.beans;
 
+import java.sql.Date;
+
 public class Form {
 
 	private int id;
-	private String openDateTime;
-	private String courseStart;
+	private Date openDateTime;
+	private Date courseStart;
 	private String location;
 	private String description;
-	private int cost;
+	private double cost;
 	private String reasonForExceedingMax;
-	private int gradingFormat;
+	private String gradingFormat;
 	private String typeOfEvent;
 	private String workRelatedJustification;
-	private String status;
+	private int status;
 	private String deniedReason;
 	private String openQuestions;
-	private int WorkTimeMissed;
+	private double WorkTimeMissed;
 	private String linkToFiles;
 	private int employeeId;
 	private int deptId;
@@ -23,9 +25,9 @@ public class Form {
 	public Form() {
 		super();
 	}
-	public Form(int id, String openDateTime, String courseStart, String location, String description, int cost,
-			String reasonForExceedingMax, int gradingFormat, String typeOfEvent, String workRelatedJustification,
-			String status, String deniedReason, String openQuestions, int workTimeMissed, String linkToFiles,
+	public Form(int id, Date openDateTime, Date courseStart, String location, String description, double cost,
+			String reasonForExceedingMax, String gradingFormat, String typeOfEvent, String workRelatedJustification,
+			int status, String deniedReason, String openQuestions, double workTimeMissed, String linkToFiles,
 			int employeeId, int deptId) {
 		super();
 		this.id = id;
@@ -61,16 +63,16 @@ public class Form {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getOpenDateTime() {
+	public Date getOpenDateTime() {
 		return openDateTime;
 	}
-	public void setOpenDateTime(String openDateTime) {
+	public void setOpenDateTime(Date openDateTime) {
 		this.openDateTime = openDateTime;
 	}
-	public String getCourseStart() {
+	public Date getCourseStart() {
 		return courseStart;
 	}
-	public void setCourseStart(String courseStart) {
+	public void setCourseStart(Date courseStart) {
 		this.courseStart = courseStart;
 	}
 	public String getLocation() {
@@ -85,10 +87,10 @@ public class Form {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getCost() {
+	public double getCost() {
 		return cost;
 	}
-	public void setCost(int cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 	public String getReasonForExceedingMax() {
@@ -97,10 +99,10 @@ public class Form {
 	public void setReasonForExceedingMax(String reasonForExceedingMax) {
 		this.reasonForExceedingMax = reasonForExceedingMax;
 	}
-	public int getGradingFormat() {
+	public String getGradingFormat() {
 		return gradingFormat;
 	}
-	public void setGradingFormat(int gradingFormat) {
+	public void setGradingFormat(String gradingFormat) {
 		this.gradingFormat = gradingFormat;
 	}
 	public String getTypeOfEvent() {
@@ -115,10 +117,10 @@ public class Form {
 	public void setWorkRelatedJustification(String workRelatedJustification) {
 		this.workRelatedJustification = workRelatedJustification;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public String getDeniedReason() {
@@ -133,10 +135,10 @@ public class Form {
 	public void setOpenQuestions(String openQuestions) {
 		this.openQuestions = openQuestions;
 	}
-	public int getWorkTimeMissed() {
+	public double getWorkTimeMissed() {
 		return WorkTimeMissed;
 	}
-	public void setWorkTimeMissed(int workTimeMissed) {
+	public void setWorkTimeMissed(double workTimeMissed) {
 		WorkTimeMissed = workTimeMissed;
 	}
 	public String getLinkToFiles() {

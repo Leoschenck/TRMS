@@ -2,15 +2,15 @@ package com.revature.beans;
 
 public class User {
 
-	private String userName;
-	private String password;
 	private int id;
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
 	private String email;
-	private int rmnReimbursement;
+	private double rmnReimbursement;
 	private int reportsTo;
+	private String userName;
+	private String password;
 
 	public String getUserName() {
 		return userName;
@@ -25,13 +25,11 @@ public class User {
 	public String toString() {
 		return "User [userName=" + userName + ", password=" + password + ", id=" + id + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", rmnReimbursement="
-				+ rmnReimbursement + ", reportsTo=" + reportsTo + "]";
+				+ rmnReimbursement + ", reportsTo=" + reportsTo + "]\n";
 	}
-	public User() {
-		super();
-	}
-	public User(String userName, String password, int id, String firstName, String lastName, String phoneNumber,
-			String email, int rmnReimbursement, int reportsTo) {
+
+	public User(int id, String firstName, String lastName, String phoneNumber,
+			String email, double rmnReimbursement, int reportsTo, String userName, String password) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -76,10 +74,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getRmnReimbursement() {
+	public double getRmnReimbursement() {
 		return rmnReimbursement;
 	}
-	public void setRmnReimbursement(int rmnReimbursement) {
+	public void setRmnReimbursement(double rmnReimbursement) {
 		this.rmnReimbursement = rmnReimbursement;
 	}
 	public int getReportsTo() {
