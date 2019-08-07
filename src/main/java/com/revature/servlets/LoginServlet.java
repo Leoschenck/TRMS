@@ -1,30 +1,42 @@
 package com.revature.servlets;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.revature.daoImpls.UserDaoImpl;
+
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// Forwards get requests
-		req.getRequestDispatcher("/home.html").forward(req, resp);
+		req.getRequestDispatcher("/login.html").forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("In login servlet...");
+		System.out.println("In login servlet..." + req.getParameter("username") + "  ||  "+ req.getParameter("password"));
 		try {
-			String[] info = getServletContext().getInitParameter("dbInfo").split(",");
 			// Retrieves any employees who match the username/password
-			EmployeeDAOImpl edi = new EmployeeDAOImpl(info);
-			Employee emp = edi.employeeLogin(req.getParameter("email"), req.getParameter("password"));
+			UserDaoImpl udi = new UserDaoImpl();
+			int userId = udi.loginUser(req.getParameter("username"), req.getParameter("password"));
 			resp.setContentType("text/html");
 
 			// Sends the user to the home screen if the username and password match an
-			// employee
-			if (emp.getId() != 0) {
+			// user
+			if (userId >= 0) {
 				HttpSession ses = req.getSession(true);
-				ses.setAttribute("userid", emp.getId());
-				resp.sendRedirect("/ReimbursementSystem/home");
+				ses.setAttribute("userId", userId);
+				System.out.println("User logged in! Id = " + userId);
+				resp.sendRedirect("/TRMS/home");
 			}
-			// Lets the user know the username and password don't match any employee records
+			// Lets the user know the username and password don't match any user records
 			else {
 				PrintWriter pw = resp.getWriter();
 				resp.setContentType("text/html");
@@ -37,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 }

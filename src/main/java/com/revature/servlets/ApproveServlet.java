@@ -4,6 +4,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.revature.beans.Form;
+import com.revature.beans.User;
+import com.revature.daoImpls.FormDaoImpl;
+import com.revature.daoImpls.UserDaoImpl;
+
 public class ApproveServlet extends HttpServlet {
 		private static final long serialVersionUID = 1L;
 	     
@@ -12,37 +23,7 @@ public class ApproveServlet extends HttpServlet {
 		}
 
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			int formId = Integer.parseInt(request.getParameter("id"));
-			HttpSession ses = request.getSession(false);
-			int empId = (int) ses.getAttribute("userid");
 			
-			PrintWriter pw = response.getWriter();
-			try {
-				String[] info = getServletContext().getInitParameter("dbInfo").split(",");
-				FormDAOImpl fdi = new FormDAOImpl(info);
-				UserDAOImpl edi = new UserDAOImpl(info);
-				
-				User user = edi.getUser(userId);
-				Form f = fdi.retrieveForm(formId);
-				
-				if(user.isBenCo()) {
-					f.setBenCoApproval(true);
-					f.setStatus(3);
-				}
-				if(user.isHead())
-					f.setHeadApproval(true);
-				if(user.isSupervisor())
-					f.setSupervisorApproval(true);
-				
-				fdi.updateForm(f);
-				
-				request.getRequestDispatcher("/home.html").include(request, response);
-			}catch(SQLException e) {
-				pw.print("System is down! Please try again later!");
-				// request.getRequestDispatcher("/home").include(request, response);
-				e.printStackTrace();
-				pw.close();
-			}
 		}
 
 	}
