@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 				PrintWriter pw = resp.getWriter();
 				resp.setContentType("text/html");
 				pw.println("<script type=\"text/javascript\">");
-				pw.println("alert('Username and password do not match!');");
+				pw.println("alert('Username and Password do not match');");
 				pw.println("</script>");
 				req.getRequestDispatcher("/login.html").include(req, resp);
 				pw.close();
