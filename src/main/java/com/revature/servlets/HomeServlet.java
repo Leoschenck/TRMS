@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,11 @@ public class HomeServlet extends HttpServlet {
 			PrintWriter out = resp.getWriter();
 			out.write(s.getAttribute("userId").toString());
 			System.out.println(s.getAttribute("userId").toString());
+			Cookie CK[] = req.getCookies();
+			Cookie ck = CK[0];
+			System.out.println(ck.getName());
+			System.out.println(ck.getValue());
+			//for(int i = 0; i < CK.length; i++)
 		}
 			
 			// Forwards get requests
