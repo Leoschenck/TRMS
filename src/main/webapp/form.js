@@ -37,59 +37,101 @@ today = yyyy + '-' + mm + '-' + dd;
 // // displays 726
 // console.log('Days since ' + Jan1st2010.toLocaleDateString() + ': '
 // + Date.daysBetween(Jan1st2010, today));
+window.onload = function() {
+document.getElementById("cost")
+		.addEventListener("change", alerter);
+document.getElementById("typeOfEvent")
+		.addEventListener("change", alerter);
+document.getElementById("formSubmit").addEventListener("click", postForm,
+		false);
+//document.getElementById("currentDate").value = today;
+}
 
-document.getElementById("reimbursementcost")
-		.addEventListener("change", alerter);
-document.getElementById("reimbursementtype")
-		.addEventListener("change", alerter);
-document.getElementById("currentDate").value = today;
+function postForm(){
+	console.log("in post form");
+
+	//let vg = document.getElementById("vgForm").submit;
+	var xhr2 = new XMLHttpRequest();
+	xhr2.onreadystatechange = function() {
+		console.log("in post form on ready change");
+		console.log("in ORSC " + xhr2.readyState + xhr2.status);
+		if (xhr2.readyState == 4 && xhr2.status == 200) {
+			console.log(xhr.responseText);
+		}
+	}
+	xhr2.open("POST","http://localhost:8080/TRMS/form",false);
+	var trash=jsonBuilder();
+	alert(trash);
+	xhr2.send(trash); //Wtf, trash is not escapecharactered and also is escapecharactered? Also why is this json stuff so reeeeeeeeeeee
+}
+
+function jsonBuilder() {
+	var elements = document.getElementById("form").elements;
+	//var elements = document.getElementsByClassName("form-control");
+	var obj ={};
+	for(var i = 0 ; i < elements.length; i++){
+		var item = elements.item(i);
+		console.log(item.tagName + " is type");
+		if((item.tagName == "INPUT" || item.tagName == "SELECT") && item.id != "reimbursementamount"){
+        obj[item.name] = item.value;
+        console.log(obj);
+		};
+
+    };
+    var json= JSON.stringify(obj);
+    console.log(json + " is our json document");
+    return json;
+};
+
+
 
 function alerter() {
-	document.getElementById("reimbursementcost").value = parseFloat(
-			document.getElementById("reimbursementcost").value).toFixed(2);
-	var amount = document.getElementById("reimbursementcost").value;
+	document.getElementById("cost").value = parseFloat(
+			document.getElementById("cost").value).toFixed(2);
+	var amount = document.getElementById("cost").value;
 
-	var event = document.getElementById("reimbursementtype").value;
+	var event = document.getElementById("typeOfEvent").value;
 
 	switch (event) {
-	case "200":
+	case "1":
 		document.getElementById("reimbursementamount").value = parseFloat(
-				(amount * .80)).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(
-				(amount * .80)).toFixed(2);
+				(amount )).toFixed(2);
+		//document.getElementById("reimbamtEst").value = parseFloat(
+		//		(amount )).toFixed(2);
 		;
 		break;
-	case "201":
+	case "2":
 		document.getElementById("reimbursementamount").value = parseFloat(
 				(amount * .60)).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(
-				(amount * .60)).toFixed(2);
+		//document.getElementById("reimbamtEst").value = parseFloat(
+		//		(amount * .60)).toFixed(2);
 		break;
-	case "202":
+	case "3":
 		document.getElementById("reimbursementamount").value = parseFloat(
-				(amount * .75)).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(
-				(amount * .75)).toFixed(2);
+				(amount * .80)).toFixed(2);
+		//document.getElementById("reimbamtEst").value = parseFloat(
+		//		(amount * .80)).toFixed(2);
 		break;
-	case "203":
+	case "4":
 		document.getElementById("reimbursementamount").value = parseFloat(
-				amount).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(amount)
-				.toFixed(2);
+				amount * .75).toFixed(2);
+		//document.getElementById("reimbamtEst").value = parseFloat(
+		//		amount * .75)
+		//		.toFixed(2);
 		break;
-	case "204":
+	case "5":
 		document.getElementById("reimbursementamount").value = parseFloat(
 				(amount * .90)).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(
-				(amount * .90)).toFixed(2);
+		//document.getElementById("reimbamtEst").value = parseFloat(
+		//		(amount * .90)).toFixed(2);
 		break;
-	case "205":
+	case "6":
 		document.getElementById("reimbursementamount").value = parseFloat(
 				(amount * .30)).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(
-				(amount * .30)).toFixed(2);
+		//document.getElementById("reimbamtEst").value = parseFloat(
+		//		(amount * .30)).toFixed(2);
 		break;
 	default:
-		console.log("Error caught calculating reimbursement amount in form.js");
+		console.log("Reimbursement Amount Error");
 	}
 }

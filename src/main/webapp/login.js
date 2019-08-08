@@ -1,5 +1,5 @@
 window.onload=function(){
-	document.getElementsByClassName("btn btn-default")[0].onclick=login();
+	document.getElementsByClassName("btn btn-primary btn-block")[0].onclick=login();
 }
 
 function login(){
@@ -7,9 +7,9 @@ function login(){
 	var pw=document.getElementsByClassName("form-control")[1].value;
 	var xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){}
-	xhr.open("POST", "/login", true);
+	xhr.open("POST", "/TRMS/login", true);
 	xhr.setRequestHeader("username", un);
-	xhr.setRequestHeader("password", un);
+	xhr.setRequestHeader("password", pw);
 	xhr.send();
 }
 
