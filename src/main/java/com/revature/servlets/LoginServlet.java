@@ -26,17 +26,15 @@ public class LoginServlet extends HttpServlet {
 		try {
 			// Retrieves any employees who match the username/password
 			UserDaoImpl udi = new UserDaoImpl();
-			int userId = udi.loginUser(req.getParameter("username"), req.getParameter("password"));
-			String uName = req.getParameter("username");
-			String password = req.getParameter("password");
-
+			String userName = req.getParameter("username");
+			int userId = udi.loginUser(userName, req.getParameter("password"));
+			
 			// Sends the user to the home screen if the username and password match a user
 			// or tells him there is no match and directs him back to the login.
 			if (userId >= 0) {
 				HttpSession ses = req.getSession();
 				ses.setAttribute("userId", userId);
-				ses.setAttribute("uName", uName);
-				ses.setAttribute("password", password);
+				ses.setAttribute("userName", userName);
 				System.out.println("User logged in! Id = " + userId);
 				resp.sendRedirect("/TRMS/home");
 			}

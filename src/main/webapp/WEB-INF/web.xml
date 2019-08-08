@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>TRMS</display-name>
-   <welcome-file-list>
+  <welcome-file-list>
     <welcome-file>/????.html</welcome-file>
     <welcome-file>/????.html</welcome-file>
   </welcome-file-list>
@@ -9,7 +9,7 @@
     <param-name>TRMS_DB</param-name>
     <param-value>jdbc:oracle:thin:pega1907.c2eziwx6aimi.us-east-2.rds.amazonaws.com:1521:ORCL,kylekolstad,p4ssw0rd</param-value>
   </context-param>
-   <servlet>
+  <servlet>
     <description></description>
     <display-name>HomeServlet</display-name>
     <servlet-name>HomeServlet</servlet-name>
@@ -39,7 +39,7 @@
     <servlet-name>FormServlet</servlet-name>
     <url-pattern>/form</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <description></description>
     <display-name>LogoutServlet</display-name>
     <servlet-name>LogoutServlet</servlet-name>
@@ -49,7 +49,7 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <description></description>
     <display-name>ApproveServlet</display-name>
     <servlet-name>ApproveServlet</servlet-name>
@@ -59,7 +59,7 @@
     <servlet-name>ApproveServlet</servlet-name>
     <url-pattern>/approve</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>DenyServlet</display-name>
     <servlet-name>DenyServlet</servlet-name>
@@ -68,5 +68,15 @@
   <servlet-mapping>
     <servlet-name>DenyServlet</servlet-name>
     <url-pattern>/deny</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserServlet</display-name>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.revature.servlets.UserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/user</url-pattern>
   </servlet-mapping>
 </web-app>
