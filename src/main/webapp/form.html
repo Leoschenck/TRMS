@@ -15,18 +15,22 @@
 
 <body>
 	<!-- Navigation Bar -->
-	<nav class=" ">
-		<div class=" ">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
 			<!-- Company Brand Name -->
-			<div class=" ">
-				<a class=" " href="home.html">KLLJ Tuition Reimbursement
+			<div class="navbar-header">
+				<a class="navbar-brand" href="home.html">KLLJ Tuition Reimbursement
 					Management System</a>
 			</div>
-
-		
+			
+			<!-- Login and Logout -->
+			<ul class="nav navbar-nav navbar-right">
+				<li id="logout"><a href="home.html"> <span
+						class="glyphicon glyphicon-log-out"></span> Logout
+				</a></li>
+			</ul>
 		</div>
 	</nav>
-	
 		<div class="col-md-6 col-md-offset-3">
 			<div id="divlogin" class="panel-default">
 				<div class="panel-heading">
@@ -65,7 +69,7 @@
 						<!-- Event Description -->
 						<div class="form-group">
 							<label for="eventdescription">Event Description:</label>
-							<h6>(?????????????????)</h6>
+							<h6>" "</h6>
 							<input type="text" class="form-control" id="eventdescription"
 								name="eventdescription"
 								placeholder="Enter work related justification "
@@ -98,14 +102,6 @@
 					</form>
 					<br>
 				<div>
-					<nav>
-						<!-- Login and Logout -->
-						<input class=" ">
-							<li id="logout"><a href="logout"> <span
-									class=" "></span> Logout
-							</a></li>
-						</ul>
-					</nav>
 				</div>
 				</div>
 				<div class="panel-footer"></div>
