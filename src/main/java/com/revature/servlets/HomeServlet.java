@@ -14,14 +14,19 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("in doget homeservlet");
 		HttpSession s = req.getSession(false);
-		if (s!= null) {
-			
-			PrintWriter out = resp.getWriter();
+		PrintWriter out = resp.getWriter();
+		if (s != null) {
+
+			System.out.println(s.getAttribute("userId").toString() + " is the userId of " + s.getAttribute("uName"));
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('<%=Session[\"uName\"] %>');");
+			out.println("</script>");
+
 			out.write(s.getAttribute("userId").toString());
-			System.out.println(s.getAttribute("userId").toString());
+			req.getRequestDispatcher("/home.html").include(req, resp);
+		} else {
+			req.getRequestDispatcher("/login").forward(req, resp);
 		}
-			
-			// Forwards get requests
-			req.getRequestDispatcher("/home.html").forward(req, resp);
+		out.close();
 	}
 }
