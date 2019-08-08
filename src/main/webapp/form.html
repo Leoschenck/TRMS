@@ -38,60 +38,60 @@
 				</div>
 				<div class="panel-body">
 					<!-- Reimbursement Form -->
-					<form id="form" action="form" method="POST">
+					<form id="form" action="form" enctype="application/json" method="POST">
 						<!-- Employee ID -->
-						<input type="hidden" id="userid" name="userid" value="" />
+		<!--			<input type="hidden" id="userid" name="userid" value="" />
 						<input type="hidden" id="currentDate" name="currentDate" value="" />
 						<input type="hidden" id="reimbamtEst" name="reimbamtEst" value="" />
-
+		-->
 						<!-- Event Type -->
 						<div class="form-group">
-							<label for="reimbursementtype">Event Type:</label> <select
-								name="eventgroup" class="form-control" id="reimbursementtype"
+							<label for="typeOfEvent">Event Type:</label> <select
+								name="typeOfEvent" class="form-control" id="typeOfEvent"
 								required="required">
 								<option value="" selected="selected">Select Type</option>
-								<option value="202">"University Courses"</option>
-								<option value="201">"Seminars"</option>
-								<option value="203">"Certification Preparation Classes"</option>
-								<option value="200">"Certification"</option>
-								<option value="204">"Technical Training"</option>
-								<option value="205">"Other"</option>
+								<option value="1">"University Courses"</option>
+								<option value="2">"Seminars"</option>
+								<option value="3">"Certification Preparation Classes"</option>
+								<option value="4">"Certification"</option>
+								<option value="5">"Technical Training"</option>
+								<option value="6">"Other"</option>
 							</select>
 						</div>
 
 						<!-- Event Description -->
 						<div class="form-group">
-							<label for="eventdescription">Course Description:</label>
-							<input type="text" class="form-control" id="eventdescription"
-								name="eventdescription"
+							<label for="description">Course Description:</label>
+							<input type="text" class="form-control" id="description"
+								name="description"
 								placeholder="Enter Course Description "
 								required="required">
 						</div>
 
 						<!-- Event Date -->
 						<div class="form-group">
-							<label for="eventdate">Event Date:</label> <input type="date"
-								name="eventdate" class="form-control" id="eventdate"
+							<label for="courseStart">Event Date:</label> <input type="date"
+								name="courseStart" class="form-control" id="courseStart"
 								required="required">
 						</div>
 						<!--Event location -->
 						<div class="form-group">
-							<label for="eventlocation">Location:</label>
-							<input type="text" class="form-control" id="eventlocation"
-								name="eventlocation"
+							<label for="location">Location:</label>
+							<input type="text" class="form-control" id="location"
+								name="location"
 								placeholder="Enter Building Location "
 								required="required">
 						</div>
 
 						<!-- Reimbursement Cost -->
 						<div class="form-group">
-							<label for="reimbursementcost">Total Cost:</label> <input
-								type="number" class="form-control" id="reimbursementcost"
+							<label for="cost">Total Cost:</label> <input
+								type="number" class="form-control" id="cost" name="cost"
 								step="0.01" max="1000" placeholder="Enter amount "
 								required="required">
 						</div>
 
-						<!-- Reimbursement Amount -->
+						<!-- est Reimbursement Amount -->
 						<div class="form-group">
 							<label for="reimbursementamount">Estimated Reimbursement
 								Amount: </label> <input type="number" class="form-control"
@@ -102,24 +102,47 @@
 
 						<!-- Event grading format -->		
 						<div class="form-group">
-						<label for="gradingformat">Grading Format:</label> <input type="text"
-						name="gradingformat" class="form-control" id="gradingformat"
+						<label for="gradingFormat">Grading Format:</label> <input type="text"
+						name="gradingFormat" class="form-control" id="gradingFormat"
 						placeholder="Enter Grading Format"
 						required="required">
 						</div>
 
 						<!-- Event work related just -->
 						<div class="form-group">
-							<label for="workrelatedjust">Work-Related justification:</label>
-							<input type="text" class="form-control" id="workrelatedjust"
-								name="workrelatedjust"
+							<label for="workRelatedJustification">Work-Related justification:</label>
+							<input type="text" class="form-control" id="workRelatedJustification"
+								name="workRelatedJustification"
 								placeholder="Enter work-related justification "
 								required="required">
 						</div>
 
+						<!-- Work time missed -->
+						<div class="form-group">
+							<label for="WorkTimeMissed">Work Time Missed:</label> <input
+								type="number" class="form-control" id="WorkTimeMissed" name="WorkTimeMissed"
+								step="0.5" max="1000" placeholder="Enter Time "
+								required="required">
+						</div>
+
+												<!-- Dept Id -->
+						<div class="form-group">
+							<label for="deptId">Department:</label> <select
+								name="deptId" class="form-control" id="deptId"
+								required="required">
+								<option value="" selected="selected">Select Department</option>
+								<option value="1">"Some"</option>
+								<option value="2">"Random"</option>
+								<option value="3">"Department"</option>
+								<option value="4">"Math"</option>
+								<option value="5">"Bla"</option>
+								<option value="6">"Other"</option>
+							</select>
+						</div>
+
 						<!-- File Attachment -->
-						<label for="attachedfile">Attach Supporting Documention:</label> <input
-							type="file" id="attachedfile" name="attachedfile"
+						<label for="linkToFiles">Attach Supporting Documention:</label> <input
+							type="file" id="linkToFiles" name="linkToFiles"
 							accept=".pdf, .png, .jpeg, .jpg, .txt, .doc, .msg" /> <br />
 						<br>
 							<!-- Submit -->
