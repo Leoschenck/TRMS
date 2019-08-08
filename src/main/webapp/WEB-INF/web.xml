@@ -31,16 +31,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>FormServlet</display-name>
-    <servlet-name>FormServlet</servlet-name>
-    <servlet-class>com.revature.servlets.FormServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FormServlet</servlet-name>
-    <url-pattern>/form</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>LogoutServlet</display-name>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>com.revature.servlets.LogoutServlet</servlet-class>
@@ -78,5 +68,15 @@
   <servlet-mapping>
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/user</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FormServlet</display-name>
+    <servlet-name>FormServlet</servlet-name>
+    <servlet-class>com.revature.servlets.FormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FormServlet</servlet-name>
+    <url-pattern>/form</url-pattern>
   </servlet-mapping>
 </web-app>
