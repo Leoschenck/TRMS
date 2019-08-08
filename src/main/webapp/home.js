@@ -15,6 +15,13 @@ function logout() {
 	// Step 4 send the request
 	xhr.send();
 }
+window.onload=function(){
+	
+	var ck = document.cookie;
+	console.log("ef")
+	console.log(ck);
+}
+
 
 function home() {
 	// Step 1
