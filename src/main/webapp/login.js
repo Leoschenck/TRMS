@@ -14,5 +14,5 @@ function login(){
 }
 
 function error(){
-	window.alert("Username and password don't match");
+	window.alert("The username or password do not match");
 }
