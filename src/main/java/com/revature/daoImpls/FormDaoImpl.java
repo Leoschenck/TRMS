@@ -3,13 +3,12 @@ package com.revature.daoImpls;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.revature.beans.Form;
-import com.revature.beans.User;
 import com.revature.util.ConnFactory;
 
 public class FormDaoImpl {
@@ -44,9 +43,8 @@ public class FormDaoImpl {
 	public ArrayList<Form> getFormsByUserId(int employeeId) throws SQLException {
 		ArrayList<Form> formList = new ArrayList<Form>();
 		Connection conn = cf.getConnection();
-		Statement stmt = conn.createStatement();
-		String sql = "SELECT * FROM Form WHERE employeeid = " + employeeId;
-		ResultSet rs = stmt.executeQuery(sql);
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM Form WHERE employeeid = " + employeeId);
+		ResultSet rs = ps.executeQuery();
 		Form f = null;
 		while (rs.next()) {
 			f = new Form(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getDouble(6),
@@ -61,9 +59,8 @@ public class FormDaoImpl {
 	public ArrayList<Form> getFormsByStatus(int status) throws SQLException {
 		ArrayList<Form> formList = new ArrayList<Form>();
 		Connection conn = cf.getConnection();
-		Statement stmt = conn.createStatement();
-		String sql = "SELECT * FROM Form WHERE status = " + status;
-		ResultSet rs = stmt.executeQuery(sql);
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM Form WHERE status = " + status);
+		ResultSet rs = ps.executeQuery();
 		Form f = null;
 		while (rs.next()) {
 			f = new Form(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getDouble(6),
@@ -76,9 +73,8 @@ public class FormDaoImpl {
 	}
 	public Form getFormBy(int formid) throws SQLException {
 		Connection conn = cf.getConnection();
-		Statement stmt = conn.createStatement();
-		String sql = "SELECT * FROM Form WHERE formid = " + formid;
-		ResultSet rs = stmt.executeQuery(sql);
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM Form WHERE formid = " + formid);
+		ResultSet rs = ps.executeQuery();
 		Form f = null;
 		if(rs.next()) {
 			f = new Form(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getDouble(6),

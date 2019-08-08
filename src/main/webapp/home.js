@@ -12,13 +12,19 @@ function getUser() {
     var xhr = new XMLHttpRequest();
     var user = '';
     xhr.onreadystatechange = function () {
-        console.log("In ORSC " + xhr.readyState);
+        console.log("In ORSC " + xhr.readyState + xhr.status);
         if (xhr.readyState == 4 && xhr.status == 200) {
             console.log(xhr.responseText);
             user = JSON.parse(xhr.responseText);
             loadUserHome(user);
+            console.log(user);
         }
     }
-    xhr.open("GET", "http://localhost:8080/TRMS/home", true);
+    xhr.open("GET", "http://localhost:8080/TRMS/user", true);
     xhr.send();
+}
+
+window.onload = function(){
+	var curUser = getUser();
+	console.log(curUser)
 }

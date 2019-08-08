@@ -1,9 +1,9 @@
 package com.revature.daoImpls;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.revature.beans.User;
@@ -16,8 +16,8 @@ public class UserDaoImpl {
 	public ArrayList<User> getUsers() throws SQLException {
 		ArrayList<User> userList = new ArrayList<User>();
 		Connection conn = cf.getConnection();
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM \"USER\"");
+		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"USER\"");
+		ResultSet rs = stmt.executeQuery();
 		User u = null;
 		while (rs.next()) {
 			u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
@@ -29,10 +29,9 @@ public class UserDaoImpl {
 	
 	public int loginUser(String username, String password) throws SQLException {
 		Connection conn = cf.getConnection();
-		Statement stmt = conn.createStatement();
-		String sql = "SELECT * FROM \"USER\" WHERE UserName = '" + username +
-				"' AND Password = '" + password + "'";
-		ResultSet rs = stmt.executeQuery(sql);
+		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"USER\" WHERE UserName = '" + username +
+				"' AND Password = '" + password + "'");
+		ResultSet rs = stmt.executeQuery();
 		int u = -1;
 		if(rs.next()) {
 			u = (rs.getInt(1));
@@ -43,9 +42,8 @@ public class UserDaoImpl {
 	public User getUserById(int id) throws SQLException {
 		ArrayList<User> userList = new ArrayList<User>();
 		Connection conn = cf.getConnection();
-		Statement stmt = conn.createStatement();
-		String sql = "SELECT * FROM \"USER\" WHERE userid = " + id;
-		ResultSet rs = stmt.executeQuery(sql);
+		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"USER\" WHERE userid = " + id);
+		ResultSet rs = stmt.executeQuery();
 		User u = null;
 		if (rs.next()) {
 
@@ -59,9 +57,8 @@ public class UserDaoImpl {
 	public User getBenCo() throws SQLException {
 		ArrayList<User> userList = new ArrayList<User>();
 		Connection conn = cf.getConnection();
-		Statement stmt = conn.createStatement();
-		String sql = "SELECT * FROM \"USER\" WHERE userid = (SELECT bencoid FROM BENCO)";
-		ResultSet rs = stmt.executeQuery(sql);
+		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"USER\" WHERE userid = (SELECT bencoid FROM BENCO)");
+		ResultSet rs = stmt.executeQuery();
 		User u = null;
 		if (rs.next()) {
 
