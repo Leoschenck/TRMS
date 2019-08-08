@@ -54,42 +54,43 @@ function alerter() {
 	switch (event) {
 	case "200":
 		document.getElementById("reimbursementamount").value = parseFloat(
-				(amount * .80)).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(
-				(amount * .80)).toFixed(2);
+				(amount )).toFixed(2);
+		document.getElementById("reimbamtEst").value = parseFloat(
+				(amount )).toFixed(2);
 		;
 		break;
 	case "201":
 		document.getElementById("reimbursementamount").value = parseFloat(
 				(amount * .60)).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(
+		document.getElementById("reimbamtEst").value = parseFloat(
 				(amount * .60)).toFixed(2);
 		break;
 	case "202":
 		document.getElementById("reimbursementamount").value = parseFloat(
-				(amount * .75)).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(
-				(amount * .75)).toFixed(2);
+				(amount * .80)).toFixed(2);
+		document.getElementById("reimbamtEst").value = parseFloat(
+				(amount * .80)).toFixed(2);
 		break;
 	case "203":
 		document.getElementById("reimbursementamount").value = parseFloat(
-				amount).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(amount)
+				amount * .75).toFixed(2);
+		document.getElementById("reimbamtEst").value = parseFloat(
+				amount * .75)
 				.toFixed(2);
 		break;
 	case "204":
 		document.getElementById("reimbursementamount").value = parseFloat(
 				(amount * .90)).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(
+		document.getElementById("reimbamtEst").value = parseFloat(
 				(amount * .90)).toFixed(2);
 		break;
 	case "205":
 		document.getElementById("reimbursementamount").value = parseFloat(
 				(amount * .30)).toFixed(2);
-		document.getElementById("estReimbAmt").value = parseFloat(
+		document.getElementById("reimbamtEst").value = parseFloat(
 				(amount * .30)).toFixed(2);
 		break;
 	default:
-		console.log("Error caught calculating reimbursement amount in form.js");
+		console.log("Reimbursement Amount Error");
 	}
 }

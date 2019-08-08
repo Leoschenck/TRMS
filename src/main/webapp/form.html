@@ -40,24 +40,33 @@
 					<!-- Reimbursement Form -->
 					<form id="form" action="form" method="POST">
 						<!-- Employee ID -->
-						<input type="hidden" id="employeeid" name="employeeid" value="" />
+						<input type="hidden" id="userid" name="userid" value="" />
 						<input type="hidden" id="currentDate" name="currentDate" value="" />
-						<input type="hidden" id="estReimbAmt" name="estReimbAmt" value="" />
+						<input type="hidden" id="reimbamtEst" name="reimbamtEst" value="" />
 
 						<!-- Event Type -->
 						<div class="form-group">
 							<label for="reimbursementtype">Event Type:</label> <select
 								name="eventgroup" class="form-control" id="reimbursementtype"
 								required="required">
-								<option value="203" selected="selected">""</option>
-								<option value="202">""</option>
-								<option value="201">""</option>
-								<option value="204">""</option>
-								<option value="200">""</option>
-								<option value="205">""</option>
+								<option value="" selected="selected">Select Type</option>
+								<option value="202">"University Courses"</option>
+								<option value="201">"Seminars"</option>
+								<option value="203">"Certification Preparation Classes"</option>
+								<option value="200">"Certification"</option>
+								<option value="204">"Technical Training"</option>
+								<option value="205">"Other"</option>
 							</select>
 						</div>
 
+						<!-- Event Description -->
+						<div class="form-group">
+							<label for="eventdescription">Course Description:</label>
+							<input type="text" class="form-control" id="eventdescription"
+								name="eventdescription"
+								placeholder="Enter Course Description "
+								required="required">
+						</div>
 
 						<!-- Event Date -->
 						<div class="form-group">
@@ -65,20 +74,18 @@
 								name="eventdate" class="form-control" id="eventdate"
 								required="required">
 						</div>
-
-						<!-- Event Description -->
+						<!--Event location -->
 						<div class="form-group">
-							<label for="eventdescription">Event Description:</label>
-							<h6>" "</h6>
-							<input type="text" class="form-control" id="eventdescription"
-								name="eventdescription"
-								placeholder="Enter work related justification "
+							<label for="eventlocation">Location:</label>
+							<input type="text" class="form-control" id="eventlocation"
+								name="eventlocation"
+								placeholder="Enter Building Location "
 								required="required">
 						</div>
 
 						<!-- Reimbursement Cost -->
 						<div class="form-group">
-							<label for="reimbursementcost">Request Amount:</label> <input
+							<label for="reimbursementcost">Total Cost:</label> <input
 								type="number" class="form-control" id="reimbursementcost"
 								step="0.01" max="1000" placeholder="Enter amount "
 								required="required">
@@ -89,14 +96,33 @@
 							<label for="reimbursementamount">Estimated Reimbursement
 								Amount: </label> <input type="number" class="form-control"
 								name="reimbursementamount" id="reimbursementamount" max="1000"
+								placeholder="Estimated Amount"
 								disabled="disabled">
+						</div>
+
+						<!-- Event grading format -->		
+						<div class="form-group">
+						<label for="gradingformat">Grading Format:</label> <input type="number"
+						name="gradingformat" class="form-control" id="gradingformat"
+						placeholder="Enter Grading Format"
+						required="required">
+						</div>
+
+						<!-- Event work related just -->
+						<div class="form-group">
+							<label for="workrelatedjust">Work-Related justification:</label>
+							<input type="text" class="form-control" id="workrelatedjust"
+								name="workrelatedjust"
+								placeholder="Enter work-related justification "
+								required="required">
 						</div>
 
 						<!-- File Attachment -->
 						<label for="attachedfile">Attach Supporting Documention:</label> <input
 							type="file" id="attachedfile" name="attachedfile"
 							accept=".pdf, .png, .jpeg, .jpg, .txt, .doc, .msg" /> <br />
-						<!-- Submit -->
+						<br>
+							<!-- Submit -->
 						<button type="submit" class="btn btn-success btn-block">Submit</button>
 
 					</form>
