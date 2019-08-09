@@ -40,30 +40,28 @@ public class ViewFormsServlet extends HttpServlet {
 		System.out.println("In viewForms doget");
         PrintWriter out = response.getWriter();
         FormDaoImpl fdi = new FormDaoImpl();
-        String vgJSON;
+        
         if ( s != null) {
             int id = om.readValue(s.getAttribute("userId").toString(), Integer.class);
            // List<Form> allForms = null;
             try {
-            	vgJSON = om.writeValueAsString(fdi.getFormsByUserId(id));
+            	om.writeValue(out, fdi.getFormsByUserId(id));
             	//allForms = new FormDaoImpl().getFormsByUserId((int)s.getAttribute("userId"));
     			response.setContentType("application/json");
     			response.setCharacterEncoding("UTF-8");
-    			out.write(vgJSON);
                 //user = new FormDaoImpl().getUserById((int)s.getAttribute("userId"));
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
+            	
                 e.printStackTrace();
             }
             out.flush();
         }
         else {
         	System.out.println("viewforms no session");
-        	 response.sendRedirect("/viewforms.html");
+        	 response.sendRedirect("/TRMS/login");
              System.out.println("No session");
         }
         out.close();
-		response.sendRedirect("/TRMS/home");//viewforms.html");
 	}
 
 	/**

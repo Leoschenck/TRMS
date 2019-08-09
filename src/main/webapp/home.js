@@ -12,7 +12,7 @@ function getUser() {
     var xhr = new XMLHttpRequest();
     var user = '';
     xhr.onreadystatechange = function () {
-        alert("In ORSC " + xhr.readyState + xhr.status);
+        //alert("In ORSC " + xhr.readyState + xhr.status);
         if (xhr.readyState == 4 && xhr.status == 200) {
             console.log(xhr.responseText);
             user = JSON.parse(xhr.responseText);

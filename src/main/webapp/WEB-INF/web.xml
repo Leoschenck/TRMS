@@ -89,4 +89,14 @@
     <servlet-name>ViewFormsServlet</servlet-name>
     <url-pattern>/viewforms</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShowFormsServlet</display-name>
+    <servlet-name>ShowFormsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ShowFormsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowFormsServlet</servlet-name>
+    <url-pattern>/showforms</url-pattern>
+  </servlet-mapping>
 </web-app>
