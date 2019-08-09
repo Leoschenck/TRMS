@@ -79,4 +79,24 @@
     <servlet-name>FormServlet</servlet-name>
     <url-pattern>/form</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetUSerFormsServlet</display-name>
+    <servlet-name>GetUSerFormsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetUSerFormsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetUSerFormsServlet</servlet-name>
+    <url-pattern>/getuserforms</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShowFormsServlet</display-name>
+    <servlet-name>ShowFormsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ShowFormsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowFormsServlet</servlet-name>
+    <url-pattern>/showforms</url-pattern>
+  </servlet-mapping>
 </web-app>

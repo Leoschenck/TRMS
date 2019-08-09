@@ -1,0 +1,14 @@
+body {
+    min-height: 2000px;
+    padding-top: 70px;
+  }
+
+.fixed-nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 50px;
+    background-color: #064264;
+  }
