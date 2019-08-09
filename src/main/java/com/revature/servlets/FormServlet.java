@@ -26,10 +26,18 @@ public class FormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("in doget formservlet");
+		HttpSession s = req.getSession(false);
+		if (s != null) {
+
+			System.out.println(s.getAttribute("userId").toString() + " is the userId of " + s.getAttribute("userName"));
+
+			req.getRequestDispatcher("/form.html").include(req, resp); // TODO homepage
+		} else {
+			resp.sendRedirect("/TRMS/login");
+		}
 	}
 
 	/**
@@ -42,10 +50,11 @@ public class FormServlet extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		String input = fixJson(request.getInputStream());
 		InputStream inStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+		//PreparedForm pf = mapper.readValue(request.getInputStream(), PreparedForm.class);
 		PreparedForm pf = mapper.readValue(inStream, PreparedForm.class);
 		System.out.println(pf);
 		HttpSession s = request.getSession(false);
-		new FormDaoImpl().createForm(pf.getCourseStart(), pf.getLocation(), pf.getDescription(), pf.getCost(), pf.getGradingFormat(), pf.getTypeOfEvent(), pf.getWorkRelatedJustification(), pf.getWorkTimeMissed(), pf.getLinkToFiles(), 2, pf.getDeptId());
+		new FormDaoImpl().createForm(pf.getCourseStart(), pf.getLocation(), pf.getDescription(), pf.getCost(), pf.getGradingFormat(), pf.getTypeOfEvent(), pf.getWorkRelatedJustification(), pf.getWorkTimeMissed(), pf.getLinkToFiles(), (int)s.getAttribute("userId"), pf.getDeptId());
 		response.sendRedirect("/TRMS/home");
 	}
 	

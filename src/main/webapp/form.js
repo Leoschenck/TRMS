@@ -38,18 +38,15 @@ today = yyyy + '-' + mm + '-' + dd;
 // console.log('Days since ' + Jan1st2010.toLocaleDateString() + ': '
 // + Date.daysBetween(Jan1st2010, today));
 window.onload = function() {
-document.getElementById("cost")
-		.addEventListener("change", alerter);
-document.getElementById("typeOfEvent")
-		.addEventListener("change", alerter);
-
-document.getElementById("formSubmit").addEventListener("click", postForm,
-		false);
+document.getElementById("cost").addEventListener("change", alerter);
+document.getElementById("typeOfEvent").addEventListener("change", alerter);
+//document.getElementById("formSubmit").addEventListener("click", postForm,
+//		false);
 //document.getElementById("currentDate").value = today;
 }
 
 function postForm(){
-	console.log("in post form");
+	alert("in post form");
 
 	//let vg = document.getElementById("vgForm").submit;
 	var xhr2 = new XMLHttpRequest();
@@ -66,7 +63,7 @@ function postForm(){
 	xhr2.send(trash); //Wtf, trash is not escapecharactered and also is escapecharactered? Also why is this json stuff so reeeeeeeeeeee
 }
 
-function jsonBuilder() {
+function jsonBuiilder() {
 	var elements = document.getElementById("form").elements;
 	//var elements = document.getElementsByClassName("form-control");
 	var obj ={};
