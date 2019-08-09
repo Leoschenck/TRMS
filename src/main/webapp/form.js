@@ -42,6 +42,7 @@ document.getElementById("cost")
 		.addEventListener("change", alerter);
 document.getElementById("typeOfEvent")
 		.addEventListener("change", alerter);
+
 document.getElementById("formSubmit").addEventListener("click", postForm,
 		false);
 //document.getElementById("currentDate").value = today;
@@ -75,11 +76,12 @@ function jsonBuilder() {
 		if((item.tagName == "INPUT" || item.tagName == "SELECT") && item.id != "reimbursementamount"){
         obj[item.name] = item.value;
         console.log(obj);
-		};
 
-    };
+		}
+
+    }
     var json= JSON.stringify(obj);
-    console.log(json + " is our json document");
+    console.log(json);
     return json;
 };
 
