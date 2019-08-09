@@ -40,7 +40,7 @@ function displayForm(){
 	
 	console.log("outside");
 	xhr.open("GET", "view", true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.setRequestHeader('Content-Type', 'form');
 	xhr.send();
 	
 }
@@ -63,7 +63,7 @@ function approve(){
 	}
 	
 	xhr.open("POST", "decision", true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.setRequestHeader('Content-Type', 'form');
 	xhr.send("form="+JSON.stringify(form));
 	
 }
@@ -86,7 +86,7 @@ function deny(){
 	}
 	
 	xhr.open("POST", "decision", true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.setRequestHeader('Content-Type', 'form');
 	xhr.send("form="+JSON.stringify(form));
 	
 }
