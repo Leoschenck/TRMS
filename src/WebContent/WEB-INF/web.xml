@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ViewFormServlet</display-name>
+    <servlet-name>ViewFormServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ViewFormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewFormServlet</servlet-name>
+    <url-pattern>/ViewForms</url-pattern>
+  </servlet-mapping>
 </web-app>

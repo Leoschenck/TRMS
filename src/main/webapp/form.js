@@ -97,7 +97,7 @@ function alerter() {
 	switch (event) {
 	case "1":
 		document.getElementById("reimbursementamount").value = parseFloat(
-				(amount )).toFixed(2);
+				(amount * .80)).toFixed(2);
 		//document.getElementById("reimbamtEst").value = parseFloat(
 		//		(amount )).toFixed(2);
 		;
@@ -110,13 +110,13 @@ function alerter() {
 		break;
 	case "3":
 		document.getElementById("reimbursementamount").value = parseFloat(
-				(amount * .80)).toFixed(2);
+				(amount * .75)).toFixed(2);
 		//document.getElementById("reimbamtEst").value = parseFloat(
 		//		(amount * .80)).toFixed(2);
 		break;
 	case "4":
 		document.getElementById("reimbursementamount").value = parseFloat(
-				amount * .75).toFixed(2);
+				amount ).toFixed(2);
 		//document.getElementById("reimbamtEst").value = parseFloat(
 		//		amount * .75)
 		//		.toFixed(2);
