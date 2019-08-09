@@ -40,6 +40,8 @@ public class UserServlet extends HttpServlet {
 			}
 			ObjectMapper om = new ObjectMapper();
 			om.writeValue(out, user);
+			System.out.println("this may lead back to form post.");
+			//request.getRequestDispatcher("/")
 		}else {
 			response.sendRedirect("/login.html");
 		}

@@ -50,10 +50,11 @@ public class FormServlet extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		String input = fixJson(request.getInputStream());
 		InputStream inStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+		//PreparedForm pf = mapper.readValue(request.getInputStream(), PreparedForm.class);
 		PreparedForm pf = mapper.readValue(inStream, PreparedForm.class);
 		System.out.println(pf);
 		HttpSession s = request.getSession(false);
-		new FormDaoImpl().createForm(pf.getCourseStart(), pf.getLocation(), pf.getDescription(), pf.getCost(), pf.getGradingFormat(), pf.getTypeOfEvent(), pf.getWorkRelatedJustification(), pf.getWorkTimeMissed(), pf.getLinkToFiles(), 2, pf.getDeptId());
+		new FormDaoImpl().createForm(pf.getCourseStart(), pf.getLocation(), pf.getDescription(), pf.getCost(), pf.getGradingFormat(), pf.getTypeOfEvent(), pf.getWorkRelatedJustification(), pf.getWorkTimeMissed(), pf.getLinkToFiles(), (int)s.getAttribute("userId"), pf.getDeptId());
 		response.sendRedirect("/TRMS/home");
 	}
 	

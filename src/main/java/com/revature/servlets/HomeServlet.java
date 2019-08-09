@@ -18,9 +18,10 @@ public class HomeServlet extends HttpServlet {
 		HttpSession s = req.getSession(false);
 		if (s != null) {
 
-			System.out.println(s.getAttribute("userId").toString() + " is the userId of " + s.getAttribute("userName"));
+			while(req.getInputStream().read()!=-1) {}
 
-			req.getRequestDispatcher("/home.html").include(req, resp); // TODO homepage
+			req.getRequestDispatcher("/home.html").include(req, resp);; // TODO homepage
+			
 		} else {
 			resp.sendRedirect("/TRMS/login");
 		}
