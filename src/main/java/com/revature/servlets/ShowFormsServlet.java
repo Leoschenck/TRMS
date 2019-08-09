@@ -31,7 +31,7 @@ public class ShowFormsServlet extends HttpServlet {
 
 			while(req.getInputStream().read()!=-1) {}
 			
-			req.getRequestDispatcher("/viewforms.html").include(req, resp); // TODO homepage
+			req.getRequestDispatcher("/showforms.html").include(req, resp); // TODO homepage
 			
 		} else {
 			resp.sendRedirect("/TRMS/login");

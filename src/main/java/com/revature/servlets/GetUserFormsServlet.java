@@ -18,13 +18,13 @@ import com.revature.daoImpls.FormDaoImpl;
 /**
  * Servlet implementation class ViewFormsServlet
  */
-public class ViewFormsServlet extends HttpServlet {
+public class GetUserFormsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewFormsServlet() {
+    public GetUserFormsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,12 +37,12 @@ public class ViewFormsServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession s = request.getSession(false);
         ObjectMapper om = new ObjectMapper();
-		System.out.println("In viewForms doget");
+		System.out.println("In getuserForms doget");
         PrintWriter out = response.getWriter();
         FormDaoImpl fdi = new FormDaoImpl();
         
         if ( s != null) {
-            int id = om.readValue(s.getAttribute("userId").toString(), Integer.class);
+            int id = (int)s.getAttribute("userId");
            // List<Form> allForms = null;
             try {
             	om.writeValue(out, fdi.getFormsByUserId(id));
