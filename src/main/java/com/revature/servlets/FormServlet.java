@@ -26,10 +26,18 @@ public class FormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("in doget formservlet");
+		HttpSession s = req.getSession(false);
+		if (s != null) {
+
+			System.out.println(s.getAttribute("userId").toString() + " is the userId of " + s.getAttribute("userName"));
+
+			req.getRequestDispatcher("/form.html").include(req, resp); // TODO homepage
+		} else {
+			resp.sendRedirect("/TRMS/login");
+		}
 	}
 
 	/**
