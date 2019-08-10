@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.revature.beans.Form;
 import com.revature.util.ConnFactory;
@@ -85,13 +86,13 @@ public class FormDaoImpl {
 			}
 		return f;
 	}
-	public ArrayList<String> getDepartments() throws SQLException {
-		ArrayList<String> departments = new ArrayList<String>();
+	public HashMap<Integer, String> getDepartments() throws SQLException {
+		HashMap<Integer, String> departments = new HashMap<Integer, String>();
 		Connection conn = ConnFactory.getInstance().getConnection();
-		PreparedStatement ps = conn.prepareStatement("SELECT deptname FROM department");
+		PreparedStatement ps = conn.prepareStatement("SELECT deptid, deptname FROM department");
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
-			departments.add(rs.getString(1));
+			departments.put(rs.getInt(1), rs.getString(2));
 			
 		}
 		return departments;

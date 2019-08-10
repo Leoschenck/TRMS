@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -134,10 +135,10 @@ class FormWithDeptName {
 
 	private String getDeptName(int deptId) {
 		FormDaoImpl fdi = new FormDaoImpl();
-		ArrayList<String> departments;
+		HashMap<Integer, String> departments;
 		try {
 			departments = fdi.getDepartments();
-			return departments.get(deptId + 1);
+			return departments.get(deptId);
 		} catch (SQLException e) {
 			System.out.println("something in the sql conn went wrong :s In GetUSerFormServlet");
 			e.printStackTrace();
