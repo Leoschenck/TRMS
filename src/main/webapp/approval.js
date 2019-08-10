@@ -68,6 +68,7 @@ function approve(){
 	
 }
 
+<<<<<<< HEAD
 function deny(){
 	
 	var xhr = new XMLHttpRequest();
@@ -105,14 +106,48 @@ function logout(){
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.send();
 	
+=======
+function loadForms(allForms){
+    console.log("in loadForms");
+
+    console.log(allForms);
+    // if(userId != null){
+    //     document.getElementById("userId").innerHTML = userId.id;
+    // } else {
+    //     document.getElementById("vgName").innerHTML = "There is no record associated with that ID";
+    // }
+}
+
+function getForms() {
+    console.log("In get User function!");
+    var xhr = new XMLHttpRequest();
+    var forms = '';
+    xhr.onreadystatechange = function () {
+        console.log("In ORSC " + xhr.readyState + xhr.status);
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log(xhr.responseText);
+            forms = JSON.parse(xhr.responseText);
+            loadForms(forms);
+            console.log(forms);
+        }
+    }
+    xhr.open("GET", "http://localhost:8080/TRMS/viewforms", true);
+    xhr.send();
+>>>>>>> 56bf37ad14117952d75193edbab82053e4a7611e
 }
 
 
 
 window.onload = function(){
+<<<<<<< HEAD
 	var ticketid;
 	displayForm();
 	document.getElementById("approve").addEventListener("click", approve, false);
 	document.getElementById("deny").addEventListener("click", deny, false);
 	document.getElementById("logout").addEventListener("click", logout, false);
 }
+=======
+	var curUser = getForms();
+    console.log(curUser)
+}
+>>>>>>> 56bf37ad14117952d75193edbab82053e4a7611e

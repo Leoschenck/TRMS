@@ -36,6 +36,7 @@ public class UserDaoImpl {
 		if(rs.next()) {
 			u = (rs.getInt(1));
 		}
+		System.out.println("in loginuser with " + username + " and "+ password);
 		return u;
 	}
 

@@ -1,3 +1,8 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
 <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,13 +17,13 @@
       <a class="nav-link" href="form.html">Create Form</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="viewforms.html">View Forms</a>
-    </li>
+	  <a class="nav-link" href="showforms.html">View Forms</a>
+	</li>
     <li class="nav-item">
       <a class="nav-link" href="approval.html">Approval</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">Notifications</a>
+      <a class="nav-link" href="notifications.html">Notifications</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="login.html">Logout</a>
@@ -28,12 +33,35 @@
 </div>
 <br>
 
+<body>
+	<!-- Navigation Bar
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			Company Brand Name -->
+			<!-- <div class="navbar-header">
+				<a class="navbar-brand" href="home.html">Tuition Reimbursement
+					Management System</a>
+			</div> -->
+			
+			<!-- Login and Logout -->
+			<!-- <ul class="nav navbar-nav navbar-right">
+				<li id="logout"><a href="home.html"> <span
+						class="glyphicon glyphicon-log-out"></span> Logout
+				</a></li>
+			</ul>
+		</div> -->
 <br>
+<dv>
+	<div> 
+		<br>
+	</div>
+<h1 class="text-left">Tuition Reimbursement Form</h1>
+</dv>
 	</nav>
 		<div class="col-md-6 col-md-offset-3">
 			<div id="divlogin" class="panel-default">
 				<div class="panel-heading">
-					<h1 class="text-center">Tuition Reimbursement Form</h1>
+					<!-- <h1 class="text-center">Tuition Reimbursement Form</h1> -->
 				</div>
 				<div class="panel-body">
 					<!-- Reimbursement Form -->
@@ -118,8 +146,8 @@
 
 						<!-- Work time missed -->
 						<div class="form-group">
-							<label for="WorkTimeMissed">Work Time Missed:</label> <input
-								type="number" class="form-control" id="WorkTimeMissed" name="WorkTimeMissed"
+							<label for="workTimeMissed">Work Time Missed:</label> <input
+								type="number" class="form-control" id="workTimeMissed" name="workTimeMissed"
 								step="0.5" max="1000" placeholder="Enter Time "
 								required="required">
 						</div>
@@ -129,13 +157,13 @@
 							<label for="deptId">Department:</label> <select
 								name="deptId" class="form-control" id="deptId"
 								required="required">
-								<option value="" selected="selected">Select Department</option>
-								<option value="1">"Some"</option>
-								<option value="2">"Random"</option>
-								<option value="3">"Department"</option>
-								<option value="4">"Math"</option>
-								<option value="5">"Bla"</option>
-								<option value="6">"Other"</option>
+								<option value="0" selected="selected">Select Department</option>
+								<option value="1">Some</option>
+								<option value="2">Random</option>
+								<option value="3">Department</option>
+								<option value="4">Math</option>
+								<option value="5">Bla</option>
+								<option value="6">Other</option>
 							</select>
 						</div>
 
@@ -145,7 +173,7 @@
 							accept=".pdf, .png, .jpeg, .jpg, .txt, .doc, .msg" /> <br />
 						<br>
 							<!-- Submit -->
-						<button type="submit" class="btn btn-success btn-block">Submit</button>
+						<button id="formSubmit" class="btn btn-success btn-block">Submit</button>
 
 					</form>
 					<br>

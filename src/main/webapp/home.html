@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Bootstrap Example</title>
@@ -15,13 +15,13 @@
       <a class="nav-link" href="form.html">Create Form</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="viewforms.html">View Forms</a>
+      <a class="nav-link" href="showforms.html">View Forms</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="approval.html">Approval</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">Notifications</a>
+      <a class="nav-link" href="notifications.html">Notifications</a> 
     </li>
     <li class="nav-item">
       <a class="nav-link" href="login.html">Logout</a>
@@ -46,9 +46,13 @@
       <div>
         <br>
       </div>
+      <div>
+        <br>
+      </div>
     <h1>Welcome to the Transaction Reimbursement Management System</h1>
     <br>
 <img src="1.jpg"></img>
+
 <div class="container-fluid" style="margin-top:80px">
   <h3>Overview</h3>
   <p>The purpose of the Tuition Reimbursement Management System(TRMS) is to provide a system that encourages quality knowledge growth
@@ -58,6 +62,27 @@
       funds and is error-prone due to inbox clutter and incorrect routing of tasks. Furthermore, there
       is no way to record and report on reimbursements awarded, and so the company has no way to
       identify highly-invested courses that could be developed to be offered in-house.</p>
+
+      <p>Each employee is allowed to claim up to $1000 in tuition reimbursement a year.
+          - The amount available to an employee is reset on the new year.
+           Event types have different standard reimbursement coverage:
+           University Courses 80%,
+          Seminars 60%,
+          Certification Preparation Classes 75%,
+          Certification 100%,
+           Technical Training 90%, or
+          Other 30%.
+          After a BenCo has approved a reimbursement, the reimbursement is pending until a
+          passing grade or presentation over the event is provided.
+          The monetary amount available for an employee to reimburse is defined by the following
+          equation:
+          The available Reimburstment = TotalReimburstment ($1000) –
+          PendingReimburstments – AwardedReimburstments.
+           If the projected reimbursement for an event exceeds the available reimbursement
+          amount, it is adjusted to the amount available.
+           Reimbursements do not cover course materials such as books.</p>
+
+          <p>Complete your tuition reimbursement form today!</p>
 </div>
 </body>
   </div>
@@ -67,4 +92,5 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="home.js"></script>
   </body>
+
 </html>

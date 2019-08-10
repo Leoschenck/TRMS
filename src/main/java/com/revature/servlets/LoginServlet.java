@@ -31,18 +31,18 @@ public class LoginServlet extends HttpServlet {
 			
 			// Sends the user to the home screen if the username and password match a user
 			// or tells him there is no match and directs him back to the login.
-			if (userId >= 0) {
+			if (userId > 0) {
 				HttpSession ses = req.getSession();
 				ses.setAttribute("userId", userId);
 				ses.setAttribute("userName", userName);
 				System.out.println("User logged in! Id = " + userId);
+				
 				resp.sendRedirect("/TRMS/home");
 			}
 			else {
+				System.out.println("login denied");
 				resp.setContentType("text/html");
-				pw.println("<script type=\"text/javascript\">");
-				pw.println("alert('Username and Password do not match');");
-				pw.println("</script>");
+				pw.println("<script type=\"text/javascript\">window.alert('Username and password do not match!')</script>");
 				req.getRequestDispatcher("/login.html").forward(req, resp);
 			}
 			pw.close();

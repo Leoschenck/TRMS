@@ -33,6 +33,7 @@ public class FormDaoImpl {
 			call.setInt(10, employeeId);
 			call.setInt(11, deptId);
 			call.execute();
+			System.out.println("form was successfully created! This call comes from FormDaoImpl");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
