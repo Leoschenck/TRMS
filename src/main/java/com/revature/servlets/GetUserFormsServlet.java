@@ -47,8 +47,8 @@ public class GetUserFormsServlet extends HttpServlet {
             try {
             	om.writeValue(out, fdi.getFormsByUserId(id));
             	//allForms = new FormDaoImpl().getFormsByUserId((int)s.getAttribute("userId"));
-    			response.setContentType("application/json");
-    			response.setCharacterEncoding("UTF-8");
+    			//response.setContentType("application/json");
+    			//response.setCharacterEncoding("UTF-8");
                 //user = new FormDaoImpl().getUserById((int)s.getAttribute("userId"));
             } catch (SQLException e) {
             	

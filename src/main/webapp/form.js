@@ -45,7 +45,7 @@ document.getElementById("typeOfEvent").addEventListener("change", alerter);
 //document.getElementById("currentDate").value = today;
 }
 
-function postForm(){
+/*function postForm(){
 	alert("in post form");
 
 	//let vg = document.getElementById("vgForm").submit;
@@ -81,7 +81,7 @@ function jsonBuiilder() {
     console.log(json);
     return json;
 };
-
+*/
 
 
 function alerter() {

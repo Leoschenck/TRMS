@@ -31,36 +31,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>LogoutServlet</display-name>
-    <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>com.revature.servlets.LogoutServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/logout</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ApproveServlet</display-name>
-    <servlet-name>ApproveServlet</servlet-name>
-    <servlet-class>com.revature.servlets.ApproveServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ApproveServlet</servlet-name>
-    <url-pattern>/approve</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>DenyServlet</display-name>
-    <servlet-name>DenyServlet</servlet-name>
-    <servlet-class>com.revature.servlets.DenyServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DenyServlet</servlet-name>
-    <url-pattern>/deny</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>UserServlet</display-name>
     <servlet-name>UserServlet</servlet-name>
     <servlet-class>com.revature.servlets.UserServlet</servlet-class>
@@ -81,12 +51,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>GetUSerFormsServlet</display-name>
-    <servlet-name>GetUSerFormsServlet</servlet-name>
-    <servlet-class>com.revature.servlets.GetUSerFormsServlet</servlet-class>
+    <display-name>GetUserFormsServlet</display-name>
+    <servlet-name>GetUserFormsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetUserFormsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetUSerFormsServlet</servlet-name>
+    <servlet-name>GetUserFormsServlet</servlet-name>
     <url-pattern>/getuserforms</url-pattern>
   </servlet-mapping>
   <servlet>
@@ -98,5 +68,35 @@
   <servlet-mapping>
     <servlet-name>ShowFormsServlet</servlet-name>
     <url-pattern>/showforms</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SignOutServlet</display-name>
+    <servlet-name>SignOutServlet</servlet-name>
+    <servlet-class>com.revature.servlets.SignOutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SignOutServlet</servlet-name>
+    <url-pattern>/SignOutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.revature.servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FormApprovalServlet</display-name>
+    <servlet-name>FormApprovalServlet</servlet-name>
+    <servlet-class>com.revature.servlets.FormApprovalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FormApprovalServlet</servlet-name>
+    <url-pattern>/approval</url-pattern>
   </servlet-mapping>
 </web-app>

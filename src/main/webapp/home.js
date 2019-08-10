@@ -18,7 +18,7 @@ function getUser() {
             user = JSON.parse(xhr.responseText);
             loadUserHome(user);
             console.log(user);
-            alert(user);
+            
         }
     }
     
