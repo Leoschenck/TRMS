@@ -85,6 +85,17 @@ public class FormDaoImpl {
 			}
 		return f;
 	}
+	public ArrayList<String> getDepartments() throws SQLException {
+		ArrayList<String> departments = new ArrayList<String>();
+		Connection conn = ConnFactory.getInstance().getConnection();
+		PreparedStatement ps = conn.prepareStatement("SELECT deptname FROM department");
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			departments.add(rs.getString(1));
+			
+		}
+		return departments;
+	}
 	
 	
 }

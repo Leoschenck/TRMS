@@ -29,7 +29,7 @@ function getForms() {
             console.log(forms);
         }
     }
-    xhr.open("GET", "http://localhost:8080/TRMS/viewforms", true);
+    xhr.open("GET", "http://localhost:8080/TRMS/showforms", true);
     xhr.send();
 }
 
