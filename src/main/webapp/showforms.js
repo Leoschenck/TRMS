@@ -34,6 +34,41 @@ function gradePass(cur) {
         if (curRow[0].innerHTML == curFormId) {
             console.log("Form " + curRow[0].innerHTML + " found");
             curRow[7].innerHTML = "Approved";
+            //function postForm() {
+                alert("in post form");
+
+                //let vg = document.getElementById("vgForm").submit;
+                var xhr2 = new XMLHttpRequest();
+                xhr2.onreadystatechange = function () {
+                    console.log("in post form on ready change");
+                    console.log("in ORSC " + xhr2.readyState + xhr2.status);
+                    if (xhr2.readyState == 4 && xhr2.status == 200) {
+                        console.log(xhr.responseText);
+                    }
+                }
+                xhr2.open("POST", "http://localhost:8080/TRMS/form", false);
+                var trash = jsonBuilder();
+                alert(trash);
+                xhr2.send(trash); 
+            
+
+            //function jsonBuiilder() {
+                var elements = document.getElementById("form").elements;
+                //var elements = document.getElementsByClassName("form-control");
+                var obj = {};
+                for (var i = 0 ; i < elements.length; i++) {
+                    var item = elements.item(i);
+                    console.log(item.tagName + " is type");
+                    if ((item.tagName == "INPUT" || item.tagName == "SELECT") && item.id != "reimbursementamount") {
+                        obj[item.name] = item.value;
+                        console.log(obj);
+
+                    }
+
+                }
+                var json = JSON.stringify(obj);
+                console.log(json);
+                return json;
         }
     }
     //cur.currentTarget.removeEventListener("click", gradePass, false);
