@@ -80,7 +80,7 @@ public class FormDaoImpl {
 		// States: 0 just opened, 1 super approved, 2 dep approved, 3 benco approved, 4 passed
 		ps = conn.prepareStatement(
 				"SELECT * FROM Form WHERE employeeid IN (SELECT userId from \"USER\" WHERE reportsto =" + employeeId
-						+ ") AND state >= 0 OR deptid = (SELECT deptId FROM department WHERE depthead =" + employeeId + ") AND state >= 1");
+						+ ") AND status >= 0 OR deptid = (SELECT deptId FROM department WHERE depthead =" + employeeId + ") AND status >= 1");
 		ResultSet rs1 = ps.executeQuery();
 		Form f = null;
 		while (rs1.next()) {
