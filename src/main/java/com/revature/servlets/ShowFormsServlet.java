@@ -57,11 +57,11 @@ public class ShowFormsServlet extends HttpServlet {
 
 			XhrGrading grade = mapper.readValue(request.getInputStream(), XhrGrading.class);
 			if (grade.getPassed() == 1) {
-				fdi.setState(grade.getId(), 4);
+				fdi.setState(grade.getFormId(), 4);
 				// TODO Process the money being withdrawn, don't overdraw blablabla - how can
 				// the benco approve of overdrawing? if string == null, dont overdraw?
 			} else if (grade.getPassed() == 0) {
-				fdi.setState(grade.getId(), -1);
+				fdi.setState(grade.getFormId(), -1);
 			}
 
 		} else {
@@ -72,12 +72,12 @@ public class ShowFormsServlet extends HttpServlet {
 }
 
 class XhrGrading {
-	private int id;
+	private int formId;
 	private int passed;
 
 	public XhrGrading(int id, int passed) {
 		super();
-		this.id = id;
+		this.formId = id;
 		this.passed = passed;
 	}
 
@@ -86,12 +86,12 @@ class XhrGrading {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
-		return id;
+	public int getFormId() {
+		return formId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setFormId(int id) {
+		this.formId = id;
 	}
 
 	public int getPassed() {
