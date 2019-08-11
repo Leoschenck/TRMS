@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.beans.User;
 import com.revature.daoImpls.FormDaoImpl;
 import com.revature.daoImpls.UserDaoImpl;
 
@@ -30,8 +31,8 @@ public class LoginServlet extends HttpServlet {
 			UserDaoImpl udi = new UserDaoImpl();
 			FormDaoImpl fdi = new FormDaoImpl();
 			String userName = req.getParameter("username");
-			int userId = udi.loginUser(userName, req.getParameter("password"));
-			
+			User u = udi.loginUser(userName, req.getParameter("password"));
+			int userId = u.getId();
 			// Sends the user to the home screen if the username and password match a user
 			// or tells him there is no match and directs him back to the login.
 			if (userId > 0) {
@@ -39,9 +40,11 @@ public class LoginServlet extends HttpServlet {
 				ses.setAttribute("userId", userId);
 				ses.setAttribute("isBenco", udi.isBenco(userId));
 				ses.setAttribute("userName", userName);
+				ses.setAttribute("remainingReimbursementAmount", u.getRmnReimbursement());
 				String hasApprovablesString = fdi.hasApprovableForms(userId)?"1":"0";
 				ses.setAttribute("hasApprovables", hasApprovablesString);
 				resp.addCookie(new Cookie("userName", userName));
+				resp.addCookie(new Cookie("remainingReimbursementAmount", u.getRmnReimbursement()+""));
 				resp.addCookie(new Cookie("isBenco", udi.isBenco(userId)));
 				resp.addCookie(new Cookie("hasApprovables", hasApprovablesString));
 

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.revature.beans.Form;
 import com.revature.beans.User;
 import com.revature.util.ConnFactory;
 
@@ -28,15 +27,17 @@ public class UserDaoImpl {
 		return userList;
 	}
 
-	public int loginUser(String username, String password) throws SQLException {
+	public User loginUser(String username, String password) throws SQLException {
 		Connection conn = cf.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(
 				"SELECT * FROM \"USER\" WHERE UserName = '" + username + "' AND Password = '" + password + "'");
 		ResultSet rs = stmt.executeQuery();
-		int u = -1;
+		User u = new User();
+		u.setId(-1);
 		if (rs.next()) {
-			u = (rs.getInt(1));
-		}
+			u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+					rs.getDouble(6), rs.getInt(7), rs.getString(8), rs.getString(9));
+			}
 		System.out.println("in loginuser with " + username + " and " + password);
 		return u;
 	}
