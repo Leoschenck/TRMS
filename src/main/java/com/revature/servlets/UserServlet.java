@@ -28,20 +28,20 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession s = request.getSession(false);
+		UserDaoImpl udi = new UserDaoImpl();
 		
 		PrintWriter out = response.getWriter();
 		if ( s != null) {
 			User user = null;
 			try {
 				user = new UserDaoImpl().getUserById((int)s.getAttribute("userId"));
+				System.out.println(user);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			ObjectMapper om = new ObjectMapper();
 			om.writeValue(out, user);
-			System.out.println("this may lead back to form post.");
-			//request.getRequestDispatcher("/")
 		}else {
 			response.sendRedirect("/login.html");
 		}

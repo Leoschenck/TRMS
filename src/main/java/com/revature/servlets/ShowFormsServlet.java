@@ -57,11 +57,11 @@ public class ShowFormsServlet extends HttpServlet {
 
 			XhrGrading grade = mapper.readValue(request.getInputStream(), XhrGrading.class);
 			if (grade.getPassed() == 1) {
-				fdi.setState(grade.getFormId(), 4);
+				fdi.setStatus(grade.getFormId(), 4);
 				// TODO Process the money being withdrawn, don't overdraw blablabla - how can
 				// the benco approve of overdrawing? if string == null, dont overdraw?
 			} else if (grade.getPassed() == 0) {
-				fdi.setState(grade.getFormId(), -1);
+				fdi.setStatus(grade.getFormId(), -1);
 			}
 
 		} else {

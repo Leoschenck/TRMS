@@ -57,16 +57,39 @@ public class FormDaoImpl {
 		return formList;
 	}
 
+	public boolean isSupervisor(int formId, int userId) {
+		Connection conn = cf.getConnection();
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM \"USER\" WHERE userid = (SELECT employeeid FROM form WHERE formid = " + formId + ") AND reportsto = " + userId);
+			ResultSet rs = ps.executeQuery();
+			return rs.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public boolean isDeptHead(int formId, int userId) {
+		Connection conn = cf.getConnection();
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM form WHERE formid = " + formId +" AND deptid = (SELECT deptid FROM department WHERE depthead = " + userId);
+			ResultSet rs = ps.executeQuery();
+			return rs.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public ArrayList<Form> getApprovableFormsByUserId(int employeeId) throws SQLException {
 		ArrayList<Form> formList = new ArrayList<Form>();
 		Connection conn = cf.getConnection();
 
-		PreparedStatement ps = conn.prepareStatement("SELECT bencoid FROM benco WHERE bencoid = " + employeeId);
-		ResultSet rs0 = ps.executeQuery();
-		if (rs0.next()) {
+		if (new UserDaoImpl().isBenco(employeeId).equals("1")) {
 			PreparedStatement ps0 = conn.prepareStatement(
 					"SELECT * FROM Form WHERE state >= 2");
-			ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps0.executeQuery();
 			Form f = null;
 			while (rs.next()) {
 				f = new Form(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), rs.getString(5),
@@ -78,7 +101,7 @@ public class FormDaoImpl {
 			return formList;
 		}
 		// States: 0 just opened, 1 super approved, 2 dep approved, 3 benco approved, 4 passed
-		ps = conn.prepareStatement(
+		PreparedStatement ps = conn.prepareStatement(
 				"SELECT * FROM Form WHERE employeeid IN (SELECT userId from \"USER\" WHERE reportsto =" + employeeId
 						+ ") AND status >= 0 OR deptid = (SELECT deptId FROM department WHERE depthead =" + employeeId + ") AND status >= 1");
 		ResultSet rs1 = ps.executeQuery();
@@ -94,6 +117,16 @@ public class FormDaoImpl {
 		return formList;
 	}
 
+	public boolean hasApprovableForms(int userId) {
+		try {
+			return (getApprovableFormsByUserId(userId) != null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+			
+	}
 	public ArrayList<Form> getFormsByStatus(int status) throws SQLException {
 		ArrayList<Form> formList = new ArrayList<Form>();
 		Connection conn = cf.getConnection();
@@ -124,7 +157,7 @@ public class FormDaoImpl {
 		return f;
 	}
 	
-	public void setState(int formId, int state) {
+	public void setStatus(int formId, int state) {
 		Connection conn = cf.getConnection();
 		try {
 			CallableStatement call = conn.prepareCall("{ call change_status(?, ?) }");
