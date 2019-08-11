@@ -81,12 +81,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>GetUSerFormsServlet</display-name>
-    <servlet-name>GetUSerFormsServlet</servlet-name>
-    <servlet-class>com.revature.servlets.GetUSerFormsServlet</servlet-class>
+    <display-name>GetUserFormsServlet</display-name>
+    <servlet-name>GetUserFormsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetUserFormsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetUSerFormsServlet</servlet-name>
+    <servlet-name>GetUserFormsServlet</servlet-name>
     <url-pattern>/getuserforms</url-pattern>
   </servlet-mapping>
   <servlet>
