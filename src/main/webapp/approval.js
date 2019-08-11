@@ -30,42 +30,66 @@ function approveForm(cur) {
     console.log("Approving form " + curFormId);
     var curRow;
     var allRows = document.getElementById("lefttable").children[0].children;
-    for (var i = 0; i < allRows.length; i++) {
-        curRow = allRows[i].children;
-        if (curRow[0].innerHTML == curFormId) {
-            console.log("Form " + curRow[0].innerHTML + " found");       
-            switch (curRow[7].innerHTML) {
-                case "Awaiting Supervisor Approval":
-                    curRow[7].innerHTML = "Awaiting Department Approval";
-                    break;
-                case "Awaiting Department Approval":
-                    curRow[7].innerHTML = "Awaiting BenCo Approval";
-                    break;
-                case "Awaiting BenCo Approval":
-                    curRow[7].innerHTML = "Awaiting Grade";
-                    break;
-                case "Denied":
-                    return;
-            }
+    curRow = cur.currentTarget.parentElement.children;
+    console.log("Form " + curRow[0].innerHTML + " found");       
+    switch (curRow[7].innerHTML) {
+        case "Awaiting Supervisor Approval":
+            curRow[7].innerHTML = "Awaiting Department Approval";
+            break;
+        case "Awaiting Department Approval":
+            curRow[7].innerHTML = "Awaiting BenCo Approval";
+            break;
+        case "Awaiting BenCo Approval":
+            curRow[7].innerHTML = "Awaiting Grade";
+            break;
+        case "Denied":
+            return;
+    }
+
+    var xhr2 = new XMLHttpRequest();
+    xhr2.onreadystatechange = function () {
+        console.log("in FORM APPROVE on ready change");
+        console.log("in ORSC " + xhr2.readyState + xhr2.status);
+        if (xhr2.readyState == 4 && xhr2.status == 200) {
+            //  console.log(xhr2.responseText);
         }
     }
+    xhr2.open("POST", "http://localhost:8080/TRMS/approval", false);
+    var obj = {};
+    obj["formId"] = curFormId;
+    obj["approved"] = 1;
+    var trash = JSON.stringify(obj)
+    xhr2.send(trash);
+
     cur.currentTarget.removeEventListener("click", approveForm, false);
-
-
+    cur.currentTarget.parentElement.children[9].removeEventListener("click", denyForm, false);
 }
 function denyForm(cur) {
     curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
     console.log("Denying form " + curFormId);
     var curRow;
     var allRows = document.getElementById("lefttable").children[0].children;
-    for (var i = 0; i < allRows.length; i++) {
-        curRow = allRows[i].children;
-        if(curRow[0].innerHTML == curFormId){
-        console.log("Form " + curRow[0].innerHTML + " found");
-        curRow[7].innerHTML = "Denied";
+    curRow = cur.currentTarget.parentElement.children;
+    console.log("Form " + curRow[0].innerHTML + " found");
+    curRow[7].innerHTML = "Denied";
+
+    var xhr2 = new XMLHttpRequest();
+    xhr2.onreadystatechange = function () {
+        console.log("in FORM DENY on ready change");
+        console.log("in ORSC " + xhr2.readyState + xhr2.status);
+        if (xhr2.readyState == 4 && xhr2.status == 200) {
+            //  console.log(xhr2.responseText);
         }
     }
+    xhr2.open("POST", "http://localhost:8080/TRMS/approval", false);
+    var obj = {};
+    obj["formId"] = curFormId;
+    obj["approved"] = 0;
+    var trash = JSON.stringify(obj)
+    xhr2.send(trash);
+
     cur.currentTarget.removeEventListener("click", denyForm, false);
+    cur.currentTarget.parentElement.children[8].removeEventListener("click", approveForm, false);
 }
 function addcell() {
     var formTable = document.getElementById("lefttable");
