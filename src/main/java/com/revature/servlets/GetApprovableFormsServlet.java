@@ -35,10 +35,15 @@ public class GetApprovableFormsServlet extends HttpServlet {
 			ArrayList<Form> approvableForms = null;
 			try {
 				approvableForms = fdi.getApprovableFormsByUserId((int)s.getAttribute("userId"));
+				ArrayList<FormWithDeptName> allFormsWithDeptName = new ArrayList<FormWithDeptName>();
+				for (Form form : approvableForms) {
+					allFormsWithDeptName.add(new FormWithDeptName(form));
+				}
+				om.writeValue(out, allFormsWithDeptName);
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			om.writeValue(out, approvableForms);
 		}else {
 			resp.sendRedirect("/TRMS/login");
 		}
