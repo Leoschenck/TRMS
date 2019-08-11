@@ -31,8 +31,9 @@ function approveForm(cur) {
     var curRow;
     var allRows = document.getElementById("lefttable").children[0].children;
     curRow = cur.currentTarget.parentElement.children;
-    console.log("Form " + curRow[0].innerHTML + " found");       
-    switch (curRow[7].innerHTML) {
+    console.log("Form " + curRow[0].innerHTML + " found");
+    curRow[7].innerHTML = "Approved for next step"
+    /*switch (curRow[7].innerHTML) {
         case "Awaiting Supervisor Approval":
             curRow[7].innerHTML = "Awaiting Department Approval";
             break;
@@ -44,7 +45,7 @@ function approveForm(cur) {
             break;
         case "Denied":
             return;
-    }
+    }*/
 
     var xhr2 = new XMLHttpRequest();
     xhr2.onreadystatechange = function () {
@@ -61,8 +62,8 @@ function approveForm(cur) {
     var trash = JSON.stringify(obj)
     xhr2.send(trash);
 
-    cur.currentTarget.removeEventListener("click", approveForm, false);
-    cur.currentTarget.parentElement.children[9].removeEventListener("click", denyForm, false);
+    //cur.currentTarget.removeEventListener("click", approveForm, false);
+    //cur.currentTarget.parentElement.children[9].removeEventListener("click", denyForm, false);
 }
 function denyForm(cur) {
     curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
@@ -88,8 +89,8 @@ function denyForm(cur) {
     var trash = JSON.stringify(obj)
     xhr2.send(trash);
 
-    cur.currentTarget.removeEventListener("click", denyForm, false);
-    cur.currentTarget.parentElement.children[8].removeEventListener("click", approveForm, false);
+    //cur.currentTarget.removeEventListener("click", denyForm, false);
+    //cur.currentTarget.parentElement.children[8].removeEventListener("click", approveForm, false);
 }
 function addcell() {
     var formTable = document.getElementById("lefttable");
