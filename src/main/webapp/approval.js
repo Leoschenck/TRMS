@@ -61,12 +61,31 @@ function openQuestion(cur) {
 
     questBoxCell.id = "questBox";
     questBoxCell.colSpan = "8";
-    questBoxCell.innerHTML = "<textarea name='message' rows='3' cols='100'>";
+    questBoxCell.innerHTML = "<textarea name='message' id='questBoxArea' rows='3' cols='100'>";
 
     questSubmitCell.id = "questSubmit";
     questSubmitCell.colSpan = "1";
-    questSubmitCell.innerHTML = "<input type='submit' name='ed'/>"
-
+    questSubmitCell.innerHTML = "<input type='submit' id='questSubmitButton' name='ed'/>"
+    document.getElementById("questSubmitButton").addEventListener("click", submitQuestion, false);
+}
+function submitQuestion(cur) {
+    console.log(document.getElementById("questBoxArea").value);
+    document.getElementById("questTextCell").innerHTML = "Question submitted: ";
+    document.getElementById("questBoxCell").innerHTML = document.getElementById("questBoxArea").value;
+	/*var xhr2 = new XMLHttpRequest();
+    xhr2.onreadystatechange = function () {
+        console.log("in FORM Question on ready change");
+        console.log("in ORSC " + xhr2.readyState + xhr2.status);
+        if (xhr2.readyState == 4 && xhr2.status == 200) {
+            //  console.log(xhr2.responseText);
+        }
+    }
+    xhr2.open("POST", "http://localhost:8080/TRMS/approval", false);
+    var obj = {};
+    obj["formId"] = curFormId;
+    obj["approved"] = document.getElementById("questBoxArea").innerHTML;
+    var trash = JSON.stringify(obj)
+    xhr2.send(trash);*/
 }
 function approveForm(cur) {
     curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
@@ -129,6 +148,7 @@ function denyForm(cur) {
     var obj = {};
     obj["formId"] = curFormId;
     obj["approved"] = 0;
+    /////obj["attachedReasoning"] =
     var trash = JSON.stringify(obj)
     xhr2.send(trash);
 
