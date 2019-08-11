@@ -65,7 +65,7 @@ public class FormDaoImpl {
 		ResultSet rs0 = ps.executeQuery();
 		if (rs0.next()) {
 			PreparedStatement ps0 = conn.prepareStatement(
-					"SELECT * FROM Form");
+					"SELECT * FROM Form WHERE state >= 2");
 			ResultSet rs = ps.executeQuery();
 			Form f = null;
 			while (rs.next()) {
@@ -77,10 +77,10 @@ public class FormDaoImpl {
 			}
 			return formList;
 		}
-
+		// States: 0 just opened, 1 super approved, 2 dep approved, 3 benco approved, 4 passed
 		ps = conn.prepareStatement(
 				"SELECT * FROM Form WHERE employeeid IN (SELECT userId from \"USER\" WHERE reportsto =" + employeeId
-						+ ") OR deptid = (SELECT deptId FROM department WHERE depthead =" + employeeId + ")");
+						+ ") AND state >= 0 OR deptid = (SELECT deptId FROM department WHERE depthead =" + employeeId + ") AND state >= 1");
 		ResultSet rs1 = ps.executeQuery();
 		Form f = null;
 		while (rs1.next()) {
@@ -123,10 +123,22 @@ public class FormDaoImpl {
 		}
 		return f;
 	}
+	
+	public void setState(int formId, int state) {
+		Connection conn = cf.getConnection();
+		try {
+			CallableStatement call = conn.prepareCall("{ call change_status(?, ?) }");
+			call.setInt(1, formId);
+			call.setInt(2, state);
+			call.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public HashMap<Integer, String> getDepartments() throws SQLException {
 		HashMap<Integer, String> departments = new HashMap<Integer, String>();
-		Connection conn = ConnFactory.getInstance().getConnection();
+		Connection conn = cf.getConnection();
 		PreparedStatement ps = conn.prepareStatement("SELECT deptid, deptname FROM department");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
