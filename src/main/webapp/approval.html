@@ -1,65 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
 <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-<body style="height:1500px">
+<body style="height:1500px"; background-color:#AAE0F8">
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-  <a class="navbar-brand" href="home.html">Home</a>
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="form.html">Create Form</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="showforms.html">View Forms</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="approval.html">Approval</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="notifications.html">Notifications</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="login.html">Logout</a>
-    </li>
-  </ul>
-</nav>
-<br>
-<div>
-      <body>
-        <div>
-          <br>
-          <br>
-        </div>
-          <h1>Reimbursement Approvals</h1>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <a class="navbar-brand" href="home.html">Home</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="form.html">Create Form</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/TRMS/showforms">View Forms</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="approval.html">Approval</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Notifications</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/TRMS/login.html">Logout</a>
+            </li>
         </ul>
-        <div class="containers">
-          <table id="lefttable" class="table">
+    </nav>
+    <br>
+    <div>
+        <br>
+    </div>
+    
+
+    <!-- Reimbursement Form -->
+    <br>
+    <h1>View Requests</h1>
+    <div class="split2 right">
+        <table id="lefttable" class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Form ID</th>
-                    <th>Application Date</th>
-                    <th>Course Start Date</th>
-                    <th>Location</th>
-                    <th>Department</th>
-                    <th>Cost</th>
-                    <th>Type of Event</th>
-                    <th>Status</th>
+                    <td style="font-Weight:bold">Form ID</td>
+                    <td style="font-Weight:bold">Application Date</td>
+                    <td style="font-Weight:bold">Course Start Date</td>
+                    <td style="font-Weight:bold">Location</td>
+                    <td style="font-Weight:bold">Department</td>
+                    <td style="font-Weight:bold">Cost</td>
+                    <td style="font-Weight:bold">Type of Event</td>
+                    <td style="font-Weight:bold">Status</td>
+                    <td style="font-Weight:bold">Approve</td>
+                    <td style="font-Weight:bold">Deny</td>
+
                 </tr>
-            </thead> 
-          
-       </table>
-      </div> 
-          <!-- <a href="home.html" class="button" id="approve">Approve</a> -->
-          <!-- <button type="approve" class="btn btn-info btn-default" id=approve ></button>Approve</button> -->
-          <button type="approve" class="btn btn-approve btn-default">Approve</button>
-         <!-- // <a href="home.html" class="button" id="deny">Deny</a> -->
-          <!-- <button type="deny" class="btn btn-info btn-default" id=deny></button>Deny</button> -->
-          <button type="deny" class="btn btn-deny btn-default">Deny</button>
-        </div>
-        <div class="panel-footer"></div>
-        <script type="text/javascript" src="approval.js"></script>
-      </body>
-    
-    </html>
+            </thead>
+        </table>
+    </div>
+
+    <script type="text/javascript" src="approval.js"></script>
+</body>
+</html>
