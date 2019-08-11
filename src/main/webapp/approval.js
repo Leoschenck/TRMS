@@ -105,11 +105,11 @@ function getApprovalForms() {
            // console.log(forms);
         }
     }
-    xhr.open("GET", "http://localhost:8080/TRMS/approval", true);
+    xhr.open("GET", "http://localhost:8080/TRMS/getapprovableforms", true);
     xhr.send();
 }
 
 window.onload = function(){
-    var curUser = getApprovalForms();
-    console.log(curUser);   
+    var forms = getApprovalForms();
+    console.log(forms);   
 }

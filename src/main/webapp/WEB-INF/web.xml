@@ -71,16 +71,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>SignOutServlet</display-name>
-    <servlet-name>SignOutServlet</servlet-name>
-    <servlet-class>com.revature.servlets.SignOutServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SignOutServlet</servlet-name>
-    <url-pattern>/SignOutServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>LogoutServlet</display-name>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>com.revature.servlets.LogoutServlet</servlet-class>
@@ -98,5 +88,15 @@
   <servlet-mapping>
     <servlet-name>FormApprovalServlet</servlet-name>
     <url-pattern>/approval</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetApprovableFormsServlet</display-name>
+    <servlet-name>GetApprovableFormsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetApprovableFormsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetApprovableFormsServlet</servlet-name>
+    <url-pattern>/getapprovableforms</url-pattern>
   </servlet-mapping>
 </web-app>

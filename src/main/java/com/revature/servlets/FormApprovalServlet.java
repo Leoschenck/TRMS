@@ -17,7 +17,9 @@ public class FormApprovalServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/approval.html").forward(request, response);
+		//TODO approveforms.html approveforms.js 
+		// load all assigned approval worthy forms
 	}
 
 	/**
@@ -26,6 +28,9 @@ public class FormApprovalServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		//TODO send approval / denial to (denied = status -1?) 
+		// check for user-form relationship, set state accordingly
+		// different servlet for CreateNotificationServlet or something
 	}
 
 }
