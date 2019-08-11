@@ -4,7 +4,69 @@
 // 	var leftTable = document.getElementByID("lefttable");
 // 	console.log("here");
 // }
+var curFormId;
+function gradeInput(cur){
+    curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    if (document.getElementById("gradeInputId") != null) {
+        var prevInput = document.getElementById("gradeInputId");
+        prevInput.parentElement.removeChild(prevInput);
+    }
+    var gradeIn = document.createElement("div");
+    gradeIn.id = "gradeInputId";
+    gradeIn.innerHTML = "Input grade for form " + curFormId +
+        ": <input type='text' name='gradeInBox' id='gradeInBox'/>" +
+        "<input type='submit' id='gradeInSubmit'/>";
+    document.getElementById("gradetable").appendChild(gradeIn);
+    document.getElementById("gradeInSubmit").addEventListener("click", submitGrade, false);
+    
+}
+function submitGrade(cur) {
+    console.log(curFormId);
+    var getGrade = document.getElementById("gradeInBox").value;
+    console.log(getGrade);
+}
+function approveForm(cur) {
+    curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    console.log("Approving form " + curFormId);
+    var curRow;
+    var allRows = document.getElementById("lefttable").children[0].children;
+    for (var i = 0; i < allRows.length; i++) {
+        curRow = allRows[i].children;
+        if (curRow[0].innerHTML == curFormId) {
+            console.log("Form " + curRow[0].innerHTML + " found");       
+            switch (curRow[7].innerHTML) {
+                case "Awaiting Supervisor Approval":
+                    curRow[7].innerHTML = "Awaiting Department Approval";
+                    break;
+                case "Awaiting Department Approval":
+                    curRow[7].innerHTML = "Awaiting BenCo Approval";
+                    break;
+                case "Awaiting BenCo Approval":
+                    curRow[7].innerHTML = "Awaiting Grade";
+                    break;
+                case "Denied":
+                    return;
+            }
+        }
+    }
+    cur.currentTarget.removeEventListener("click", approveForm, false);
 
+
+}
+function denyForm(cur) {
+    curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    console.log("Denying form " + curFormId);
+    var curRow;
+    var allRows = document.getElementById("lefttable").children[0].children;
+    for (var i = 0; i < allRows.length; i++) {
+        curRow = allRows[i].children;
+        if(curRow[0].innerHTML == curFormId){
+        console.log("Form " + curRow[0].innerHTML + " found");
+        curRow[7].innerHTML = "Denied";
+        }
+    }
+    cur.currentTarget.removeEventListener("click", denyForm, false);
+}
 function addcell() {
     var formTable = document.getElementById("lefttable");
     var numRows = formTable.rows.length;
@@ -18,12 +80,11 @@ function addcell() {
     cell3.innerHTML = "cell" + (numRows) + "entry3";
     cell4.innerHTML = "cell" + (numRows) + "entry4";}
 
-function loadAppprovalForms(allForms){
+function loadApprovalForms(allForms){
     console.log("in loadForms");
     console.log(allForms);
     var formTable = document.getElementById("lefttable");
     var curRow = 1;
-   // var k = allForms.split(":");
     for (var i = 0; i < allForms.length; i++) {
     	console.log("in for loop");
         var newRow = formTable.insertRow(curRow);
@@ -34,6 +95,8 @@ function loadAppprovalForms(allForms){
         var dept = newRow.insertCell(4);
         var cost = newRow.insertCell(5);
         var typeEvent = newRow.insertCell(6);
+        var approveButton = newRow.insertCell(7);
+        var denyButton = newRow.insertCell(8);
         var stat = newRow.insertCell(7);
         formId.innerHTML = allForms[i].id;
         appDate.innerHTML = new Date(allForms[i].openDateTime);
@@ -62,22 +125,30 @@ function loadAppprovalForms(allForms){
                 typeEvent.innerHTML = "Other";
                 break;
         }
-        console.log("type: " + allForms[i].typeOfEvent);
+        approveButton.innerHTML = "Approve"
+        approveButton.style = "background:#00ff00";
+        approveButton.addEventListener("click", approveForm, false);
+        denyButton.innerHTML = "Deny"
+        denyButton.style = "background:#ff4d4d";
+        denyButton.addEventListener("click", denyForm, false);
         switch (allForms[i].status) {
             case 0:
-                stat.innerHTML = "Avaiting Supervisor Approval";
+                stat.innerHTML = "Awaiting Supervisor Approval";
                 break;
             case 1:
-                stat.innerHTML = "Avaiting Department Approval";
+                stat.innerHTML = "Awaiting Department Approval";
                 break;
             case 2:
-                stat.innerHTML = "Avaiting BenCo Approval";
+                stat.innerHTML = "Awaiting BenCo Approval";
                 break;
             case 3:
-                stat.innerHTML = "Avaiting Grade";
+                stat.innerHTML = "Awaiting Grade";
                 break;
             case 4:
                 stat.innerHTML = "Approved";
+                break;
+            case -1:
+                stat.innerHTML = "Denied";
                 break;
 
         }
