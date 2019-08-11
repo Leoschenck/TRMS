@@ -140,6 +140,72 @@ function submitGrade(cur) {
     var getGrade = document.getElementById("gradeInBox").value;
     console.log(getGrade);
 }
+function openQuestion(cur) {
+    var rowList = cur.currentTarget.parentElement.parentElement.children;
+    console.log(rowList);
+    var curRowId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    console.log(curRowId);
+    for (var i = 0; i < rowList.length; i++) {
+        console.log(i);
+        if (rowList[i].children[0] != null) {
+            if (rowList[i].children[0].innerHTML == curRowId) {
+                break;
+                console.log(rowList[i].firstChild.innerHTML);
+            }
+        }
+    }
+    console.log(i);
+    if (document.getElementById("questBox") != null) {
+        var prevInput = document.getElementById("questBox");
+        prevInput.parentElement.removeChild(prevInput);
+        prevInput = document.getElementById("questText");
+        prevInput.parentElement.removeChild(prevInput);
+        prevInput = document.getElementById("questSubmit");
+        prevInput.parentElement.removeChild(prevInput);
+        console.log("removed child");
+    }
+    
+    var myTable = document.getElementById("lefttable");
+    var questRow = myTable.insertRow(i + 1);
+    var questTextCell = questRow.insertCell(0);
+    var questBoxCell = questRow.insertCell(1);
+    var questSubmitCell = questRow.insertCell(2);
+    questTextCell.id = "questText";
+    questTextCell.colSpan = "2";
+    questTextCell.innerHTML = "Please type question: ";
+
+    questBoxCell.id = "questBox";
+    questBoxCell.colSpan = "8";
+    questBoxCell.innerHTML = "<textarea name='message' id='questBoxArea' rows='3' cols='100'>";
+
+    questSubmitCell.id = "questSubmit";
+    questSubmitCell.colSpan = "1";
+    questSubmitCell.innerHTML = "<input type='submit' id='questSubmitButton' name='ed'/>"
+    document.getElementById("questSubmitButton").addEventListener("click", submitQuestion, false);
+}
+function submitQuestion(cur) {
+    console.log(document.getElementById("questBoxArea").value);
+    document.getElementById("questText").innerHTML = "Question submitted: ";
+    document.getElementById("questText").style="font-weight:bold";
+    document.getElementById("questBox").innerHTML = document.getElementById("questBoxArea").value;
+    document.getElementById("questBox").style="font-weight:bold";
+    document.getElementById("questSubmitButton").removeEventListener("click", submitQuestion, false);
+    document.getElementById("questSubmitButton").style = "visibility:hidden";
+	var xhr2 = new XMLHttpRequest();
+    xhr2.onreadystatechange = function () {
+        console.log("in FORM Question on ready change");
+        console.log("in ORSC " + xhr2.readyState + xhr2.status);
+        if (xhr2.readyState == 4 && xhr2.status == 200) {
+            //  console.log(xhr2.responseText);
+        }
+    }
+    xhr2.open("POST", "http://localhost:8080/TRMS/approval", false);
+    var obj = {};
+    obj["formId"] = curFormId;
+    obj["attachedReasoning"] = document.getElementById("questBox").innerHTML;
+    var trash = JSON.stringify(obj)
+    xhr2.send(trash);
+}
 function approveForm(cur) {
     curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
     console.log("Approving form " + curFormId);
@@ -180,18 +246,92 @@ function approveForm(cur) {
     //cur.currentTarget.removeEventListener("click", approveForm, false);
     //cur.currentTarget.parentElement.children[9].removeEventListener("click", denyForm, false);
 }
-function denyForm(cur) {
-    curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
-    console.log("Denying form " + curFormId);
-    var curRow;
-    var allRows = document.getElementById("lefttable").children[0].children;
-    curRow = cur.currentTarget.parentElement.children;
-    console.log("Form " + curRow[0].innerHTML + " found");
-    curRow[7].innerHTML = "Denied";
 
+function denyForm(cur) {
+    var rowList = cur.currentTarget.parentElement.parentElement.children;
+    console.log(rowList);
+    var curRowId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    console.log(curRowId);
+    for (var i = 0; i < rowList.length; i++) {
+        console.log(i);
+        if (rowList[i].children[0] != null) {
+            if (rowList[i].children[0].innerHTML == curRowId) {
+                break;
+                console.log(rowList[i].firstChild.innerHTML);
+            }
+        }
+    }
+    console.log(i);
+    if (document.getElementById("reasBox") != null) {
+        var prevInput = document.getElementById("reasBox");
+        prevInput.parentElement.removeChild(prevInput);
+        prevInput = document.getElementById("reasText");
+        prevInput.parentElement.removeChild(prevInput);
+        prevInput = document.getElementById("reasSubmit");
+        prevInput.parentElement.removeChild(prevInput);
+        console.log("removed child");
+    }
+    
+    var myTable = document.getElementById("lefttable");
+    var reasRow = myTable.insertRow(i + 1);
+    var reasTextCell = reasRow.insertCell(0);
+    var reasBoxCell = reasRow.insertCell(1);
+    var reasSubmitCell = reasRow.insertCell(2);
+    reasTextCell.id = "reasText";
+    reasTextCell.colSpan = "2";
+    reasTextCell.innerHTML = "Please type reason for denial: ";
+
+    reasBoxCell.id = "reasBox";
+    reasBoxCell.colSpan = "8";
+    reasBoxCell.innerHTML = "<textarea name='message' id='reasBoxArea' rows='3' cols='100'>";
+    
+    reasSubmitCell.id = "reasSubmit";
+    reasSubmitCell.colSpan = "1";
+    reasSubmitCell.innerHTML = "<input type='submit' id='reasSubmitButton' name='ed'/>"
+    document.getElementById("reasSubmitButton").addEventListener("click", submitReason, false);
+
+
+
+
+
+                                    //curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+                                    //console.log("Denying form " + curFormId);
+                                    //var curRow;
+                                    //var allRows = document.getElementById("lefttable").children[0].children;
+                                    //curRow = cur.currentTarget.parentElement.children;
+                                    //console.log("Form " + curRow[0].innerHTML + " found");
+                                    //curRow[7].innerHTML = "Denied";
+
+                                    //var xhr2 = new XMLHttpRequest();
+                                    //xhr2.onreadystatechange = function () {
+                                    //    console.log("in FORM DENY on ready change");
+                                    //    console.log("in ORSC " + xhr2.readyState + xhr2.status);
+                                    //    if (xhr2.readyState == 4 && xhr2.status == 200) {
+                                    //        //  console.log(xhr2.responseText);
+                                    //    }
+                                    //}
+                                    //xhr2.open("POST", "http://localhost:8080/TRMS/approval", false);
+                                    //var obj = {};
+                                    //obj["formId"] = curFormId;
+                                    //obj["approved"] = 0;
+                                    ///////obj["attachedReasoning"] =
+                                    //var trash = JSON.stringify(obj)
+                                    //xhr2.send(trash);
+
+    //cur.currentTarget.removeEventListener("click", denyForm, false);
+    //cur.currentTarget.parentElement.children[8].removeEventListener("click", approveForm, false);
+}
+function submitReason(cur) {
+    console.log(document.getElementById("reasBoxArea").value);
+    document.getElementById("reasText").innerHTML = "Reason for denial submitted: ";
+    document.getElementById("reasText").style="font-weight:bold";
+    document.getElementById("reasBox").innerHTML = document.getElementById("reasBoxArea").value;
+    document.getElementById("reasBox").style="font-weight:bold";
+    document.getElementById("reasSubmitButton").removeEventListener("click", submitReason, false);
+    document.getElementById("reasSubmitButton").style = "visibility:hidden";
     var xhr2 = new XMLHttpRequest();
     xhr2.onreadystatechange = function () {
-        console.log("in FORM DENY on ready change");
+        console.log("in FORM Deny Reason on ready change");
         console.log("in ORSC " + xhr2.readyState + xhr2.status);
         if (xhr2.readyState == 4 && xhr2.status == 200) {
             //  console.log(xhr2.responseText);
@@ -201,11 +341,9 @@ function denyForm(cur) {
     var obj = {};
     obj["formId"] = curFormId;
     obj["approved"] = 0;
+    obj["attachedReasoning"] = document.getElementById("reasBox").innerHTML;
     var trash = JSON.stringify(obj)
     xhr2.send(trash);
-
-    //cur.currentTarget.removeEventListener("click", denyForm, false);
-    //cur.currentTarget.parentElement.children[8].removeEventListener("click", approveForm, false);
 }
 function addcell() {
     var formTable = document.getElementById("lefttable");
@@ -219,12 +357,26 @@ function addcell() {
     cell2.innerHTML = "cell" + (numRows) + "entry2";
     cell3.innerHTML = "cell" + (numRows) + "entry3";
     cell4.innerHTML = "cell" + (numRows) + "entry4";}
+var ckobj = {
 
+}
 function loadApprovalForms(allForms){
     console.log("in loadForms");
     console.log(allForms);
     var formTable = document.getElementById("lefttable");
     var curRow = 1;
+    var ck = decodeURIComponent(document.cookie);
+    var cks = ck.split(';');
+    var ckobj = {
+    }
+    for (var i = 0; i < cks.length; i++) {
+        var tempCk = cks[i].split('=');
+        tempCk[0] = tempCk[0].trim();
+        tempCk[1] = tempCk[1].trim();
+        ckobj[tempCk[0]] = tempCk[1];
+        console.log(tempCk[0]);
+        console.log(ckobj[tempCk[0]]);
+    }
     for (var i = 0; i < allForms.length; i++) {
     	console.log("in for loop");
         var newRow = formTable.insertRow(curRow);
@@ -235,15 +387,16 @@ function loadApprovalForms(allForms){
         var dept = newRow.insertCell(4);
         var cost = newRow.insertCell(5);
         var typeEvent = newRow.insertCell(6);
-        var approveButton = newRow.insertCell(7);
-        var denyButton = newRow.insertCell(8);
         var stat = newRow.insertCell(7);
+        var approveButton = newRow.insertCell(8);
+        var denyButton = newRow.insertCell(9);
+        var questButton = newRow.insertCell(10);
         formId.innerHTML = allForms[i].id;
         appDate.innerHTML = new Date(allForms[i].openDateTime);
         courseDate.innerHTML = new Date(allForms[i].courseStart);
         loca.innerHTML = allForms[i].location;
         dept.innerHTML = allForms[i].deptName;
-        cost.innerHTML = "$" + allForms[i].cost;
+        cost.innerHTML = "$" + allForms[i].cost + 0;
 
         switch(allForms[i].typeOfEvent){
             case "0":
@@ -265,13 +418,16 @@ function loadApprovalForms(allForms){
                 typeEvent.innerHTML = "Other";
                 break;
         }
+        stat.innerHTML = "Awaiting your approval";
         approveButton.innerHTML = "Approve"
         approveButton.style = "background:#00ff00";
         approveButton.addEventListener("click", approveForm, false);
         denyButton.innerHTML = "Deny"
         denyButton.style = "background:#ff4d4d";
         denyButton.addEventListener("click", denyForm, false);
-        stat.innerHTML = "Awaiting your approval"
+        questButton.style = "background:#b3b3b3";
+        questButton.innerHTML = "Submit Question";
+        questButton.addEventListener("click", openQuestion, false);
         /*switch (allForms[i].status) {
             case 0:
                 stat.innerHTML = "Awaiting Supervisor Approval";

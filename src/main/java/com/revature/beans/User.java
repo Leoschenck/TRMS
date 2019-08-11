@@ -41,6 +41,9 @@ public class User {
 		this.rmnReimbursement = rmnReimbursement;
 		this.reportsTo = reportsTo;
 	}
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
