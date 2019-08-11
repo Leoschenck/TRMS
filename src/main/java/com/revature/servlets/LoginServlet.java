@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
 				resp.addCookie(new Cookie("userName", userName));
 				resp.addCookie(new Cookie("isBenco", udi.isBenco(userId)));
 				resp.addCookie(new Cookie("hasApprovables", hasApprovablesString));
+
 				System.out.println("User logged in! Id = " + userId);
 				
 				resp.sendRedirect("/TRMS/home");
