@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,7 @@ public class LoginServlet extends HttpServlet {
 				HttpSession ses = req.getSession();
 				ses.setAttribute("userId", userId);
 				ses.setAttribute("userName", userName);
+				resp.addCookie(new Cookie("testName", "TestVal"));
 				System.out.println("User logged in! Id = " + userId);
 				
 				resp.sendRedirect("/TRMS/home");

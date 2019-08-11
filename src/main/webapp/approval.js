@@ -25,6 +25,49 @@ function submitGrade(cur) {
     var getGrade = document.getElementById("gradeInBox").value;
     console.log(getGrade);
 }
+function openQuestion(cur) {
+    var rowList = cur.currentTarget.parentElement.parentElement.children;
+    console.log(rowList);
+    var curRowId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    console.log(curRowId);
+    for (var i = 0; i < rowList.length; i++) {
+        console.log(i);
+        if (rowList[i].children[0] != null) {
+            if (rowList[i].children[0].innerHTML == curRowId) {
+                break;
+                console.log(rowList[i].firstChild.innerHTML);
+            }
+        }
+    }
+    console.log(i);
+    if (document.getElementById("questBox") != null) {
+        var prevInput = document.getElementById("questBox");
+        prevInput.parentElement.removeChild(prevInput);
+        prevInput = document.getElementById("questText");
+        prevInput.parentElement.removeChild(prevInput);
+        prevInput = document.getElementById("questSubmit");
+        prevInput.parentElement.removeChild(prevInput);
+        console.log("removed child");
+    }
+    
+    var myTable = document.getElementById("lefttable");
+    var questRow = myTable.insertRow(i + 1);
+    var questTextCell = questRow.insertCell(0);
+    var questBoxCell = questRow.insertCell(1);
+    var questSubmitCell = questRow.insertCell(2);
+    questTextCell.id = "questText";
+    questTextCell.colSpan = "2";
+    questTextCell.innerHTML = "Please type question: ";
+
+    questBoxCell.id = "questBox";
+    questBoxCell.colSpan = "8";
+    questBoxCell.innerHTML = "<textarea name='message' rows='3' cols='100'>";
+
+    questSubmitCell.id = "questSubmit";
+    questSubmitCell.colSpan = "1";
+    questSubmitCell.innerHTML = "<input type='submit' name='ed'/>"
+
+}
 function approveForm(cur) {
     curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
     console.log("Approving form " + curFormId);
@@ -120,9 +163,10 @@ function loadApprovalForms(allForms){
         var dept = newRow.insertCell(4);
         var cost = newRow.insertCell(5);
         var typeEvent = newRow.insertCell(6);
-        var approveButton = newRow.insertCell(7);
-        var denyButton = newRow.insertCell(8);
         var stat = newRow.insertCell(7);
+        var approveButton = newRow.insertCell(8);
+        var denyButton = newRow.insertCell(9);
+        var questButton = newRow.insertCell(10);
         formId.innerHTML = allForms[i].id;
         appDate.innerHTML = new Date(allForms[i].openDateTime);
         courseDate.innerHTML = new Date(allForms[i].courseStart);
@@ -150,13 +194,16 @@ function loadApprovalForms(allForms){
                 typeEvent.innerHTML = "Other";
                 break;
         }
+        stat.innerHTML = "Awaiting your approval";
         approveButton.innerHTML = "Approve"
         approveButton.style = "background:#00ff00";
         approveButton.addEventListener("click", approveForm, false);
         denyButton.innerHTML = "Deny"
         denyButton.style = "background:#ff4d4d";
         denyButton.addEventListener("click", denyForm, false);
-        stat.innerHTML = "Awaiting your approval"
+        questButton.style = "background:#b3b3b3";
+        questButton.innerHTML = "Submit Question";
+        questButton.addEventListener("click", openQuestion, false);
         /*switch (allForms[i].status) {
             case 0:
                 stat.innerHTML = "Awaiting Supervisor Approval";
@@ -187,6 +234,7 @@ function loadApprovalForms(allForms){
     // } else {
     //     document.getElementById("vgName").innerHTML = "There is no record associated with that ID";
     // }
+    
 }
 
 function getApprovalForms() {
