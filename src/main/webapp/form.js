@@ -12,6 +12,7 @@ if (mm < 10) {
 }
 
 today = yyyy + '-' + mm + '-' + dd;
+
 // https://www.htmlgoodies.com/html5/javascript/calculating-the-difference-between-two-dates-in-javascript.html
 // ///////////////////////////////////////////////// FUNCTION TO COUNT # OF DAYS
 // Date.daysBetween = function(date1, date2) {
@@ -44,6 +45,7 @@ document.getElementById("typeOfEvent").addEventListener("change", alerter);
 //		false);
 //document.getElementById("currentDate").value = today;
 }
+
 
 /*function postForm(){
 	alert("in post form");

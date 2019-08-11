@@ -100,13 +100,34 @@
 								placeholder="Enter Course Description "
 								required="required">
 						</div>
-
-						<!-- Event Date -->
+					
+						<!-- Event Course Start Date -->
 						<div class="form-group">
-							<label for="courseStart">Event Date:</label> <input type="date"
-								name="courseStart" class="form-control" id="courseStart"
+							<label for="courseStart">Course Start Date:</label> <input type="date" min="2019-08-12" max="2019-08-23"
+								name="courseStart" class="form-control" id="courseStart" placeholder="yyyy-dd-mm"
 								required="required">
 						</div>
+
+						<!--Event Course End Date -->
+						<div class="form-group">
+							<label for="courseEnd">Course End Date:</label> <input type="date"  min="2019-08-12"
+								name="courseEnd" class="form-control" id="courseEnd" placeholder="yyyy-dd-mm"
+								required="required"> 
+						</div>
+						<!-- Event Time
+						<div class="form-group">
+							<label for="courseStartTime">Start Time</label>
+							</div>
+							<div class="col-4">
+								<input class="form-control" type="time" value="12:00:00" id="startTime" required>
+							</div>
+							<label for="courseEndTime">End Time</label>
+							</div>
+							<div class="col-4">
+								<input class="form-control" type="time" value="12:00:00" id="endTime" required>
+							</div>                         
+						</div> -->
+				
 						<!--Event location -->
 						<div class="form-group">
 							<label for="location">Location:</label>
@@ -158,7 +179,7 @@
 								required="required">
 						</div>
 
-												<!-- Dept Id -->
+						<!-- Dept Id -->
 						<div class="form-group">
 							<label for="deptId">Department:</label> <select
 								name="deptId" class="form-control" id="deptId"

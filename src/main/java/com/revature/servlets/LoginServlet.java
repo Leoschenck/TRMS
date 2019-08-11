@@ -27,7 +27,10 @@ public class LoginServlet extends HttpServlet {
 			// Retrieves any employees who match the username/password
 			UserDaoImpl udi = new UserDaoImpl();
 			String userName = req.getParameter("username");
-			int userId = udi.loginUser(userName, req.getParameter("password"));
+			User u = udi.loginUser(userName, req.getParameter("password"));
+			int userId = u.getId();
+			double bal = u.get;
+			
 			
 			// Sends the user to the home screen if the username and password match a user
 			// or tells him there is no match and directs him back to the login.
