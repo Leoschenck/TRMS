@@ -4,7 +4,7 @@
 // 	var leftTable = document.getElementByID("lefttable");
 // 	console.log("here");
 // }
-
+var curFormId;
 function addcell() {
     var formTable = document.getElementById("lefttable");
     var numRows = formTable.rows.length;
@@ -23,6 +23,22 @@ function compare(a, b) {
     if (a.status > b.courseDate)
         return 1;
     return 0;
+}
+function gradeInput(cur){
+    curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    if (document.getElementById("gradeInBox") == null) {
+        var gradeIn = document.createElement("div");
+        gradeIn.innerHTML = "Input grade for form " + curFormId +
+            ": <input type='text' name='gradeInBox' id='gradeInBox'/>" +
+            "<input type='submit' id='gradeInSubmit'/>";
+        document.getElementById("gradetable").appendChild(gradeIn);
+        document.getElementById("gradeInSubmit").addEventListener("click", submitGrade, false);
+    }
+}
+function submitGrade(cur) {
+    console.log(curFormId);
+    var getGrade = document.getElementById("gradeInBox").value;
+    console.log(getGrade);
 }
 function loadForms(allForms){
     console.log("in loadForms");
@@ -43,7 +59,7 @@ function loadForms(allForms){
             var dept = newRow.insertCell(4);
             var cost = newRow.insertCell(5);
             var typeEvent = newRow.insertCell(6);
-            var stat = newRow.insertCell(7);
+            var gradeButton = newRow.insertCell(7);
             formId.innerHTML = allForms[i].id;
             appDate.innerHTML = new Date(allForms[i].openDateTime);
             courseDate.innerHTML = new Date(allForms[i].courseStart);
@@ -71,25 +87,9 @@ function loadForms(allForms){
                     typeEvent.innerHTML = "Other";
                     break;
             }
-            /*console.log("type: " + allForms[i].typeOfEvent);
-            switch (allForms[i].status) {
-                case 0:
-                    stat.innerHTML = "Avaiting Supervisor Approval";
-                    break;
-                case 1:
-                    stat.innerHTML = "Avaiting Department Approval";
-                    break;
-                case 2:
-                    stat.innerHTML = "Avaiting BenCo Approval";
-                    break;
-                case 3:
-                    stat.innerHTML = "Avaiting Grade";
-                    break;
-                case 4:
-                    stat.innerHTML = "Approved";
-                    break;
-
-            }*/
+            gradeButton.innerHTML = "Click to input grade"
+            gradeButton.style = "background:#99ccff";
+            gradeButton.addEventListener("click", gradeInput, false);
             curRow++;
         }
     }
@@ -107,7 +107,6 @@ function loadForms(allForms){
                 var dept = newRow.insertCell(4);
                 var cost = newRow.insertCell(5);
                 var typeEvent = newRow.insertCell(6);
-                var stat = newRow.insertCell(7);
                 formId.innerHTML = allForms[i].id;
                 appDate.innerHTML = new Date(allForms[i].openDateTime);
                 courseDate.innerHTML = new Date(allForms[i].courseStart);
@@ -171,7 +170,6 @@ function loadForms(allForms){
             var dept = newRow.insertCell(4);
             var cost = newRow.insertCell(5);
             var typeEvent = newRow.insertCell(6);
-            var stat = newRow.insertCell(7);
             formId.innerHTML = allForms[i].id;
             appDate.innerHTML = new Date(allForms[i].openDateTime);
             courseDate.innerHTML = new Date(allForms[i].courseStart);
@@ -199,25 +197,6 @@ function loadForms(allForms){
                     typeEvent.innerHTML = "Other";
                     break;
             }
-            /*console.log("type: " + allForms[i].typeOfEvent);
-            switch (allForms[i].status) {
-                case 0:
-                    stat.innerHTML = "Avaiting Supervisor Approval";
-                    break;
-                case 1:
-                    stat.innerHTML = "Avaiting Department Approval";
-                    break;
-                case 2:
-                    stat.innerHTML = "Avaiting BenCo Approval";
-                    break;
-                case 3:
-                    stat.innerHTML = "Avaiting Grade";
-                    break;
-                case 4:
-                    stat.innerHTML = "Approved";
-                    break;
-
-            }*/
             curRow++;
         }
     }
@@ -235,7 +214,6 @@ function loadForms(allForms){
             var dept = newRow.insertCell(4);
             var cost = newRow.insertCell(5);
             var typeEvent = newRow.insertCell(6);
-            var stat = newRow.insertCell(7);
             formId.innerHTML = allForms[i].id;
             appDate.innerHTML = new Date(allForms[i].openDateTime);
             courseDate.innerHTML = new Date(allForms[i].courseStart);
@@ -263,30 +241,11 @@ function loadForms(allForms){
                     typeEvent.innerHTML = "Other";
                     break;
             }
-            /*console.log("type: " + allForms[i].typeOfEvent);
-            switch (allForms[i].status) {
-                case 0:
-                    stat.innerHTML = "Avaiting Supervisor Approval";
-                    break;
-                case 1:
-                    stat.innerHTML = "Avaiting Department Approval";
-                    break;
-                case 2:
-                    stat.innerHTML = "Avaiting BenCo Approval";
-                    break;
-                case 3:
-                    stat.innerHTML = "Avaiting Grade";
-                    break;
-                case 4:
-                    stat.innerHTML = "Approved";
-                    break;
-
-            }*/
             curRow++;
         }
     }
 
-    formTable = document.getElementById("app");
+    formTable = document.getElementById("approved");
     var curRow = 1;
     j = 4;
     for (var i = 0; i < allForms.length; i++) {
@@ -299,7 +258,6 @@ function loadForms(allForms){
             var dept = newRow.insertCell(4);
             var cost = newRow.insertCell(5);
             var typeEvent = newRow.insertCell(6);
-            var stat = newRow.insertCell(7);
             formId.innerHTML = allForms[i].id;
             appDate.innerHTML = new Date(allForms[i].openDateTime);
             courseDate.innerHTML = new Date(allForms[i].courseStart);
@@ -327,25 +285,6 @@ function loadForms(allForms){
                     typeEvent.innerHTML = "Other";
                     break;
             }
-            /*console.log("type: " + allForms[i].typeOfEvent);
-            switch (allForms[i].status) {
-                case 0:
-                    stat.innerHTML = "Avaiting Supervisor Approval";
-                    break;
-                case 1:
-                    stat.innerHTML = "Avaiting Department Approval";
-                    break;
-                case 2:
-                    stat.innerHTML = "Avaiting BenCo Approval";
-                    break;
-                case 3:
-                    stat.innerHTML = "Avaiting Grade";
-                    break;
-                case 4:
-                    stat.innerHTML = "Approved";
-                    break;
-
-            }*/
             curRow++;
         }
     }
@@ -373,5 +312,5 @@ function getForms() {
 
 window.onload = function(){
     var curUser = getForms();
-    console.log(curUser);   
+    console.log(curUser);
 }

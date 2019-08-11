@@ -12,19 +12,19 @@
         <a class="navbar-brand" href="home.html">Home</a>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/TRMS/form">Create Form</a>
+                <a class="nav-link" href="form.html">Create Form</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/TRMS/showforms">View Forms</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/TRMS/approval">Approval</a>
+                <a class="nav-link" href="approval.html">Approval</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">Notifications</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/TRMS/logout">Logout</a>
+                <a class="nav-link" href="/TRMS/login.html">Logout</a>
             </li>
         </ul>
     </nav>
@@ -32,17 +32,12 @@
     <div>
         <br>
     </div>
-    <div class="container-fluid breadcrumb-wrapper">
-        <ol class="breadcrumb hidden-xs hidden-sm" role="navigation">
-            <li><a href="#">Messages</a></li>
-            <li><a href="table.html">View History</a></li>
-        </ol>
-    </div>
 
     <!-- Reimbursement Form -->
+    <br>
     <h1>View All Forms</h1>
     <br>
-    <div class="split2 right">
+    <div id="gradetable">
         <h2>Awaiting Grade Input</h2>
         <table id="awaitinggrade" class="table table-striped table-hover">
             <thead>
@@ -54,11 +49,14 @@
                     <th>Department</th>
                     <th>Cost</th>
                     <th>Type of Event</th>
+                    <th>Grade</th>
                 </tr>
             </thead>
         </table>
+    </div>
+    <div class="split2 right">
         <br>
-        <h2>Awaiting Supervisor Approval</h2>>
+        <h2>Awaiting Supervisor Approval</h2>
         <table id="awaitingsuper" class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -69,12 +67,11 @@
                     <th>Department</th>
                     <th>Cost</th>
                     <th>Type of Event</th>
-                    <th>Status</th>
                 </tr>
             </thead>
         </table>
         <br>
-        <h2>Awaiting Department Approval</h2>>
+        <h2>Awaiting Department Approval</h2>
         <table id="awaitingdept" class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -85,12 +82,11 @@
                     <th>Department</th>
                     <th>Cost</th>
                     <th>Type of Event</th>
-                    <th>Status</th>
                 </tr>
             </thead>
         </table>
         <br>
-        <h2>Awaiting BenCo Approval</h2>>
+        <h2>Awaiting BenCo Approval</h2>
         <table id="awaitingbenco" class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -101,12 +97,11 @@
                     <th>Department</th>
                     <th>Cost</th>
                     <th>Type of Event</th>
-                    <th>Status</th>
                 </tr>
             </thead>
         </table>
         <br>
-        <h2>Approved</h2>>
+        <h2>Approved</h2>
         <table id="approved" class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -117,14 +112,12 @@
                     <th>Department</th>
                     <th>Cost</th>
                     <th>Type of Event</th>
-                    <th>Status</th>
                 </tr>
             </thead>
         </table>
         <br>
     </div>
 
-    <button type="button" class="btn btn-info btn-lg" data-toggle=></button>
     <script type="text/javascript" src="showforms.js"></script>
 </body>
 </html>
