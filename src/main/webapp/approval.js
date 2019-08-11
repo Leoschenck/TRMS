@@ -242,12 +242,26 @@ function addcell() {
     cell2.innerHTML = "cell" + (numRows) + "entry2";
     cell3.innerHTML = "cell" + (numRows) + "entry3";
     cell4.innerHTML = "cell" + (numRows) + "entry4";}
+var ckobj = {
 
+}
 function loadApprovalForms(allForms){
     console.log("in loadForms");
     console.log(allForms);
     var formTable = document.getElementById("lefttable");
     var curRow = 1;
+    var ck = decodeURIComponent(document.cookie);
+    var cks = ck.split(';');
+    var ckobj = {
+    }
+    for (var i = 0; i < cks.length; i++) {
+        var tempCk = cks[i].split('=');
+        tempCk[0] = tempCk[0].trim();
+        tempCk[1] = tempCk[1].trim();
+        ckobj[tempCk[0]] = tempCk[1];
+        console.log(tempCk[0]);
+        console.log(ckobj[tempCk[0]]);
+    }
     for (var i = 0; i < allForms.length; i++) {
     	console.log("in for loop");
         var newRow = formTable.insertRow(curRow);
@@ -267,7 +281,7 @@ function loadApprovalForms(allForms){
         courseDate.innerHTML = new Date(allForms[i].courseStart);
         loca.innerHTML = allForms[i].location;
         dept.innerHTML = allForms[i].deptName;
-        cost.innerHTML = "$" + allForms[i].cost;
+        cost.innerHTML = "$" + allForms[i].cost + 0;
 
         switch(allForms[i].typeOfEvent){
             case "0":
@@ -329,7 +343,6 @@ function loadApprovalForms(allForms){
     // } else {
     //     document.getElementById("vgName").innerHTML = "There is no record associated with that ID";
     // }
-    
 }
 
 function getApprovalForms() {
