@@ -155,7 +155,8 @@ function loadApprovalForms(allForms){
         denyButton.innerHTML = "Deny"
         denyButton.style = "background:#ff4d4d";
         denyButton.addEventListener("click", denyForm, false);
-        switch (allForms[i].status) {
+        stat.innerHTML = "Awaiting your approval"
+        /*switch (allForms[i].status) {
             case 0:
                 stat.innerHTML = "Awaiting Supervisor Approval";
                 break;
@@ -175,7 +176,7 @@ function loadApprovalForms(allForms){
                 stat.innerHTML = "Denied";
                 break;
 
-        }
+        }*/
         curRow++;
        // console.log(allForms[i].id);
         //console.log(allForms[i]);
