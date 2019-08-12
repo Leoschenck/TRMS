@@ -39,7 +39,7 @@ public interface UserDao {
 	 * @param newAmount
 	 * @throws SQLException
 	 */
-	public void changeReimbursementAmount(double newAmount) throws SQLException;
+	public void changeReimbursementAmount(double newAmount, int userId) throws SQLException;
 	
 	/**
 	 * Resets the reimbursement amount to 1000 for all users.
@@ -61,7 +61,7 @@ public interface UserDao {
 	 * @return String Object
 	 * @throws SQLException
 	 */
-	public int getUserByFormId(int formid) throws SQLException;
+	public int getUserIdByFormId(int formid) throws SQLException;
 	
 	/**
 	 * This method will return the user with the specified id.

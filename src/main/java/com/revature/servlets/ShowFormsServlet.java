@@ -1,6 +1,8 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.daoImpls.FormDaoImpl;
+import com.revature.daoImpls.NotificationDaoImpl;
+import com.revature.daoImpls.UserDaoImpl;
 
 /**
  * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
@@ -48,12 +52,25 @@ public class ShowFormsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession s = request.getSession(false);
 		FormDaoImpl fdi = new FormDaoImpl();
+		UserDaoImpl udi = new UserDaoImpl();
 		ObjectMapper mapper = new ObjectMapper();
 		if (s != null) {
 			try {
 			XhrGrading grade = mapper.readValue(request.getInputStream(), XhrGrading.class);
 			if (grade.getPassed() == 1) {
-				fdi.setStatus(grade.getFormId(), 4);
+				try {
+					if(udi.getUserById((int)s.getAttribute("userId")).getRmnReimbursement() >= 0) {
+						fdi.setStatus(grade.getFormId(), 4);
+					} else {
+						//TODO create two notifications for user & benco? Benco is "If any user is below 0, make it pop up"
+						NotificationDaoImpl ndi = new NotificationDaoImpl();
+						ndi.createNotification(grade.getFormId(), "Your grade for form " + grade.getFormId() + " could not be accepted, as noone agreed to you overdrawing your maximum amount of reimbursement per year. Please contact your benco of trust for aid!");
+						
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				// TODO Process the money being withdrawn, don't overdraw blablabla - how can
 				// the benco approve of overdrawing? if string == null, don't overdraw?
 			} else if (grade.getPassed() == 0) {

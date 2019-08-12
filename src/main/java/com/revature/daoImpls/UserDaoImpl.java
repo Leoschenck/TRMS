@@ -54,18 +54,18 @@ public class UserDaoImpl implements UserDao{
 		return u;
 	}
 
-	@Override
-	public void changeReimbursementAmount(double newAmount) throws SQLException {
+	
+	public void changeReimbursementAmount(double newAmount, int userId) throws SQLException {
 		Connection conn = cf.getConnection();
-		CallableStatement call = conn.prepareCall("{ call setReimbusementAmount(?)");
+		CallableStatement call = conn.prepareCall("{ call setReimbursementAmount(?, ?) }");
 		call.setDouble(1, newAmount);
+		call.setInt(2, userId);
 		call.execute();
 	}
-	
-	@Override
+
 	public void resetReimbursementAllUsers() throws SQLException{
 		Connection conn = cf.getConnection();
-		CallableStatement call = conn.prepareCall("{ call resetReimbusementAmount()");
+		CallableStatement call = conn.prepareCall("{ call resetReimbursementAmount() }");
 		call.execute();
 	}
 
@@ -78,8 +78,7 @@ public class UserDaoImpl implements UserDao{
 		return rs.next()?"1":"0";
 	}
 
-	@Override
-	public int getUserByFormId(int formid) throws SQLException {
+	public int getUserIdByFormId(int formid) throws SQLException {
 		Connection conn = cf.getConnection();
 		PreparedStatement ps = conn.prepareStatement("SELECT employeeid FROM form WHERE formid = ?");
 		ps.setInt(1, formid);

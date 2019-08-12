@@ -32,12 +32,12 @@ function submitGrade(cur) {
 function openQuestion(cur) {
     var rowList = cur.currentTarget.parentElement.parentElement.children;
     console.log(rowList);
-    var curRowId = cur.currentTarget.parentElement.firstChild.innerHTML;
-    console.log(curRowId);
+    var curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    console.log(curFormId);
     for (var i = 0; i < rowList.length; i++) {
         console.log(i);
         if (rowList[i].children[0] != null) {
-            if (rowList[i].children[0].innerHTML == curRowId) {
+            if (rowList[i].children[0].innerHTML == curFormId) {
                 break;
                 console.log(rowList[i].firstChild.innerHTML);
             }
@@ -91,6 +91,7 @@ function submitQuestion(cur) {
     xhr2.open("POST", "http://localhost:8080/TRMS/approval", false);
     var obj = {};
     obj["formId"] = curFormId;
+    obj["approved"] = 0;
     obj["attachedReasoning"] = document.getElementById("questBox").innerHTML;
     var trash = JSON.stringify(obj)
     xhr2.send(trash);
@@ -124,12 +125,12 @@ function approveForm(cur) {
     else {
         var rowList = cur.currentTarget.parentElement.parentElement.children;
         console.log(rowList);
-        var curRowId = cur.currentTarget.parentElement.firstChild.innerHTML;
-        console.log(curRowId);
+        var curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+        console.log(curFormId);
         for (var i = 0; i < rowList.length; i++) {
             console.log(i);
             if (rowList[i].children[0] != null) {
-                if (rowList[i].children[0].innerHTML == curRowId) {
+                if (rowList[i].children[0].innerHTML == curFormId) {
                     break;
                     console.log(rowList[i].firstChild.innerHTML);
                 }
@@ -190,6 +191,7 @@ function approveForm(cur) {
 function submitSubsidy(cur) {
     console.log(document.getElementById("subsBoxArea").value);
     cur.currentTarget.parentElement.parentElement.previousSibling.children[7].innerHTML = "Denied";
+    var curFormId = cur.currentTarget.parentElement.parentElement.previousSibling.children[0].innerHTML;
     document.getElementById("subsText").innerHTML = "Subsidy submitted of amount: ";
     document.getElementById("subsText").style = "font-weight:bold";
     document.getElementById("subsBox").innerHTML = document.getElementById("subsBoxArea").value;
@@ -219,12 +221,12 @@ function submitSubsidy(cur) {
 function denyForm(cur) {
     var rowList = cur.currentTarget.parentElement.parentElement.children;
     console.log(rowList);
-    var curRowId = cur.currentTarget.parentElement.firstChild.innerHTML;
-    console.log(curRowId);
+    var curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    console.log(curFormId);
     for (var i = 0; i < rowList.length; i++) {
         console.log(i);
         if (rowList[i].children[0] != null) {
-            if (rowList[i].children[0].innerHTML == curRowId) {
+            if (rowList[i].children[0].innerHTML == curFormId) {
                 break;
                 console.log(rowList[i].firstChild.innerHTML);
             }
@@ -258,37 +260,11 @@ function denyForm(cur) {
     reasSubmitCell.colSpan = "1";
     reasSubmitCell.innerHTML = "<input type='submit' id='reasSubmitButton' name='ed'/>"
     document.getElementById("reasSubmitButton").addEventListener("click", submitReason, false);
-
-                                    //curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
-                                    //console.log("Denying form " + curFormId);
-                                    //var curRow;
-                                    //var allRows = document.getElementById("lefttable").children[0].children;
-                                    //curRow = cur.currentTarget.parentElement.children;
-                                    //console.log("Form " + curRow[0].innerHTML + " found");
-                                    //curRow[7].innerHTML = "Denied";
-
-                                    //var xhr2 = new XMLHttpRequest();
-                                    //xhr2.onreadystatechange = function () {
-                                    //    console.log("in FORM DENY on ready change");
-                                    //    console.log("in ORSC " + xhr2.readyState + xhr2.status);
-                                    //    if (xhr2.readyState == 4 && xhr2.status == 200) {
-                                    //        //  console.log(xhr2.responseText);
-                                    //    }
-                                    //}
-                                    //xhr2.open("POST", "http://localhost:8080/TRMS/approval", false);
-                                    //var obj = {};
-                                    //obj["formId"] = curFormId;
-                                    //obj["approved"] = 0;
-                                    ///////obj["attachedReasoning"] =
-                                    //var trash = JSON.stringify(obj)
-                                    //xhr2.send(trash);
-
-    //cur.currentTarget.removeEventListener("click", denyForm, false);
-    //cur.currentTarget.parentElement.children[8].removeEventListener("click", approveForm, false);
 }
 function submitReason(cur) {
     console.log(document.getElementById("reasBoxArea").value);
     cur.currentTarget.parentElement.parentElement.previousSibling.children[7].innerHTML = "Denied";
+    var curFormId = cur.currentTarget.parentElement.parentElement.previousSibling.children[0].innerHTML;
     document.getElementById("reasText").innerHTML = "Reason for denial submitted: ";
     document.getElementById("reasText").style="font-weight:bold";
     document.getElementById("reasBox").innerHTML = document.getElementById("reasBoxArea").value;
@@ -328,87 +304,171 @@ function loadApprovalForms(allForms) {
     console.log("in loadForms");
     console.log(allForms);
     var formTable = document.getElementById("lefttable");
+    console.log("in for loop");
     for (var i = 0; i < allForms.length; i++) {
-    	console.log("in for loop");
-        var newRow = formTable.insertRow(curRow);
-        var formId = newRow.insertCell(0);
-        var appDate = newRow.insertCell(1);
-        var courseDate = newRow.insertCell(2);
-        var loca = newRow.insertCell(3);
-        var dept = newRow.insertCell(4);
-        var cost = newRow.insertCell(5);
-        var typeEvent = newRow.insertCell(6);
-        var stat = newRow.insertCell(7);
-        var approveButton = newRow.insertCell(8);
-        var denyButton = newRow.insertCell(9);
-        var questButton = newRow.insertCell(10);
-        formId.innerHTML = allForms[i].id;
-        appDate.innerHTML = new Date(allForms[i].openDateTime);
-        courseDate.innerHTML = new Date(allForms[i].courseStart);
-        loca.innerHTML = allForms[i].location;
-        dept.innerHTML = allForms[i].deptName;
-        cost.innerHTML = "$" + allForms[i].cost;
+            var applDate = new Date(allForms[i].openDateTime);
+            var coursDate = new Date(allForms[i].courseStart);
+            var courseMil = (coursDate.getTime() / (1000 * 60 * 60 * 24));
+            var curMil = (Date.now() / (1000 * 60 * 60 * 24));
+            var courseDif = courseMil - curMil;
+        if (courseDif <= 7) {
+            console.log(courseDif);
+            var newRow = formTable.insertRow(curRow);
+            var formId = newRow.insertCell(0);
+            var appDate = newRow.insertCell(1);
+            var courseDate = newRow.insertCell(2);
+            var loca = newRow.insertCell(3);
+            var dept = newRow.insertCell(4);
+            var cost = newRow.insertCell(5);
+            var typeEvent = newRow.insertCell(6);
+            var stat = newRow.insertCell(7);
+            var approveButton = newRow.insertCell(8);
+            var denyButton = newRow.insertCell(9);
+            var questButton = newRow.insertCell(10);
+            formId.innerHTML = allForms[i].id;
+            appDate.innerHTML = applDate;
+            courseDate.innerHTML = coursDate;
+            courseDate.style = "background:#ff8080";
+            loca.innerHTML = allForms[i].location;
+            dept.innerHTML = allForms[i].deptName;
+            cost.innerHTML = "$" + allForms[i].cost;
 
-        switch(allForms[i].typeOfEvent){
-            case "0":
-                typeEvent.innerHTML = "Certification";
-                break;
-            case "1":
-                typeEvent.innerHTML = "Technical Training";
-                break;
-            case "2":
-                typeEvent.innerHTML = "University Course";
-                break;
-            case "3":
-                typeEvent.innerHTML = "Certification Prep Classes";
-                break;
-            case "4":
-                typeEvent.innerHTML = "Seminar";
-                break;
-            case "5":
-                typeEvent.innerHTML = "Other";
-                break;
+            switch (allForms[i].typeOfEvent) {
+                case "0":
+                    typeEvent.innerHTML = "Certification";
+                    break;
+                case "1":
+                    typeEvent.innerHTML = "Technical Training";
+                    break;
+                case "2":
+                    typeEvent.innerHTML = "University Course";
+                    break;
+                case "3":
+                    typeEvent.innerHTML = "Certification Prep Classes";
+                    break;
+                case "4":
+                    typeEvent.innerHTML = "Seminar";
+                    break;
+                case "5":
+                    typeEvent.innerHTML = "Other";
+                    break;
+            }
+            stat.innerHTML = "Awaiting your approval";
+            approveButton.innerHTML = "Approve"
+            approveButton.style = "background:#00ff00";
+            approveButton.addEventListener("click", approveForm, false);
+            denyButton.innerHTML = "Deny"
+            denyButton.style = "background:#ff4d4d";
+            denyButton.addEventListener("click", denyForm, false);
+            questButton.style = "background:#b3b3b3";
+            questButton.innerHTML = "Submit Question";
+            questButton.addEventListener("click", openQuestion, false);
+            /*switch (allForms[i].status) {
+                case 0:
+                    stat.innerHTML = "Awaiting Supervisor Approval";
+                    break;
+                case 1:
+                    stat.innerHTML = "Awaiting Department Approval";
+                    break;
+                case 2:
+                    stat.innerHTML = "Awaiting BenCo Approval";
+                    break;
+                case 3:
+                    stat.innerHTML = "Awaiting Grade";
+                    break;
+                case 4:
+                    stat.innerHTML = "Approved";
+                    break;
+                case -1:
+                    stat.innerHTML = "Denied";
+                    break;
+    
+            }*/
+            curRow++;
         }
-        stat.innerHTML = "Awaiting your approval";
-        approveButton.innerHTML = "Approve"
-        approveButton.style = "background:#00ff00";
-        approveButton.addEventListener("click", approveForm, false);
-        denyButton.innerHTML = "Deny"
-        denyButton.style = "background:#ff4d4d";
-        denyButton.addEventListener("click", denyForm, false);
-        questButton.style = "background:#b3b3b3";
-        questButton.innerHTML = "Submit Question";
-        questButton.addEventListener("click", openQuestion, false);
-        /*switch (allForms[i].status) {
-            case 0:
-                stat.innerHTML = "Awaiting Supervisor Approval";
-                break;
-            case 1:
-                stat.innerHTML = "Awaiting Department Approval";
-                break;
-            case 2:
-                stat.innerHTML = "Awaiting BenCo Approval";
-                break;
-            case 3:
-                stat.innerHTML = "Awaiting Grade";
-                break;
-            case 4:
-                stat.innerHTML = "Approved";
-                break;
-            case -1:
-                stat.innerHTML = "Denied";
-                break;
-
-        }*/
-        curRow++;
-       // console.log(allForms[i].id);
-        //console.log(allForms[i]);
     }
-    // if(userId != null){
-    //     document.getElementById("userId").innerHTML = userId.id;
-    // } else {
-    //     document.getElementById("vgName").innerHTML = "There is no record associated with that ID";
-    // }
+    for (var i = 0; i < allForms.length; i++) {
+        var applDate = new Date(allForms[i].openDateTime);
+        var coursDate = new Date(allForms[i].courseStart);
+        var courseMil = (coursDate.getTime() / (1000 * 60 * 60 * 24));
+        var curMil = (Date.now() / (1000 * 60 * 60 * 24));
+        var courseDif = courseMil - curMil;
+        if (courseDif > 7) {
+            console.log(courseDif);
+            var newRow = formTable.insertRow(curRow);
+            var formId = newRow.insertCell(0);
+            var appDate = newRow.insertCell(1);
+            var courseDate = newRow.insertCell(2);
+            var loca = newRow.insertCell(3);
+            var dept = newRow.insertCell(4);
+            var cost = newRow.insertCell(5);
+            var typeEvent = newRow.insertCell(6);
+            var stat = newRow.insertCell(7);
+            var approveButton = newRow.insertCell(8);
+            var denyButton = newRow.insertCell(9);
+            var questButton = newRow.insertCell(10);
+            formId.innerHTML = allForms[i].id;
+            appDate.innerHTML = applDate;
+            courseDate.innerHTML = coursDate;
+            loca.innerHTML = allForms[i].location;
+            dept.innerHTML = allForms[i].deptName;
+            cost.innerHTML = "$" + allForms[i].cost;
+
+            switch (allForms[i].typeOfEvent) {
+                case "0":
+                    typeEvent.innerHTML = "Certification";
+                    break;
+                case "1":
+                    typeEvent.innerHTML = "Technical Training";
+                    break;
+                case "2":
+                    typeEvent.innerHTML = "University Course";
+                    break;
+                case "3":
+                    typeEvent.innerHTML = "Certification Prep Classes";
+                    break;
+                case "4":
+                    typeEvent.innerHTML = "Seminar";
+                    break;
+                case "5":
+                    typeEvent.innerHTML = "Other";
+                    break;
+            }
+            stat.innerHTML = "Awaiting your approval";
+            approveButton.innerHTML = "Approve"
+            approveButton.style = "background:#00ff00";
+            approveButton.addEventListener("click", approveForm, false);
+            denyButton.innerHTML = "Deny"
+            denyButton.style = "background:#ff4d4d";
+            denyButton.addEventListener("click", denyForm, false);
+            questButton.style = "background:#b3b3b3";
+            questButton.innerHTML = "Submit Question";
+            questButton.addEventListener("click", openQuestion, false);
+            /*switch (allForms[i].status) {
+                case 0:
+                    stat.innerHTML = "Awaiting Supervisor Approval";
+                    break;
+                case 1:
+                    stat.innerHTML = "Awaiting Department Approval";
+                    break;
+                case 2:
+                    stat.innerHTML = "Awaiting BenCo Approval";
+                    break;
+                case 3:
+                    stat.innerHTML = "Awaiting Grade";
+                    break;
+                case 4:
+                    stat.innerHTML = "Approved";
+                    break;
+                case -1:
+                    stat.innerHTML = "Denied";
+                    break;
+    
+            }*/
+            curRow++;
+        }
+    }
+
 }
 
 function getApprovalForms() {

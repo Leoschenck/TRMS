@@ -188,7 +188,8 @@ function alerter() {
 	}
 	document.getElementById("reimbursementamount").value = parseFloat(
 			(amount * factor)).toFixed(2);
-        ball = ckObj["remainingReimbursementAmount"].toString();
+	    ball = 1000;//ckObj["remainingReimbursementAmount"].toString();
+
         document.getElementById("cost").max = (ball / factor);
 	
 }
