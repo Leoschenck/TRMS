@@ -31,12 +31,11 @@ public class NotificationDaoImpl implements NotificationDao{
 	public static ConnFactory cf = ConnFactory.getInstance();
 
 	@Override
-	public void createNotification(int formID, String content, Date time) throws SQLException {
+	public void createNotification(int formID, String content) throws SQLException {
 		Connection conn = cf.getConnection();
-		CallableStatement call = conn.prepareCall("{call CREATE_NOTIFICATION(?, ?, ?)");
+		CallableStatement call = conn.prepareCall("{call CREATE_NOTIFICATION(?, ?)");
 		call.setInt(1, formID);
 		call.setString(2, content);
-		call.setDate(3, time);
 		call.execute();
 	}
 	
