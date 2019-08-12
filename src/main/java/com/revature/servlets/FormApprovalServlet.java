@@ -55,64 +55,67 @@ public class FormApprovalServlet extends HttpServlet {
 		NotificationDaoImpl ndi = new NotificationDaoImpl();
 		ObjectMapper mapper = new ObjectMapper();
 		XhrApprovalObject xhrApproval = mapper.readValue(request.getInputStream(), XhrApprovalObject.class);
+		System.out.println(xhrApproval);
 		int status = 0;
 		if (s != null) {
 			status = xhrApproval.getStatus();
+			if (xhrApproval.getApproved() == 1) {
+				// TODO insert other input situations like question, denial and reimbursement
+				// change
+				// If the state is 0 and the user is the supervisor, we set the status to one or
+				// two, depending on if he also is the depthead
+				try {
+					if (status == 0 && fdi.isSupervisor(xhrApproval.getFormId(), (int) s.getAttribute("userId"))) {
+						status = (fdi.isDeptHead(xhrApproval.getFormId(), (int) s.getAttribute("userId"))) ? 2 : 1;
 
-			// TODO insert other input situations like question, denial and reimbursement
-			// change
-			// If the state is 0 and the user is the supervisor, we set the status to one or
-			// two, depending on if he also is the depthead
-			try {
-				if (status == 0 && fdi.isSupervisor(xhrApproval.getFormId(), (int) s.getAttribute("userId"))) {
-					status = (fdi.isDeptHead(xhrApproval.getFormId(), (int) s.getAttribute("userId"))) ? 2 : 1;
+					} else if (status == 1 && fdi.isDeptHead(xhrApproval.getFormId(), (int) s.getAttribute("userId"))) {
+						status = 2;
+					} else if (status == 2 && (int) s.getAttribute("isBenco") == 1) {
 
-				} else if (status == 1 && fdi.isDeptHead(xhrApproval.getFormId(), (int) s.getAttribute("userId"))) {
-					status = 2;
-				} else if (status == 2 && (int) s.getAttribute("isBenco") == 1) {
-
-					status = 3;
+						status = 3;
+					}
+					fdi.setStatus(xhrApproval.getFormId(), status);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			} else if ((status = xhrApproval.getApproved()) == -1) { // Denied the Form!
+				System.out.println(status + "We're in denial of form." + xhrApproval.getFormId());
+				try { // lmao don't even try to understand this mess! jkjk - it get's the userid of
+						// the forms owner and updates his remaining balance to blurg I HATE JAVASCRIPT
+						// AND EVERYTHING HERE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+					int userIdOfForm = udi.getUserIdByFormId(xhrApproval.getFormId());
+					ndi.createNotification(xhrApproval.getFormId(),
+							"Your Application was denied. \n\n" + xhrApproval.getAttachedReasoning());
+					double newAmount = calculateNewAmount(fdi.getFormBy(xhrApproval.getFormId()),
+							udi.getUserById(userIdOfForm));
+					udi.changeReimbursementAmount(newAmount, userIdOfForm);
+					System.out.println(newAmount + " This is the new amount that is being set.");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				try {
+					System.out.println(status + " This is the Status that is being set.");
+					fdi.setStatus(xhrApproval.getFormId(), status);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (xhrApproval.getApproved() == 0) { // Add a Question! Display them in open forms? where status !=
+															// -1
+															// && 3 && 4
+				try {
+					ndi.createNotification(xhrApproval.getFormId(), "Open Question about your form "
+							+ xhrApproval.getFormId() + "\n\n" + xhrApproval.getAttachedReasoning());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			try {
-				fdi.setStatus(xhrApproval.getFormId(), status);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else if ((status = xhrApproval.getApproved()) == -1) { // Denied the Form!
-
-			try { // lmao don't even try to understand this mess! jkjk - it get's the userid of
-					// the forms owner and updates his remaining balance to blurg I HATE JAVASCRIPT
-					// AND EVERYTHING HERE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-				int userIdOfForm = udi.getUserIdByFormId(xhrApproval.getFormId());
-				ndi.createNotification(xhrApproval.getFormId(),
-						"Your Application was denied. \n\n" + xhrApproval.getAttachedReasoning());
-				double newAmount = calculateNewAmount(fdi.getFormBy(xhrApproval.getFormId()),
-						udi.getUserById(userIdOfForm));
-				udi.changeReimbursementAmount(newAmount, userIdOfForm);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				fdi.setStatus(xhrApproval.getFormId(), status);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else if (xhrApproval.getApproved() == 0) { // Add a Question! Display them in open forms? where status != -1
-														// && 3 && 4
-			try {
-				ndi.createNotification(xhrApproval.getFormId(), "Open Question about your form "
-						+ xhrApproval.getFormId() + "\n\n" + xhrApproval.getAttachedReasoning());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else{response.sendRedirect("/TRMS/login");}}
+		} else {
+			response.sendRedirect("/TRMS/login");
+		}
+	}
 
 	private double calculateNewAmount(Form f, User u) {
 		double newAmount = u.getRmnReimbursement();
@@ -156,20 +159,22 @@ public class FormApprovalServlet extends HttpServlet {
 
 /**
  * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
- * The purpose of TRMS is to provide a system that encourages quality knowledge growth
- * relevant to an individual’s expertise.  This program was created to address the
- * problems present in the current system, to provide the best user experience possible,
- * and to provide a more streamlined process for everyone involved.
+ * The purpose of TRMS is to provide a system that encourages quality knowledge
+ * growth relevant to an individual’s expertise. This program was created to
+ * address the problems present in the current system, to provide the best user
+ * experience possible, and to provide a more streamlined process for everyone
+ * involved.
  * <p>
- * This class is set up to store data that can be accessed and
- * manipulated through its setter and getter methods.
+ * This class is set up to store data that can be accessed and manipulated
+ * through its setter and getter methods.
+ * 
  * @author Justin Hua, Kyle Kolstad, Leonardo Schenck, Levi Applebaum
  * @version 1.0
  * 
  */
 class XhrApprovalObject {
-	
-	//Private data variables.
+
+	// Private data variables.
 	private String attachedReasoning;
 	private int formId, approved, subsAmt, status;
 
@@ -179,9 +184,11 @@ class XhrApprovalObject {
 	public XhrApprovalObject() {
 		super();
 	}
-	
+
 	/**
-	 * This method creates an XhrApprovalObject object and initializes the data variables.
+	 * This method creates an XhrApprovalObject object and initializes the data
+	 * variables.
+	 * 
 	 * @param formId
 	 * @param approved
 	 * @param attachedReasoning
@@ -198,7 +205,7 @@ class XhrApprovalObject {
 		this.status = status;
 	}
 
-	//Getter and setter methods.
+	// Getter and setter methods.
 
 	public int getSubsAmt() {
 		return subsAmt;
@@ -239,4 +246,12 @@ class XhrApprovalObject {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	// toString
+
+	@Override
+	public String toString() {
+		return "XhrApprovalObject [attachedReasoning=" + attachedReasoning + ", formId=" + formId + ", approved="
+				+ approved + ", subsAmt=" + subsAmt + ", status=" + status + "]";
+	}
+
 }

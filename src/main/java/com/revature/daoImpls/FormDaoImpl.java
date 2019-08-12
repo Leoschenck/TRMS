@@ -78,7 +78,7 @@ public class FormDaoImpl implements FormDao {
 	@Override
 	public boolean isDeptHead(int formId, int userId) throws SQLException{
 		Connection conn = cf.getConnection();
-		PreparedStatement ps = conn.prepareStatement("SELECT * FROM form WHERE formid = ? AND deptid = (SELECT deptid FROM department WHERE depthead = ?");
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM form WHERE formid = ? AND deptid = (SELECT deptid FROM department WHERE depthead = ?)");
 		ps.setInt(1, formId);
 		ps.setInt(2, userId);
 		ResultSet rs = ps.executeQuery();
