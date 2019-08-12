@@ -74,6 +74,7 @@ function openQuestion(cur) {
 }
 function submitQuestion(cur) {
     console.log(document.getElementById("questBoxArea").value);
+    var curFormId = cur.currentTarget.parentElement.parentElement.previousSibling.children[0].innerHTML;
     document.getElementById("questText").innerHTML = "Question submitted: ";
     document.getElementById("questText").style="font-weight:bold";
     document.getElementById("questBox").innerHTML = document.getElementById("questBoxArea").value;
@@ -210,6 +211,7 @@ function submitSubsidy(cur) {
     }
     xhr2.open("POST", "http://localhost:8080/TRMS/approval", false);
     var obj = {};
+    alert(curFormId);
     obj["formId"] = curFormId;
     obj["approved"] = 1;
     obj["subsAmt"] = document.getElementById("subsBox").innerHTML;

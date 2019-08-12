@@ -109,6 +109,7 @@ public class FormApprovalServlet extends HttpServlet {
 			} else if (xhrApproval.getApproved() == 0) { // Add a Question! Display them in open forms? where status !=
 															// -1
 															// && 3 && 4
+				System.out.println(xhrApproval);
 				try {
 					ndi.createNotification(xhrApproval.getFormId(), "Open Question about your form "
 							+ xhrApproval.getFormId() + "\n\n" + xhrApproval.getAttachedReasoning());
