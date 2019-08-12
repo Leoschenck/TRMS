@@ -33,7 +33,7 @@ public class FormServlet extends HttpServlet {
 		if (s != null) {
 
 			System.out.println(s.getAttribute("userId").toString() + " is the userId of " + s.getAttribute("userName"));
-
+			
 			req.getRequestDispatcher("/form.html").include(req, resp); // TODO homepage
 		} else {
 			resp.sendRedirect("/TRMS/login");

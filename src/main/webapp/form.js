@@ -37,13 +37,14 @@ today = yyyy + '-' + mm + '-' + dd;
 // // displays 726
 // console.log('Days since ' + Jan1st2010.toLocaleDateString() + ': '
 // + Date.daysBetween(Jan1st2010, today));
-window.onload = function() {
-document.getElementById("cost").addEventListener("change", alerter);
-document.getElementById("typeOfEvent").addEventListener("change", alerter);
+window.onload = function () {
+    handleOptions(data);
+    document.getElementById("cost").addEventListener("change", alerter);
+    document.getElementById("typeOfEvent").addEventListener("change", alerter);
 //document.getElementById("formSubmit").addEventListener("click", postForm,
 //		false);
 //document.getElementById("currentDate").value = today;
-}
+};
 
 /*function postForm(){
 	alert("in post form");
@@ -80,9 +81,22 @@ function jsonBuiilder() {
     var json= JSON.stringify(obj);
     console.log(json);
     return json;
-};
-*/
+};*/
 
+handleOptions(data){
+    var ck = decodeURIComponent(document.cookie);
+    var cks = ck.split(';');
+    var ckObj = {};
+    for (var i = 0; i < cks.length; i++) {
+        var tempCk = cks[i].split('=');
+        tempCk[0] = tempCk[0].trim();
+        tempCk[1] = tempCk[1].trim();
+        ckObj[tempCk[0]] = tempCk[1];
+        console.log(tempCk[0]);
+        console.log(ckObj[tempCk[0]]);
+    }
+    document.getElementById("cost").max = ckObj[""];
+};
 
 function alerter() {
 	document.getElementById("cost").value = parseFloat(
