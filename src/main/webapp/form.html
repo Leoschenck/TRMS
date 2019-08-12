@@ -20,12 +20,13 @@
       <a class="nav-link" href="/TRMS/showforms">View Forms</a>
 <!--=======
       <a class="nav-link" href="viewforms.html">View Forms</a>
+>>>>>>> b4f6b1b829e6a374998539a8927e52caee69ad0e
     </li>-->
     <li class="nav-item">
-      <a class="nav-link" href="/TRMS/approval">Approval</a>
+      <a class="nav-link" href="approval.html">Approval</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/TRMS/notifications">Notifications</a>
+      <a class="nav-link" href="">Notifications</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="login.html">Logout</a>
@@ -36,38 +37,24 @@
 <br>
 
 <body>
-	<!-- Navigation Bar
+	<!-- Navigation Bar -->
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
-<<<<<<< HEAD
-			Company Brand Name -->
-			<!-- <div class="navbar-header">
-				<a class="navbar-brand" href="home.html">Tuition Reimbursement
-					Management System</a>
-			</div> -->
-=======
 			<!-- Company Brand Name -->
->>>>>>> 529e171776354a7ae9c350a400755fc7809e7aeb
 			
 			<!-- Login and Logout -->
-			<!-- <ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right">
 				<li id="logout"><a href="home.html"> <span
 						class="glyphicon glyphicon-log-out"></span> Logout
 				</a></li>
 			</ul>
-		</div> -->
+		</div>
 <br>
-<dv>
-	<div> 
-		<br>
-	</div>
-<h1 class="text-left">Tuition Reimbursement Form</h1>
-</dv>
 	</nav>
 		<div class="col-md-6 col-md-offset-3">
 			<div id="divlogin" class="panel-default">
 				<div class="panel-heading">
-					<!-- <h1 class="text-center">Tuition Reimbursement Form</h1> -->
+					<h1 class="text-center">Tuition Reimbursement Form</h1>
 				</div>
 				<div class="panel-body">
 					<!-- Reimbursement Form -->
@@ -83,12 +70,12 @@
 								name="typeOfEvent" class="form-control" id="typeOfEvent"
 								required="required">
 								<option value="" selected="selected">Select Type</option>
-								<option value="1">University Courses</option>
-								<option value="2">Seminars</option>
-								<option value="3">Certification Preparation Classes</option>
-								<option value="4">Certification</option>
-								<option value="5">Technical Training</option>
-								<option value="6">Other</option>
+								<option value="1">"University Courses"</option>
+								<option value="2">"Seminars"</option>
+								<option value="3">"Certification Preparation Classes"</option>
+								<option value="4">"Certification"</option>
+								<option value="5">"Technical Training"</option>
+								<option value="6">"Other"</option>
 							</select>
 						</div>
 
@@ -100,34 +87,13 @@
 								placeholder="Enter Course Description "
 								required="required">
 						</div>
-					
-						<!-- Event Course Start Date -->
+
+						<!-- Event Date -->
 						<div class="form-group">
-							<label for="courseStart">Course Start Date:</label> <input type="date" min="2019-08-12" max="2019-08-23"
-								name="courseStart" class="form-control" id="courseStart" placeholder="yyyy-dd-mm"
+							<label for="courseStart">Event Date:</label> <input type="date"
+								name="courseStart" class="form-control" id="courseStart"
 								required="required">
 						</div>
-
-						<!--Event Course End Date -->
-						<div class="form-group">
-							<label for="courseEnd">Course End Date:</label> <input type="date"  min="2019-08-12"
-								name="courseEnd" class="form-control" id="courseEnd" placeholder="yyyy-dd-mm"
-								required="required"> 
-						</div>
-						<!-- Event Time
-						<div class="form-group">
-							<label for="courseStartTime">Start Time</label>
-							</div>
-							<div class="col-4">
-								<input class="form-control" type="time" value="12:00:00" id="startTime" required>
-							</div>
-							<label for="courseEndTime">End Time</label>
-							</div>
-							<div class="col-4">
-								<input class="form-control" type="time" value="12:00:00" id="endTime" required>
-							</div>                         
-						</div> -->
-				
 						<!--Event location -->
 						<div class="form-group">
 							<label for="location">Location:</label>
@@ -141,7 +107,7 @@
 						<div class="form-group">
 							<label for="cost">Total Cost:</label> <input
 								type="number" class="form-control" id="cost" name="cost"
-								step="0.01" max="1000" placeholder="Enter amount "
+								step="0.01" placeholder="Enter amount "
 								required="required">
 						</div>
 
@@ -179,18 +145,17 @@
 								required="required">
 						</div>
 
-						<!-- Dept Id -->
+												<!-- Dept Id -->
 						<div class="form-group">
 							<label for="deptId">Department:</label> <select
 								name="deptId" class="form-control" id="deptId"
 								required="required">
 								<option value="0" selected="selected">Select Department</option>
-								<option value="1">Some</option>
-								<option value="2">Random</option>
-								<option value="3">Department</option>
-								<option value="4">Math</option>
-								<option value="5">Bla</option>
-								<option value="6">Other</option>
+								<option value="1">Math</option>
+								<option value="2">Computer Science</option>
+								<option value="3">Life Science</option>
+								<option value="4">Fine Arts</option>
+								<option value="4">Other</option>
 							</select>
 						</div>
 
