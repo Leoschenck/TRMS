@@ -89,7 +89,8 @@ function getNotifications() {
             // console.log(forms);
         }
     }
-    xhr.open("GET", "http://localhost:8080/TRMS/notifications", true);
+    alert('smthn');
+    xhr.open("GET", "http://localhost:8080/TRMS/getnotifications", true);
     xhr.send();
 }
 
