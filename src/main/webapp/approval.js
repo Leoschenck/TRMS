@@ -161,7 +161,7 @@ function approveForm(cur) {
 
         subsReasCell.id = "subsReas";
         subsReasCell.colSpan = "7";
-        subsReasCell.innerHTML = "<textarea name='message' id='subsReasBoxArea' rows='3' cols='80'>";
+        subsReasCell.innerHTML = "<textarea name='message' id='subsReasBoxArea' rows='3' cols='80' value='Reason for subsidy'>";
 
         subsSubmitCell.id = "subsSubmit";
         subsSubmitCell.colSpan = "1";
