@@ -70,12 +70,12 @@
 								name="typeOfEvent" class="form-control" id="typeOfEvent"
 								required="required">
 								<option value="" selected="selected">Select Type</option>
-								<option value="1">"University Courses"</option>
-								<option value="2">"Seminars"</option>
-								<option value="3">"Certification Preparation Classes"</option>
-								<option value="4">"Certification"</option>
-								<option value="5">"Technical Training"</option>
-								<option value="6">"Other"</option>
+								<option value="1">University Courses</option>
+								<option value="2">Seminars</option>
+								<option value="3">Certification Preparation Classes</option>
+								<option value="4">Certification</option>
+								<option value="5">Technical Training</option>
+								<option value="6">Other</option>
 							</select>
 						</div>
 
@@ -90,10 +90,12 @@
 
 						<!-- Event Date -->
 						<div class="form-group">
-							<label for="courseStart">Event Date:</label> <input type="date"
+							<label for="courseStart">Event Date:</label> <input type="date" min="2019-08-12" max="2019-08-18"
 								name="courseStart" class="form-control" id="courseStart"
-								required="required">
+								required="required">	
+									  
 						</div>
+
 						<!--Event location -->
 						<div class="form-group">
 							<label for="location">Location:</label>

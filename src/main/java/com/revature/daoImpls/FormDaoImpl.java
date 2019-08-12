@@ -88,7 +88,7 @@ public class FormDaoImpl {
 
 		if (new UserDaoImpl().isBenco(employeeId).equals("1")) {
 			PreparedStatement ps0 = conn.prepareStatement(
-					"SELECT * FROM Form WHERE state >= 2");
+					"SELECT * FROM Form WHERE status >= 2");
 			ResultSet rs = ps0.executeQuery();
 			Form f = null;
 			while (rs.next()) {

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Jack's Site</title>
+		<link rel="stylesheet" href="resources/css/formtemplate.css" />
+		<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
+	</head>
+	
+	<body>
+		<ul class="nav nav-pills" id="navbar">
+			<li class="nav-item"><a class="nav-link" href="http://localhost:9998/jackTRMS/home.html">Main Menu</a></li>
+			<li class="nav-item"><a class="nav-link" href="http://localhost:9998/jackTRMS/myrequests.html">My Requests</a></li>
+			<li class="nav-item"><a class="nav-link active" href="http://localhost:9998/jackTRMS/viewrequests.html">View
+					Requests</a></li>
+			<li class="nav-item"><a class="nav-link" href="http://localhost:9998/jackTRMS/form.html">Submit
+					Request</a></li>
+			<li class="nav-item"><a class="nav-link" href="http://localhost:9998/jackTRMS/login.html" id="logout">Logout</a></li>
+		</ul>
+		<div class="containers">
+			<h5>Reimbursement Request</h5>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Field</th>
+						<th scope="col">Detail</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">Ticket ID</th>
+						<td id="ticketid"></td>
+					</tr>
+					<tr>
+						<th scope="row">Employee Name</th>
+						<td id="name"></td>
+					</tr>
+					<tr>
+						<th scope="row">Employee Email</th>
+						<td id="email"></td>
+					</tr>
+					<tr>
+						<th scope="row">Phone Number</th>
+						<td id="phone"></td>
+					</tr>
+					<tr>
+						<th scope="row">Employee ID</th>
+						<td id="employeeid"></td>
+					</tr>
+					<tr>
+						<th scope="row">Department</th>
+						<td id="department"></td>
+					</tr>
+					<tr>
+						<th scope="row">Position</th>
+						<td id="position"></td>
+					</tr>
+					<tr>
+						<th scope="row">Claimed Reimbursement</th>
+						<td id="claimed"></td>
+					</tr>
+					<tr>
+						<th scope="row">Pending Reimbursement</th>
+						<td id="pending"></td>
+					</tr>
+					<tr>
+						<th scope="row">Remaining Reimbursement</th>
+						<td id="remaining"></td>
+					</tr>
+					<tr>
+						<th scope="row">Projected Reimbursed Amount</th>
+						<td id="estimate"></td>
+					</tr>
+					<tr>
+						<th scope="row">Event Cost</th>
+						<td id="cost"></td>
+					</tr>
+					<tr>
+						<th scope="row">Event Type</th>
+						<td id="type"></td>
+					</tr>
+					<tr>
+						<th scope="row">Grading Format</th>
+						<td id="format"></td>
+					</tr>
+					<tr>
+						<th scope="row">Required Grade</th>
+						<td id="reqGrade"></td>
+					</tr>
+					<tr>
+						<th scope="row">Start Date</th>
+						<td id="startDate"></td>
+					</tr>
+					<tr>
+						<th scope="row">End Date</th>
+						<td id="endDate"></td>
+					</tr>
+					<tr>
+						<th scope="row">Start Time</th>
+						<td id="startTime"></td>
+					</tr>
+					<tr>
+						<th scope="row">End Time</th>
+						<td id="endTime"></td>
+					</tr>
+					<tr>
+						<th scope="row">Frequency</th>
+						<td id="frequency"></td>
+					</tr>
+					<tr>
+						<th scope="row">Expected Work Hours Missed</th>
+						<td id="workmissed"></td>
+					</tr>
+					<tr>
+						<th scope="row">Event Description</th>
+						<td id="description"></td>
+					</tr>
+					<tr>
+						<th scope="row">Justification</th>
+						<td id="justification"></td>
+					</tr>
+					<tr>
+						<th scope="row">Street Address</th>
+						<td id="address"></td>
+					</tr>
+					<tr>
+						<th scope="row">State</th>
+						<td id="state"></td>
+					</tr>
+					<tr>
+						<th scope="row">City</th>
+						<td id="city"></td>
+					</tr>
+					<tr>
+						<th scope="row">Zipcode</th>
+						<td id="zip"></td>
+					</tr>
+					<tr>
+						<th scope="row">Attachments</th>
+						<td id="attachments"></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="http://localhost:9998/jackTRMS/home.html" class="button" id="approve">Approve</a>
+			<a href="http://localhost:9998/jackTRMS/home.html" class="button" id="deny">Deny</a>
+			
+		</div>
+		<div class="bottom-right">Alerts</div>
+		<script type="text/javascript" src="resources/view.js"></script>
+	</body>
+
+</html>

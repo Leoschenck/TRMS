@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>BenCo - Main</title>
+	<link rel="stylesheet" href="BenCoPage.css">
+	<script type="text/javascript" src="BenCoPage.js"></script>
+</head>
+<body>
+	<h1>Benefits Coordinator Main Page</h1>
+	<hr>
+	<div id="div1">
+		<div id="welcomeField">Name displays here</div>
+		<br>
+		<div id="availableAwardsField" class="awardsSummary">Amount</div>
+		<div id="pendingAwardsField" class="awardsSummary">Amount</div>
+		<div id="awardedAwardsField" class="awardsSummary">Amount</div>
+		<br>
+	</div>
+	<hr>
+	<div id="div2">
+		<h2>Pending Requests To Review</h2>
+		
+		<div id="requestsField1"></div>
+		<br>
+	</div>
+	<hr>
+	<div id="div3">
+		<h2>Your Reimbursement Requests</h2>
+		
+		<div id="requestsField2"></div>
+		<br>
+	</div>
+	<form action="logout" method="GET">	
+		<div id="parent">
+				<div>
+					<input id="submitButton" formaction="RequestForm" type="submit" value="Submit New Request">
+					<input id="logoutButton" type="submit" value="Logout">
+				</div>
+		</div>
+	</form>
+
+</body>
+</html>
