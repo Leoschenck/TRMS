@@ -263,6 +263,8 @@ function denyForm(cur) {
 function submitReason(cur) {
     console.log(document.getElementById("reasBoxArea").value);
     cur.currentTarget.parentElement.parentElement.previousSibling.children[7].innerHTML = "Denied";
+    var curFormId = cur.currentTarget.parentElement.parentElement.previousSibling.children[0].innerHTML = "Denied";
+    var curFormId =
     document.getElementById("reasText").innerHTML = "Reason for denial submitted: ";
     document.getElementById("reasText").style="font-weight:bold";
     document.getElementById("reasBox").innerHTML = document.getElementById("reasBoxArea").value;
