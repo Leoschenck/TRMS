@@ -93,7 +93,7 @@ public class FormDaoImpl implements FormDao {
 		PreparedStatement ps;
 		ResultSet rs;
 		if (new UserDaoImpl().isBenco(employeeId).equals("1")) {
-			ps = conn.prepareStatement("SELECT * FROM Form WHERE state >= 2");
+			ps = conn.prepareStatement("SELECT * FROM Form WHERE status >= 2");
 			 rs = ps.executeQuery();
 			while (rs.next()) {
 				formList.add(new Form(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), rs.getString(5),

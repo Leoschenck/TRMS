@@ -112,7 +112,7 @@ public class FormApprovalServlet extends HttpServlet {
 				System.out.println(xhrApproval);
 				try {
 					ndi.createNotification(xhrApproval.getFormId(), "Open Question about your form "
-							+ xhrApproval.getFormId() + "\n\n" + xhrApproval.getAttachedReasoning());
+							+ xhrApproval.getFormId() + ": " + xhrApproval.getAttachedReasoning());
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
