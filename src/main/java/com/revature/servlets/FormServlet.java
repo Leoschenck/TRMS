@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.beans.User;
 import com.revature.daoImpls.FormDaoImpl;
+import com.revature.daoImpls.UserDaoImpl;
 
 /**
  * Servlet implementation class FormServlet
@@ -26,8 +29,7 @@ public class FormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("in doget formservlet");
 		HttpSession s = req.getSession(false);
 		if (s != null) {
@@ -48,28 +50,75 @@ public class FormServlet extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("in dopost of Form (yey we did it!)");
 		ObjectMapper mapper = new ObjectMapper();
+		UserDaoImpl udi = new UserDaoImpl();
 		String input = fixJson(request.getInputStream());
 		InputStream inStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
-		//PreparedForm pf = mapper.readValue(request.getInputStream(), PreparedForm.class);
+		// PreparedForm pf = mapper.readValue(request.getInputStream(),
+		// PreparedForm.class);
 		PreparedForm pf = mapper.readValue(inStream, PreparedForm.class);
 		System.out.println(pf);
 		HttpSession s = request.getSession(false);
-		new FormDaoImpl().createForm(pf.getCourseStart(), pf.getLocation(), pf.getDescription(), pf.getCost(), pf.getGradingFormat(), pf.getTypeOfEvent(), pf.getWorkRelatedJustification(), pf.getWorkTimeMissed(), pf.getLinkToFiles(), (int)s.getAttribute("userId"), pf.getDeptId());
+		new FormDaoImpl().createForm(pf.getCourseStart(), pf.getLocation(), pf.getDescription(), pf.getCost(),
+				pf.getGradingFormat(), pf.getTypeOfEvent(), pf.getWorkRelatedJustification(), pf.getWorkTimeMissed(),
+				pf.getLinkToFiles(), (int) s.getAttribute("userId"), pf.getDeptId());
 		response.sendRedirect("/TRMS/home");
+		double newAmount;
+		try {
+			newAmount = calculateNewAmount(pf, udi.getUserById((int) s.getAttribute("userId")));
+			udi.changeReimbursementAmount(newAmount);
+			
+			//TODO notification
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
-	private String fixJson(ServletInputStream inStream) throws IOException{
+
+	private double calculateNewAmount(PreparedForm pf, User u) {
+		double newAmount = u.getRmnReimbursement();
+		switch (pf.getTypeOfEvent()) {
+		case "1":
+			newAmount = 0.8 * pf.getCost();
+			break;
+		case "2":
+			newAmount = 0.6 * pf.getCost();
+			break;
+		case "3":
+			newAmount = 0.75 * pf.getCost();
+			break;// document.getElementById("reimbamtEst").value = parseFloat(
+		case "4":
+			newAmount = pf.getCost();
+			break;
+
+		case "5":
+			newAmount = 0.9 * pf.getCost();
+			break;
+		case "6":
+			newAmount = 0.3 * pf.getCost();
+			break;
+		}
+		return newAmount;
+	}
+
+	private String fixJson(ServletInputStream inStream) throws IOException {
 		StringBuffer sb = new StringBuffer();
 		int b = '0';
 		sb.append("{\"");
-		while((b = inStream.read()) != -1) {
-			switch((char)b) {
-			case('='): sb.append("\":\""); break;
-			case('&'): sb.append("\",\""); break;
-			case('+'): sb.append(" "); break;
-			default: sb.append((char)b);
+		while ((b = inStream.read()) != -1) {
+			switch ((char) b) {
+			case ('='):
+				sb.append("\":\"");
+				break;
+			case ('&'):
+				sb.append("\",\"");
+				break;
+			case ('+'):
+				sb.append(" ");
+				break;
+			default:
+				sb.append((char) b);
 			}
-			
+
 		}
 		sb.append("\"}");
 		System.out.println(sb);
@@ -90,66 +139,87 @@ class PreparedForm {
 	private double WorkTimeMissed;
 	private int deptId;
 	private String linkToFiles;
+
 	public String getTypeOfEvent() {
 		return typeOfEvent;
 	}
+
 	public void setTypeOfEvent(String typeOfEvent) {
 		this.typeOfEvent = typeOfEvent;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Date getCourseStart() {
 		return courseStart;
 	}
+
 	public void setCourseStart(Date courseStart) {
 		this.courseStart = courseStart;
 	}
+
 	public String getLocation() {
 		return location;
 	}
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
 	public double getCost() {
 		return cost;
 	}
+
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
+
 	public String getGradingFormat() {
 		return gradingFormat;
 	}
+
 	public void setGradingFormat(String gradingFormat) {
 		this.gradingFormat = gradingFormat;
 	}
+
 	public String getWorkRelatedJustification() {
 		return workRelatedJustification;
 	}
+
 	public void setWorkRelatedJustification(String workRelatedJustification) {
 		this.workRelatedJustification = workRelatedJustification;
 	}
+
 	public double getWorkTimeMissed() {
 		return WorkTimeMissed;
 	}
+
 	public void setWorkTimeMissed(double workTimeMissed) {
 		WorkTimeMissed = workTimeMissed;
 	}
+
 	public int getDeptId() {
 		return deptId;
 	}
+
 	public void setDeptId(int deptId) {
 		this.deptId = deptId;
 	}
+
 	public String getLinkToFiles() {
 		return linkToFiles;
 	}
+
 	public void setLinkToFiles(String linkToFiles) {
 		this.linkToFiles = linkToFiles;
 	}
+
 	public PreparedForm(String typeOfEvent, String description, Date courseStart, String location, double cost,
 			String gradingFormat, String workRelatedJustification, double workTimeMissed, int deptId,
 			String linkToFiles) {
@@ -165,6 +235,7 @@ class PreparedForm {
 		this.deptId = deptId;
 		this.linkToFiles = linkToFiles;
 	}
+
 	@Override
 	public String toString() {
 		return "PreparedForm [typeOfEvent=" + typeOfEvent + ", description=" + description + ", courseStart="
@@ -172,10 +243,10 @@ class PreparedForm {
 				+ ", workRelatedJustification=" + workRelatedJustification + ", WorkTimeMissed=" + WorkTimeMissed
 				+ ", deptId=" + deptId + ", linkToFiles=" + linkToFiles + "]";
 	}
+
 	public PreparedForm() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
 }

@@ -82,8 +82,17 @@ class XhrApprovalObject {
 	private int formId;
 	private int approved;
 	private String attachedReasoning;
-	private int newReimbursementAmount;
+	private int subsAmt;
 	private int status;
+
+
+	public int getSubsAmt() {
+		return subsAmt;
+	}
+
+	public void setSubsAmt(int subsAmt) {
+		this.subsAmt = subsAmt;
+	}
 
 	public int getFormId() {
 		return formId;
@@ -108,15 +117,6 @@ class XhrApprovalObject {
 	public void setAttachedReasoning(String attachedReasoning) {
 		this.attachedReasoning = attachedReasoning;
 	}
-
-	public int getNewReimbursementAmount() {
-		return newReimbursementAmount;
-	}
-
-	public void setNewReimbursementAmount(int newReimbursementAmount) {
-		this.newReimbursementAmount = newReimbursementAmount;
-	}
-
 	public XhrApprovalObject() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -128,7 +128,7 @@ class XhrApprovalObject {
 		this.formId = formId;
 		this.approved = approved;
 		this.attachedReasoning = attachedReasoning;
-		this.newReimbursementAmount = newReimbursementAmount;
+		this.subsAmt = newReimbursementAmount;
 		this.status = status;
 	}
 

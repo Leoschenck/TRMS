@@ -24,11 +24,10 @@ public interface NotificationDao {
 	 * This method can be used to create a notification
 	 * @param formID
 	 * @param content
-	 * @param time
 	 * @throws SQLException
 	 */
-	public void createNotification(int formID, String content, Date time) throws SQLException;
-
+	void createNotification(int formID, String content) throws SQLException;
+	
 	/**
 	 * This method can be used to get all visible notifications
 	 * @param employeeID
@@ -51,5 +50,6 @@ public interface NotificationDao {
 	 * @throws SQLException
 	 */
 	public void HideNotification(int notificationID) throws SQLException;
+
 
 }

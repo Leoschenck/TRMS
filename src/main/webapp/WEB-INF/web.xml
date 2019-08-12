@@ -99,4 +99,14 @@
     <servlet-name>GetApprovableFormsServlet</servlet-name>
     <url-pattern>/getapprovableforms</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetDepartmentsServlet</display-name>
+    <servlet-name>GetDepartmentsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetDepartmentsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetDepartmentsServlet</servlet-name>
+    <url-pattern>/getdepartments</url-pattern>
+  </servlet-mapping>
 </web-app>

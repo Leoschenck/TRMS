@@ -1,5 +1,6 @@
 package com.revature.daoImpls;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,6 +41,19 @@ public class UserDaoImpl {
 			}
 		System.out.println("in loginuser with " + username + " and " + password);
 		return u;
+	}
+	
+	public void changeReimbursementAmount(double newAmount) throws SQLException {
+		Connection conn = cf.getConnection();
+		CallableStatement call = conn.prepareCall("{ call setReimbusementAmount(?) }");
+		call.setDouble(1, newAmount);
+		call.execute();
+	}
+	
+	public void resetReimbursementAllUsers() throws SQLException{
+		Connection conn = cf.getConnection();
+		CallableStatement call = conn.prepareCall("{ call resetReimbusementAmount() }");
+		call.execute();
 	}
 
 	public String isBenco(int userid) {

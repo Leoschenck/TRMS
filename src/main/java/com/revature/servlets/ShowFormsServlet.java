@@ -59,7 +59,7 @@ public class ShowFormsServlet extends HttpServlet {
 			if (grade.getPassed() == 1) {
 				fdi.setStatus(grade.getFormId(), 4);
 				// TODO Process the money being withdrawn, don't overdraw blablabla - how can
-				// the benco approve of overdrawing? if string == null, dont overdraw?
+				// the benco approve of overdrawing? if string == null, don't overdraw?
 			} else if (grade.getPassed() == 0) {
 				fdi.setStatus(grade.getFormId(), -1);
 			}
