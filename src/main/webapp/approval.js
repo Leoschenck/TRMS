@@ -91,6 +91,7 @@ function submitQuestion(cur) {
     xhr2.open("POST", "http://localhost:8080/TRMS/approval", false);
     var obj = {};
     obj["formId"] = curFormId;
+    obj["approved"] = 0;
     obj["attachedReasoning"] = document.getElementById("questBox").innerHTML;
     var trash = JSON.stringify(obj)
     xhr2.send(trash);
