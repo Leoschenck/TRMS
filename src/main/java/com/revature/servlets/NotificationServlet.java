@@ -21,7 +21,7 @@ public class NotificationServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession s = request.getSession(false);
 		if(s != null) {
-			request.getRequestDispatcher("/notifications.html").forward(request, response);;
+			request.getRequestDispatcher("/notifications.html").forward(request, response);
 		} else {
 			response.sendRedirect("/TRMS/login");
 		}

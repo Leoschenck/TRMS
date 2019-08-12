@@ -30,6 +30,7 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	HttpSession s = request.getSession(false);
 		if(s != null) {
+			s.setMaxInactiveInterval(1);
 			s.invalidate();
 		}
 		response.sendRedirect("/TRMS/login");

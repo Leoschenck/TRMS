@@ -40,7 +40,12 @@ public class FormApprovalServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession s = request.getSession(false);
+		if(s != null) {
 		request.getRequestDispatcher("/approval.html").forward(request, response);
+		}else {
+			response.sendRedirect("/TRMS/login");
+		}
 	}
 
 	/**

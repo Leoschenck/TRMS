@@ -18,52 +18,17 @@ function loadNotifications(allNotifs) {
         var notifTimeCell = newRow.insertCell(3);
         var notifCheck = newRow.insertCell(4);
         notifId.innerHTML = allNotifs[i].id;
-        formId.innerHTML = allNotifs[i].formId;
-        notifCont.innerHTML = allNotif[i].content;
-      //  notifTime
-        notifTimeCell.innerHTML = allNotifs[i].id;
-
-
-        formId.innerHTML = allNotifs[i].id;
-        appDate.innerHTML = applDate;
-        courseDate.innerHTML = coursDate;
-        courseDate.style = "background:#ff8080";
-        loca.innerHTML = allNotifs[i].location;
-        dept.innerHTML = allNotifs[i].deptName;
-        cost.innerHTML = "$" + allNotifs[i].cost;
-
-        switch (allNotifs[i].typeOfEvent) {
-            case "0":
-                typeEvent.innerHTML = "Certification";
-                break;
-            case "1":
-                typeEvent.innerHTML = "Technical Training";
-                break;
-            case "2":
-                typeEvent.innerHTML = "University Course";
-                break;
-            case "3":
-                typeEvent.innerHTML = "Certification Prep Classes";
-                break;
-            case "4":
-                typeEvent.innerHTML = "Seminar";
-                break;
-            case "5":
-                typeEvent.innerHTML = "Other";
-                break;
+        formId.innerHTML = allNotifs[i].formID;
+        notifCont.innerHTML = allNotifs[i].content;
+        notifTimeCell.innerHTML = notifTime;
+        if (allNotifs[i].checked == 0) {
+            notifCheck.innerHTML = "No";
         }
-        stat.innerHTML = "Awaiting your approval";
-        approveButton.innerHTML = "Approve"
-        approveButton.style = "background:#00ff00";
-        approveButton.addEventListener("click", approveForm, false);
-        denyButton.innerHTML = "Deny"
-        denyButton.style = "background:#ff4d4d";
-        denyButton.addEventListener("click", denyForm, false);
-        questButton.style = "background:#b3b3b3";
-        questButton.innerHTML = "Submit Question";
-        questButton.addEventListener("click", openQuestion, false);
-        curRow++;
+        else {
+            notifCheck.innerHTML = "Yes";
+        }
     }
+
 
 }
 function getNotifications() {
@@ -74,7 +39,7 @@ function getNotifications() {
         console.log("In ORSC " + xhr.readyState + xhr.status);
         if (xhr.readyState == 4 && xhr.status == 200) {
             console.log(xhr.responseText);
-            forms = JSON.parse(xhr.responseText);
+            notifs = JSON.parse(xhr.responseText);
             var ck = decodeURIComponent(document.cookie);
             var cks = ck.split(';');
             for (var i = 0; i < cks.length; i++) {
@@ -85,11 +50,11 @@ function getNotifications() {
                 console.log(tempCk[0]);
                 console.log(ckObj[tempCk[0]]);
             }
+            console.log(notifs);
             loadNotifications(notifs);
             // console.log(forms);
         }
     }
-    alert('smthn');
     xhr.open("GET", "http://localhost:8080/TRMS/getnotifications", true);
     xhr.send();
 }
