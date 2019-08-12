@@ -97,7 +97,7 @@ function submitQuestion(cur) {
 }
 function approveForm(cur) {
 	console.log("benco: " + ckObj["isBenco"]);
-    if (ckObj["isBenco"] == 0) {
+    if (true) {
         curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
         console.log("Approving form " + curFormId);
         var curRow;
@@ -157,11 +157,11 @@ function approveForm(cur) {
         
         subsBoxCell.id = "subsBox";
         subsBoxCell.colSpan = "1";
-        subsBoxCell.innerHTML = "<input type='number' id='subsBoxArea'>";
+        subsBoxCell.innerHTML = "<input type='number' id='subsBoxArea' placeholder='0'>";
 
         subsReasCell.id = "subsReas";
         subsReasCell.colSpan = "7";
-        subsReasCell.innerHTML = "<textarea name='message' id='subsReasBoxArea' rows='3' cols='80'>";
+        subsReasCell.innerHTML = "<textarea name='message' id='subsReasBoxArea' rows='3' cols='80' placeholder='Reason for subsidy'>";
 
         subsSubmitCell.id = "subsSubmit";
         subsSubmitCell.colSpan = "1";
