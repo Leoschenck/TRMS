@@ -311,7 +311,6 @@ function loadApprovalForms(allForms) {
         if (courseDif <= 7) {
             console.log(courseDif);
             var newRow = formTable.insertRow(curRow);
-            newRow.style = "background:#ff8080";
             var formId = newRow.insertCell(0);
             var appDate = newRow.insertCell(1);
             var courseDate = newRow.insertCell(2);
@@ -326,6 +325,7 @@ function loadApprovalForms(allForms) {
             formId.innerHTML = allForms[i].id;
             appDate.innerHTML = applDate;
             courseDate.innerHTML = coursDate;
+            courseDate.style = "background:#ff8080";
             loca.innerHTML = allForms[i].location;
             dept.innerHTML = allForms[i].deptName;
             cost.innerHTML = "$" + allForms[i].cost;
