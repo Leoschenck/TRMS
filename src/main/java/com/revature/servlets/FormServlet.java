@@ -20,9 +20,19 @@ import com.revature.daoImpls.FormDaoImpl;
 import com.revature.daoImpls.UserDaoImpl;
 
 /**
+ * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
+ * The purpose of TRMS is to provide a system that encourages quality knowledge growth
+ * relevant to an individual’s expertise.  This program was created to address the
+ * problems present in the current system, to provide the best user experience possible,
+ * and to provide a more streamlined process for everyone involved.
+ * <p>
  * Servlet implementation class FormServlet
+ * @author Justin Hua, Kyle Kolstad, Leonardo Schenck, Levi Applebaum
+ * @version 1.0
+ * 
  */
 public class FormServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -30,12 +40,8 @@ public class FormServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("in doget formservlet");
 		HttpSession s = req.getSession(false);
 		if (s != null) {
-
-			System.out.println(s.getAttribute("userId").toString() + " is the userId of " + s.getAttribute("userName"));
-			
 			req.getRequestDispatcher("/form.html").include(req, resp); // TODO homepage
 		} else {
 			resp.sendRedirect("/TRMS/login");
@@ -46,34 +52,32 @@ public class FormServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("in dopost of Form (yey we did it!)");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		UserDaoImpl udi = new UserDaoImpl();
 		String input = fixJson(request.getInputStream());
 		InputStream inStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
-		// PreparedForm pf = mapper.readValue(request.getInputStream(),
-		// PreparedForm.class);
 		PreparedForm pf = mapper.readValue(inStream, PreparedForm.class);
-		System.out.println(pf);
 		HttpSession s = request.getSession(false);
+		try {
 		new FormDaoImpl().createForm(pf.getCourseStart(), pf.getLocation(), pf.getDescription(), pf.getCost(),
 				pf.getGradingFormat(), pf.getTypeOfEvent(), pf.getWorkRelatedJustification(), pf.getWorkTimeMissed(),
 				pf.getLinkToFiles(), (int) s.getAttribute("userId"), pf.getDeptId());
 		response.sendRedirect("/TRMS/home");
 		double newAmount;
-		try {
-			newAmount = calculateNewAmount(pf, udi.getUserById((int) s.getAttribute("userId")));
-			udi.changeReimbursementAmount(newAmount);
-			
-			//TODO notification
+		newAmount = calculateNewAmount(pf, udi.getUserById((int) s.getAttribute("userId")));
+		udi.changeReimbursementAmount(newAmount);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 
+	/**
+	 * This method will calculate the new reimbursement amount
+	 * @param pf
+	 * @param u
+	 * @return New Amount
+	 */
 	private double calculateNewAmount(PreparedForm pf, User u) {
 		double newAmount = u.getRmnReimbursement();
 		switch (pf.getTypeOfEvent()) {
@@ -85,11 +89,10 @@ public class FormServlet extends HttpServlet {
 			break;
 		case "3":
 			newAmount = 0.75 * pf.getCost();
-			break;// document.getElementById("reimbamtEst").value = parseFloat(
+			break;
 		case "4":
 			newAmount = pf.getCost();
 			break;
-
 		case "5":
 			newAmount = 0.9 * pf.getCost();
 			break;
@@ -100,6 +103,12 @@ public class FormServlet extends HttpServlet {
 		return newAmount;
 	}
 
+	/**
+	 * This Method is used to edit and fix a JSON String object and return the resulting String
+	 * @param inStream
+	 * @return String Object
+	 * @throws IOException
+	 */
 	private String fixJson(ServletInputStream inStream) throws IOException {
 		StringBuffer sb = new StringBuffer();
 		int b = '0';
@@ -118,28 +127,70 @@ public class FormServlet extends HttpServlet {
 			default:
 				sb.append((char) b);
 			}
-
 		}
 		sb.append("\"}");
-		System.out.println(sb);
 		return sb.toString();
 	}
-
 }
 
+/**
+ * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
+ * The purpose of TRMS is to provide a system that encourages quality knowledge growth
+ * relevant to an individual’s expertise.  This program was created to address the
+ * problems present in the current system, to provide the best user experience possible,
+ * and to provide a more streamlined process for everyone involved.
+ * <p>
+ * This class is set up to store data that can be accessed and
+ * manipulated through its setter and getter methods.
+ * @author Justin Hua, Kyle Kolstad, Leonardo Schenck, Levi Applebaum
+ * @version 1.0
+ * 
+ */
 class PreparedForm {
 
-	private String typeOfEvent;
-	private String description;
-	private Date courseStart;
-	private String location;
-	private double cost;
-	private String gradingFormat;
-	private String workRelatedJustification;
-	private double WorkTimeMissed;
+	//Private data variables.
 	private int deptId;
-	private String linkToFiles;
+	private Date courseStart;
+	private double cost, WorkTimeMissed;
+	private String typeOfEvent, description, location, gradingFormat, workRelatedJustification, linkToFiles;
 
+	/**
+	 * Default Constructor.
+	 */
+	public PreparedForm() {
+		super();
+	}
+	
+	/**
+	 * This method creates a PreparedForm object and initializes the data variables.
+	 * @param typeOfEvent
+	 * @param description
+	 * @param courseStart
+	 * @param location
+	 * @param cost
+	 * @param gradingFormat
+	 * @param workRelatedJustification
+	 * @param workTimeMissed
+	 * @param deptId
+	 * @param linkToFiles
+	 */
+	public PreparedForm(String typeOfEvent, String description, Date courseStart, String location, double cost,
+			String gradingFormat, String workRelatedJustification, double workTimeMissed, int deptId,
+			String linkToFiles) {
+		super();
+		this.typeOfEvent = typeOfEvent;
+		this.description = description;
+		this.courseStart = courseStart;
+		this.location = location;
+		this.cost = cost;
+		this.gradingFormat = gradingFormat;
+		this.workRelatedJustification = workRelatedJustification;
+		WorkTimeMissed = workTimeMissed;
+		this.deptId = deptId;
+		this.linkToFiles = linkToFiles;
+	}
+	
+	//Getter and setter methods.
 	public String getTypeOfEvent() {
 		return typeOfEvent;
 	}
@@ -220,22 +271,6 @@ class PreparedForm {
 		this.linkToFiles = linkToFiles;
 	}
 
-	public PreparedForm(String typeOfEvent, String description, Date courseStart, String location, double cost,
-			String gradingFormat, String workRelatedJustification, double workTimeMissed, int deptId,
-			String linkToFiles) {
-		super();
-		this.typeOfEvent = typeOfEvent;
-		this.description = description;
-		this.courseStart = courseStart;
-		this.location = location;
-		this.cost = cost;
-		this.gradingFormat = gradingFormat;
-		this.workRelatedJustification = workRelatedJustification;
-		WorkTimeMissed = workTimeMissed;
-		this.deptId = deptId;
-		this.linkToFiles = linkToFiles;
-	}
-
 	@Override
 	public String toString() {
 		return "PreparedForm [typeOfEvent=" + typeOfEvent + ", description=" + description + ", courseStart="
@@ -243,10 +278,4 @@ class PreparedForm {
 				+ ", workRelatedJustification=" + workRelatedJustification + ", WorkTimeMissed=" + WorkTimeMissed
 				+ ", deptId=" + deptId + ", linkToFiles=" + linkToFiles + "]";
 	}
-
-	public PreparedForm() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 }

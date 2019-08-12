@@ -6,73 +6,83 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.revature.beans.User;
+import com.revature.Dao.UserDao;
 import com.revature.util.ConnFactory;
 
-public class UserDaoImpl {
+/**
+ * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
+ * The purpose of TRMS is to provide a system that encourages quality knowledge growth
+ * relevant to an individual’s expertise.  This program was created to address the
+ * problems present in the current system, to provide the best user experience possible,
+ * and to provide a more streamlined process for everyone involved.
+ * <p>
+ * The UserDaoImpl implements the UserDao interface in order to have
+ * access to the basic CRUD methods inside it.  Here is where the methods are defined.
+ * @author Justin Hua, Kyle Kolstad, Leonardo Schenck, Levi Applebaum
+ * @version 1.0
+ * 
+ */
+public class UserDaoImpl implements UserDao{
 
 	ConnFactory cf = ConnFactory.getInstance();
 
+	@Override
 	public ArrayList<User> getUsers() throws SQLException {
 		ArrayList<User> userList = new ArrayList<User>();
 		Connection conn = cf.getConnection();
 		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"USER\"");
 		ResultSet rs = stmt.executeQuery();
-		User u = null;
 		while (rs.next()) {
-			u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-					rs.getDouble(6), rs.getInt(7), rs.getString(8), rs.getString(9));
-			userList.add(u);
+			userList.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+					rs.getDouble(6), rs.getInt(7), rs.getString(8), rs.getString(9)));
 		}
 		return userList;
 	}
 
+	@Override
 	public User loginUser(String username, String password) throws SQLException {
 		Connection conn = cf.getConnection();
-		PreparedStatement stmt = conn.prepareStatement(
-				"SELECT * FROM \"USER\" WHERE UserName = '" + username + "' AND Password = '" + password + "'");
-		ResultSet rs = stmt.executeQuery();
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM \"USER\" WHERE UserName = '" + username + "' AND Password = '" + password + "'");
+		ResultSet rs = ps.executeQuery();
 		User u = new User();
 		u.setId(-1);
 		if (rs.next()) {
 			u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 					rs.getDouble(6), rs.getInt(7), rs.getString(8), rs.getString(9));
 			}
-		System.out.println("in loginuser with " + username + " and " + password);
 		return u;
 	}
-	
+
+	@Override
 	public void changeReimbursementAmount(double newAmount) throws SQLException {
 		Connection conn = cf.getConnection();
-		CallableStatement call = conn.prepareCall("{ call setReimbusementAmount(?) }");
+		CallableStatement call = conn.prepareCall("{ call setReimbusementAmount(?)");
 		call.setDouble(1, newAmount);
 		call.execute();
 	}
 	
+	@Override
 	public void resetReimbursementAllUsers() throws SQLException{
 		Connection conn = cf.getConnection();
-		CallableStatement call = conn.prepareCall("{ call resetReimbusementAmount() }");
+		CallableStatement call = conn.prepareCall("{ call resetReimbusementAmount()");
 		call.execute();
 	}
 
-	public String isBenco(int userid) {
+	@Override
+	public String isBenco(int userid) throws SQLException{
 		Connection conn = cf.getConnection();
-		try {
-			PreparedStatement stmt = conn
-					.prepareStatement("SELECT bencoid FROM benco WHERE bencoid = " + userid);
-			ResultSet rs = stmt.executeQuery();
-			return rs.next()?"1":"0";
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "0";
+		PreparedStatement ps = conn.prepareStatement("SELECT bencoid FROM benco WHERE bencoid = ?");
+		ps.setInt(1, userid);
+		ResultSet rs = ps.executeQuery();
+		return rs.next()?"1":"0";
 	}
 
+	@Override
 	public int getUserByFormId(int formid) throws SQLException {
 		Connection conn = cf.getConnection();
-		PreparedStatement ps = conn.prepareStatement("SELECT employeeid FROM form WHERE formid = " + formid);
+		PreparedStatement ps = conn.prepareStatement("SELECT employeeid FROM form WHERE formid = ?");
+		ps.setInt(1, formid);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			return rs.getInt(1);
@@ -80,32 +90,30 @@ public class UserDaoImpl {
 		return -1;
 	}
 
+	@Override
 	public User getUserById(int id) throws SQLException {
-		ArrayList<User> userList = new ArrayList<User>();
 		Connection conn = cf.getConnection();
-		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"USER\" WHERE userid = " + id);
-		ResultSet rs = stmt.executeQuery();
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM \"USER\" WHERE userid = ?");
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
 		User u = null;
 		if (rs.next()) {
-
-			return new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+			u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 					rs.getDouble(6), rs.getInt(7), rs.getString(8), rs.getString(9));
 		}
-		return null;
+		return u;
 	}
 
+	@Override
 	public User getBenCo() throws SQLException {
-		ArrayList<User> userList = new ArrayList<User>();
 		Connection conn = cf.getConnection();
-		PreparedStatement stmt = conn
-				.prepareStatement("SELECT * FROM \"USER\" WHERE userid = (SELECT bencoid FROM BENCO)");
-		ResultSet rs = stmt.executeQuery();
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM \"USER\" WHERE userid = (SELECT bencoid FROM BENCO)");
+		ResultSet rs = ps.executeQuery();
+		User u = null;
 		if (rs.next()) {
-
-			return new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+			u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 					rs.getDouble(6), rs.getInt(7), rs.getString(8), rs.getString(9));
 		}
-		return null;
+		return u;
 	}
-
 }

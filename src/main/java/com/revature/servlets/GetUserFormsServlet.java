@@ -18,33 +18,30 @@ import com.revature.beans.Form;
 import com.revature.daoImpls.FormDaoImpl;
 
 /**
- * Servlet implementation class ViewFormsServlet
+ * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
+ * The purpose of TRMS is to provide a system that encourages quality knowledge growth
+ * relevant to an individual’s expertise.  This program was created to address the
+ * problems present in the current system, to provide the best user experience possible,
+ * and to provide a more streamlined process for everyone involved.
+ * <p>
+ * Servlet implementation class GetDepartmentsServlet
+ * @author Justin Hua, Kyle Kolstad, Leonardo Schenck, Levi Applebaum
+ * @version 1.0
+ * 
  */
 public class GetUserFormsServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public GetUserFormsServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession s = request.getSession(false);
 		ObjectMapper om = new ObjectMapper();
-		System.out.println("In getuserForms doget");
 		PrintWriter out = response.getWriter();
 		FormDaoImpl fdi = new FormDaoImpl();
-
 		ArrayList<Form> allForms = null;
 		ArrayList<FormWithDeptName> allFormsWithDeptName = new ArrayList<FormWithDeptName>();
 		if (s != null) {
@@ -56,7 +53,6 @@ public class GetUserFormsServlet extends HttpServlet {
 				}
 				om.writeValue(out, allFormsWithDeptName);
 			} catch (SQLException e) {
-
 				e.printStackTrace();
 			}
 			out.flush();
@@ -70,38 +66,43 @@ public class GetUserFormsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
 
+/**
+ * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
+ * The purpose of TRMS is to provide a system that encourages quality knowledge growth
+ * relevant to an individual’s expertise.  This program was created to address the
+ * problems present in the current system, to provide the best user experience possible,
+ * and to provide a more streamlined process for everyone involved.
+ * <p>
+ * This class is set up to store data that can be accessed and
+ * manipulated through its setter and getter methods.
+ * @author Justin Hua, Kyle Kolstad, Leonardo Schenck, Levi Applebaum
+ * @version 1.0
+ * 
+ */
 class FormWithDeptName {
 
-	private int id;
-	private Date openDateTime;
-	private Date courseStart;
-	private String location;
-	private String description;
-	private double cost;
-	private String reasonForExceedingMax;
-	private String gradingFormat;
-	private String typeOfEvent;
-	private String workRelatedJustification;
-	private int status;
-	private String deniedReason;
-	private String openQuestions;
-	private double WorkTimeMissed;
-	private String linkToFiles;
-	private int employeeId;
-	private String deptName;
+	//Private data variables.
+	private int id, status, employeeId;
+	private double cost, WorkTimeMissed;
+	private Date openDateTime, courseStart;
+	private String location, description, reasonForExceedingMax, gradingFormat, typeOfEvent, workRelatedJustification, deniedReason, openQuestions, linkToFiles, deptName;
 
+	/**
+	 * Default Constructor.
+	 */
 	public FormWithDeptName() {
 		super();
 	}
 
+	/**
+	 * This method creates an FormWithDeptName object and initializes the data variables.
+	 * @param form
+	 */
 	public FormWithDeptName(Form form) {
 		this(form.getId(), form.getOpenDateTime(), form.getCourseStart(),form.getLocation(),form.getDescription(),form.getCost(),
 				form.getReasonForExceedingMax(),form.getGradingFormat(),form.getTypeOfEvent(), form.getWorkRelatedJustification(),
@@ -109,6 +110,26 @@ class FormWithDeptName {
 				form.getEmployeeId(), form.getDeptId());
 	}
 
+	/**
+	 * This method creates an FormWithDeptName object and initializes the data variables.
+	 * @param id
+	 * @param openDateTime
+	 * @param courseStart
+	 * @param location
+	 * @param description
+	 * @param cost
+	 * @param reasonForExceedingMax
+	 * @param gradingFormat
+	 * @param typeOfEvent
+	 * @param workRelatedJustification
+	 * @param status
+	 * @param deniedReason
+	 * @param openQuestions
+	 * @param workTimeMissed
+	 * @param linkToFiles
+	 * @param employeeId
+	 * @param deptId
+	 */
 	public FormWithDeptName(int id, Date openDateTime, Date courseStart, String location, String description,
 			double cost, String reasonForExceedingMax, String gradingFormat, String typeOfEvent,
 			String workRelatedJustification, int status, String deniedReason, String openQuestions,
@@ -133,6 +154,11 @@ class FormWithDeptName {
 		this.deptName = getDeptName(deptId);
 	}
 
+	/**
+	 * This method will use the department id as a key to return the department name as a String
+	 * @param deptId
+	 * @return
+	 */
 	private String getDeptName(int deptId) {
 		FormDaoImpl fdi = new FormDaoImpl();
 		HashMap<Integer, String> departments;
@@ -140,22 +166,12 @@ class FormWithDeptName {
 			departments = fdi.getDepartments();
 			return departments.get(deptId);
 		} catch (SQLException e) {
-			System.out.println("something in the sql conn went wrong :s In GetUSerFormServlet");
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	@Override
-	public String toString() {
-		return "Form [id=" + id + ", openDateTime=" + openDateTime + ", courseStart=" + courseStart + ", location="
-				+ location + ", description=" + description + ", cost=" + cost + ", reasonForExceedingMax="
-				+ reasonForExceedingMax + ", gradingFormat=" + gradingFormat + ", typeOfEvent=" + typeOfEvent
-				+ ", workRelatedJustification=" + workRelatedJustification + ", status=" + status + ", deniedReason="
-				+ deniedReason + ", openQuestions=" + openQuestions + ", WorkTimeMissed=" + WorkTimeMissed
-				+ ", linkToFiles=" + linkToFiles + ", employeeId=" + employeeId + ", deptName=" + deptName + "]";
-	}
-
+	//Getter and setter methods.
 	public int getId() {
 		return id;
 	}
@@ -292,4 +308,13 @@ class FormWithDeptName {
 		this.deptName = getDeptName(deptId);
 	}
 
+	@Override
+	public String toString() {
+		return "Form [id=" + id + ", openDateTime=" + openDateTime + ", courseStart=" + courseStart + ", location="
+				+ location + ", description=" + description + ", cost=" + cost + ", reasonForExceedingMax="
+				+ reasonForExceedingMax + ", gradingFormat=" + gradingFormat + ", typeOfEvent=" + typeOfEvent
+				+ ", workRelatedJustification=" + workRelatedJustification + ", status=" + status + ", deniedReason="
+				+ deniedReason + ", openQuestions=" + openQuestions + ", WorkTimeMissed=" + WorkTimeMissed
+				+ ", linkToFiles=" + linkToFiles + ", employeeId=" + employeeId + ", deptName=" + deptName + "]";
+	}
 }

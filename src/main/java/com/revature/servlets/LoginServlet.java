@@ -15,16 +15,35 @@ import com.revature.beans.User;
 import com.revature.daoImpls.FormDaoImpl;
 import com.revature.daoImpls.UserDaoImpl;
 
+/**
+ * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
+ * The purpose of TRMS is to provide a system that encourages quality knowledge growth
+ * relevant to an individual’s expertise.  This program was created to address the
+ * problems present in the current system, to provide the best user experience possible,
+ * and to provide a more streamlined process for everyone involved.
+ * <p>
+ * Servlet implementation class LoginServlet
+ * @author Justin Hua, Kyle Kolstad, Leonardo Schenck, Levi Applebaum
+ * @version 1.0
+ * 
+ */
 public class LoginServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// Forwards get requests
 		req.getRequestDispatcher("/login.html").forward(req, resp);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("In login servlet..." + req.getParameter("username") + "  ||  " + req.getParameter("password"));
 		PrintWriter pw = resp.getWriter();
 		try {
 			// Retrieves any employees who match the username/password
@@ -47,13 +66,9 @@ public class LoginServlet extends HttpServlet {
 				resp.addCookie(new Cookie("remainingReimbursementAmount", u.getRmnReimbursement()+""));
 				resp.addCookie(new Cookie("isBenco", udi.isBenco(userId)));
 				resp.addCookie(new Cookie("hasApprovables", hasApprovablesString));
-
-				System.out.println("User logged in! Id = " + userId);
-				
 				resp.sendRedirect("/TRMS/home");
 			}
 			else {
-				System.out.println("login denied");
 				resp.setContentType("text/html");
 				pw.println("<script type=\"text/javascript\">window.alert('Username and password do not match!')</script>");
 				req.getRequestDispatcher("/login.html").forward(req, resp);
@@ -62,7 +77,5 @@ public class LoginServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }

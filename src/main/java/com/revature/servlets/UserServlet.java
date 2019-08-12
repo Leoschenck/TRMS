@@ -15,29 +15,33 @@ import com.revature.beans.User;
 import com.revature.daoImpls.UserDaoImpl;
 
 /**
+ * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
+ * The purpose of TRMS is to provide a system that encourages quality knowledge growth
+ * relevant to an individual’s expertise.  This program was created to address the
+ * problems present in the current system, to provide the best user experience possible,
+ * and to provide a more streamlined process for everyone involved.
+ * <p>
  * Servlet implementation class UserServlet
+ * @author Justin Hua, Kyle Kolstad, Leonardo Schenck, Levi Applebaum
+ * @version 1.0
+ * 
  */
 public class UserServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession s = request.getSession(false);
-		UserDaoImpl udi = new UserDaoImpl();
-		
 		PrintWriter out = response.getWriter();
 		if ( s != null) {
 			User user = null;
 			try {
 				user = new UserDaoImpl().getUserById((int)s.getAttribute("userId"));
-				System.out.println(user);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			ObjectMapper om = new ObjectMapper();
@@ -54,8 +58,6 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

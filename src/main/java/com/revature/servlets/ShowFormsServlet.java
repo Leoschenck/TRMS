@@ -9,36 +9,33 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.daoImpls.FormDaoImpl;
-import com.revature.daoImpls.UserDaoImpl;
 
 /**
+ * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
+ * The purpose of TRMS is to provide a system that encourages quality knowledge growth
+ * relevant to an individual’s expertise.  This program was created to address the
+ * problems present in the current system, to provide the best user experience possible,
+ * and to provide a more streamlined process for everyone involved.
+ * <p>
  * Servlet implementation class ShowFormsServlet
+ * @author Justin Hua, Kyle Kolstad, Leonardo Schenck, Levi Applebaum
+ * @version 1.0
+ * 
  */
 public class ShowFormsServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ShowFormsServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("in doget showformservlet");
 		HttpSession s = req.getSession(false);
 		if (s != null) {
-
 			while (req.getInputStream().read() != -1) {
 			}
-
 			req.getRequestDispatcher("/showforms.html").include(req, resp); // TODO homepage
-
 		} else {
 			resp.sendRedirect("/TRMS/login");
 		}
@@ -48,13 +45,12 @@ public class ShowFormsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession s = request.getSession(false);
 		FormDaoImpl fdi = new FormDaoImpl();
 		ObjectMapper mapper = new ObjectMapper();
 		if (s != null) {
-
+			try {
 			XhrGrading grade = mapper.readValue(request.getInputStream(), XhrGrading.class);
 			if (grade.getPassed() == 1) {
 				fdi.setStatus(grade.getFormId(), 4);
@@ -63,29 +59,51 @@ public class ShowFormsServlet extends HttpServlet {
 			} else if (grade.getPassed() == 0) {
 				fdi.setStatus(grade.getFormId(), -1);
 			}
-
+			} catch (Exception e) {
+			}
 		} else {
 			response.sendRedirect("/TRMS/login");
 		}
 	}
-
 }
 
+/**
+ * <h1>Team KLLJ - Tuition Reimbursement Management System (TRMS) Project 1</h1>
+ * The purpose of TRMS is to provide a system that encourages quality knowledge growth
+ * relevant to an individual’s expertise.  This program was created to address the
+ * problems present in the current system, to provide the best user experience possible,
+ * and to provide a more streamlined process for everyone involved.
+ * <p>
+ * This class is set up to store data that can be accessed and
+ * manipulated through its setter and getter methods.
+ * @author Justin Hua, Kyle Kolstad, Leonardo Schenck, Levi Applebaum
+ * @version 1.0
+ * 
+ */
 class XhrGrading {
-	private int formId;
-	private int passed;
+	
+	//Private data variables.
+	private int formId, passed;
 
+	/**
+	 * Default Constructor.
+	 */
+	public XhrGrading() {
+		super();
+	}
+	
+	/**
+	 * This method creates an XhrApprovalObject object and initializes the data variables.
+	 * @param id
+	 * @param passed
+	 */
 	public XhrGrading(int id, int passed) {
 		super();
 		this.formId = id;
 		this.passed = passed;
 	}
 
-	public XhrGrading() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
+	//Getter and setter methods.
 	public int getFormId() {
 		return formId;
 	}
@@ -101,5 +119,4 @@ class XhrGrading {
 	public void setPassed(int passed) {
 		this.passed = passed;
 	}
-
 }
