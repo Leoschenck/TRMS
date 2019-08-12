@@ -191,6 +191,7 @@ function approveForm(cur) {
 function submitSubsidy(cur) {
     console.log(document.getElementById("subsBoxArea").value);
     cur.currentTarget.parentElement.parentElement.previousSibling.children[7].innerHTML = "Denied";
+    var curFormId = cur.currentTarget.parentElement.parentElement.previousSibling.children[0].innerHTML;
     document.getElementById("subsText").innerHTML = "Subsidy submitted of amount: ";
     document.getElementById("subsText").style = "font-weight:bold";
     document.getElementById("subsBox").innerHTML = document.getElementById("subsBoxArea").value;
@@ -263,8 +264,7 @@ function denyForm(cur) {
 function submitReason(cur) {
     console.log(document.getElementById("reasBoxArea").value);
     cur.currentTarget.parentElement.parentElement.previousSibling.children[7].innerHTML = "Denied";
-    var curFormId = cur.currentTarget.parentElement.parentElement.previousSibling.children[0].innerHTML = "Denied";
-    var curFormId =
+    var curFormId = cur.currentTarget.parentElement.parentElement.previousSibling.children[0].innerHTML;
     document.getElementById("reasText").innerHTML = "Reason for denial submitted: ";
     document.getElementById("reasText").style="font-weight:bold";
     document.getElementById("reasBox").innerHTML = document.getElementById("reasBoxArea").value;
