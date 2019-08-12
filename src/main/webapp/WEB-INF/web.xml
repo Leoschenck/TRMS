@@ -119,4 +119,14 @@
     <servlet-name>GetNotificationsServlet</servlet-name>
     <url-pattern>/getnotifications</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NotificationServlet</display-name>
+    <servlet-name>NotificationServlet</servlet-name>
+    <servlet-class>com.revature.servlets.NotificationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NotificationServlet</servlet-name>
+    <url-pattern>/notifications</url-pattern>
+  </servlet-mapping>
 </web-app>
