@@ -32,12 +32,12 @@ function submitGrade(cur) {
 function openQuestion(cur) {
     var rowList = cur.currentTarget.parentElement.parentElement.children;
     console.log(rowList);
-    var curRowId = cur.currentTarget.parentElement.firstChild.innerHTML;
-    console.log(curRowId);
+    var curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    console.log(curFormId);
     for (var i = 0; i < rowList.length; i++) {
         console.log(i);
         if (rowList[i].children[0] != null) {
-            if (rowList[i].children[0].innerHTML == curRowId) {
+            if (rowList[i].children[0].innerHTML == curFormId) {
                 break;
                 console.log(rowList[i].firstChild.innerHTML);
             }
@@ -124,12 +124,12 @@ function approveForm(cur) {
     else {
         var rowList = cur.currentTarget.parentElement.parentElement.children;
         console.log(rowList);
-        var curRowId = cur.currentTarget.parentElement.firstChild.innerHTML;
-        console.log(curRowId);
+        var curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+        console.log(curFormId);
         for (var i = 0; i < rowList.length; i++) {
             console.log(i);
             if (rowList[i].children[0] != null) {
-                if (rowList[i].children[0].innerHTML == curRowId) {
+                if (rowList[i].children[0].innerHTML == curFormId) {
                     break;
                     console.log(rowList[i].firstChild.innerHTML);
                 }
@@ -219,12 +219,12 @@ function submitSubsidy(cur) {
 function denyForm(cur) {
     var rowList = cur.currentTarget.parentElement.parentElement.children;
     console.log(rowList);
-    var curRowId = cur.currentTarget.parentElement.firstChild.innerHTML;
-    console.log(curRowId);
+    var curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
+    console.log(curFormId);
     for (var i = 0; i < rowList.length; i++) {
         console.log(i);
         if (rowList[i].children[0] != null) {
-            if (rowList[i].children[0].innerHTML == curRowId) {
+            if (rowList[i].children[0].innerHTML == curFormId) {
                 break;
                 console.log(rowList[i].firstChild.innerHTML);
             }
