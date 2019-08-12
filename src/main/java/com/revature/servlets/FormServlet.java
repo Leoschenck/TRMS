@@ -65,7 +65,7 @@ public class FormServlet extends HttpServlet {
 		double newAmount;
 		try {
 			newAmount = calculateNewAmount(pf, udi.getUserById((int) s.getAttribute("userId")));
-			udi.changeReimbursementAmount(newAmount);
+			udi.changeReimbursementAmount(newAmount, (int)s.getAttribute("userId"));
 			
 			//TODO notification
 		} catch (SQLException e) {
@@ -75,7 +75,7 @@ public class FormServlet extends HttpServlet {
 	}
 
 	private double calculateNewAmount(PreparedForm pf, User u) {
-		double newAmount = u.getRmnReimbursement();
+		double newAmount = 0;
 		switch (pf.getTypeOfEvent()) {
 		case "1":
 			newAmount = 0.8 * pf.getCost();
@@ -97,7 +97,7 @@ public class FormServlet extends HttpServlet {
 			newAmount = 0.3 * pf.getCost();
 			break;
 		}
-		return newAmount;
+		return u.getRmnReimbursement() - newAmount;
 	}
 
 	private String fixJson(ServletInputStream inStream) throws IOException {

@@ -109,4 +109,14 @@
     <servlet-name>GetDepartmentsServlet</servlet-name>
     <url-pattern>/getdepartments</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetNotificationsServlet</display-name>
+    <servlet-name>GetNotificationsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetNotificationsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetNotificationsServlet</servlet-name>
+    <url-pattern>/getnotifications</url-pattern>
+  </servlet-mapping>
 </web-app>

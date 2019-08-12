@@ -72,7 +72,7 @@ public class FormDaoImpl {
 	public boolean isDeptHead(int formId, int userId) {
 		Connection conn = cf.getConnection();
 		try {
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM form WHERE formid = " + formId +" AND deptid = (SELECT deptid FROM department WHERE depthead = " + userId);
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM form WHERE formid = " + formId +" AND deptid = (SELECT deptid FROM department WHERE depthead = " + userId + ")");
 			ResultSet rs = ps.executeQuery();
 			return rs.next();
 		} catch (SQLException e) {
