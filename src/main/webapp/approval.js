@@ -258,33 +258,6 @@ function denyForm(cur) {
     reasSubmitCell.colSpan = "1";
     reasSubmitCell.innerHTML = "<input type='submit' id='reasSubmitButton' name='ed'/>"
     document.getElementById("reasSubmitButton").addEventListener("click", submitReason, false);
-
-                                    //curFormId = cur.currentTarget.parentElement.firstChild.innerHTML;
-                                    //console.log("Denying form " + curFormId);
-                                    //var curRow;
-                                    //var allRows = document.getElementById("lefttable").children[0].children;
-                                    //curRow = cur.currentTarget.parentElement.children;
-                                    //console.log("Form " + curRow[0].innerHTML + " found");
-                                    //curRow[7].innerHTML = "Denied";
-
-                                    //var xhr2 = new XMLHttpRequest();
-                                    //xhr2.onreadystatechange = function () {
-                                    //    console.log("in FORM DENY on ready change");
-                                    //    console.log("in ORSC " + xhr2.readyState + xhr2.status);
-                                    //    if (xhr2.readyState == 4 && xhr2.status == 200) {
-                                    //        //  console.log(xhr2.responseText);
-                                    //    }
-                                    //}
-                                    //xhr2.open("POST", "http://localhost:8080/TRMS/approval", false);
-                                    //var obj = {};
-                                    //obj["formId"] = curFormId;
-                                    //obj["approved"] = 0;
-                                    ///////obj["attachedReasoning"] =
-                                    //var trash = JSON.stringify(obj)
-                                    //xhr2.send(trash);
-
-    //cur.currentTarget.removeEventListener("click", denyForm, false);
-    //cur.currentTarget.parentElement.children[8].removeEventListener("click", approveForm, false);
 }
 function submitReason(cur) {
     console.log(document.getElementById("reasBoxArea").value);
