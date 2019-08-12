@@ -13,11 +13,15 @@ function loadNotifications(allNotifs) {
         var newRow = formTable.insertRow(curRow);
         var notifId = newRow.insertCell(0);
         var notifTime = new Date(allNotifs[i].time);
-        var notifId = newRow.insertCell(1);
+        var formId = newRow.insertCell(1);
         var notifCont = newRow.insertCell(2);
         var notifTimeCell = newRow.insertCell(3);
-        var noticCheck = newRow.insertCell(4);
+        var notifCheck = newRow.insertCell(4);
         notifId.innerHTML = allNotifs[i].id;
+        formId.innerHTML = allNotifs[i].formId;
+        notifCont.innerHTML = allNotif[i].content;
+      //  notifTime
+        notifTimeCell.innerHTML = allNotifs[i].id;
 
 
         formId.innerHTML = allNotifs[i].id;
